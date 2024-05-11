@@ -77,14 +77,14 @@ const description = "Descubre una forma más eficiente de gestionar tus envíos.
                 <IconLock class="text-stroke" size="25" stroke="2"/>
             </InputForm>
 
-            <div v-if="passwordStatus && form.password" class="mb-5 text-red-400 text-sm">
-                {{ passwordStatus }}
-            </div>
-
             <InputForm v-model="form.password_confirmation" label="Confirmar contraseña" name="password_confirmation"
                        required type="password">
                 <IconLock class="text-stroke" size="25" stroke="2"/>
             </InputForm>
+
+            <div v-if="passwordStatus && form.password" class="mb-5 text-red-400 text-sm">
+                {{ passwordStatus }}
+            </div>
 
             <PrimaryButton :disabled="passwordStatus != null" class="w-full mt-4" text="Crear cuenta" type="submit"/>
         </form>
