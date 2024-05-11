@@ -12,7 +12,10 @@ class ClientController extends Controller
     public function index()
     {
         return inertia("Dashboard/Client/Index", [
-            'clients' => Client::select('id', 'name', 'phone')->orderBy('name')->paginate(10)
+            'clients' => Client::select('id', 'name', 'phone')
+                ->orderBy('name')
+                ->where('company_id', auth()->user()->company_id)
+                ->paginate()
         ]);
     }
 

@@ -123,7 +123,7 @@ const passwordStatus = computed(() => {
                     </thead>
                     <tbody>
                     <tr v-if="users.data.length == 0">
-                        <td class="text-center text-slate-400" colspan="3">
+                        <td class="text-center text-slate-400" colspan="4">
                             No hay datos que mostrar
                         </td>
                     </tr>
