@@ -24,7 +24,7 @@ class User extends Authenticatable
         'password',
         'company_id',
         'password_updated_at',
-        'last_active_at'
+        'last_active_at',
     ];
 
     /**
@@ -45,11 +45,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
-        'last_active_at' => 'datetime'
+        'last_active_at' => 'datetime',
     ];
 
     protected $appends = [
-        'active'
+        'active',
     ];
 
     public function company()
@@ -59,9 +59,10 @@ class User extends Authenticatable
 
     public function getActiveAttribute()
     {
-        if (empty($this->last_active_at))
+        if (empty($this->last_active_at)) {
             return 'Nunca';
+        }
 
-        return ($this->last_active_at > Carbon::now()->subMinutes(5)) ? "Ahora" : $this->last_active_at->diffForHumans();
+        return ($this->last_active_at > Carbon::now()->subMinutes(5)) ? 'Ahora' : $this->last_active_at->diffForHumans();
     }
 }

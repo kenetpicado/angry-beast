@@ -5,7 +5,6 @@ use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::redirect('/', '/dashboard');
 
 Route::group([

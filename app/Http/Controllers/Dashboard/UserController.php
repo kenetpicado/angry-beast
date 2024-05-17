@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return inertia("Dashboard/User/Index", [
+        return inertia('Dashboard/User/Index', [
             'users' => User::query()
                 ->orderBy('name')
                 ->where('id', '!=', auth()->id())

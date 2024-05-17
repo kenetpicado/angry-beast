@@ -14,8 +14,7 @@ class RegisteredUserController extends Controller
 {
     public function __construct(
         private readonly UserService $userService
-    )
-    {
+    ) {
     }
 
     public function create(): Response
