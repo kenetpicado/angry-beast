@@ -97,7 +97,7 @@ const passwordStatus = computed(() => {
 </script>
 
 <template>
-  <DefaultLayout>
+  <DefaultLayout head="Usuarios">
     <div class="mb-6 flex gap-3 items-center justify-between">
       <h2 class="text-xl font-semibold">Usuarios</h2>
 

@@ -56,7 +56,7 @@ const passwordStatus = computed(() => {
 </script>
 
 <template>
-  <DefaultLayout>
+  <DefaultLayout head="Perfil">
     <div class="mx-auto max-w-270">
       <div class="grid grid-cols-4 gap-8">
         <form class="col-span-4 xl:col-span-2" @submit.prevent="handleSubmitProfile">

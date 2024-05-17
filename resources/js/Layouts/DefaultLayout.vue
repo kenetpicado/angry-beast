@@ -1,11 +1,14 @@
 <script setup>
 import HeaderArea from '@/Components/Header/HeaderArea.vue'
 import SidebarArea from '@/Components/Sidebar/SidebarArea.vue'
+import { Head } from '@inertiajs/vue3'
+defineProps(['head'])
 </script>
 
 <template>
   <div class="flex h-screen overflow-hidden">
     <SidebarArea />
+    <Head :title="head" />
     <div class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
       <HeaderArea />
       <main>
