@@ -120,7 +120,7 @@ const passwordStatus = computed(() => {
             <tr v-for="user in users.data" :key="user.id">
               <td>
                 <div>{{ user.name }}</div>
-                <small class="text-primary tracking-wider">Activo: {{ user.active }}</small>
+                <small class="text-green-700 tracking-wider">Activo: {{ user.active }}</small>
               </td>
               <td>
                 {{ user.email }}
@@ -169,7 +169,6 @@ const passwordStatus = computed(() => {
             >
               <IconLock class="text-stroke" size="25" stroke="2" />
             </InputForm>
-
             <div
               v-if="passwordStatus && form.password"
               class="mb-2 text-red-400 text-sm col-span-2"
