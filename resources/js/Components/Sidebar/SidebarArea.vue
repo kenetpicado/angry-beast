@@ -1,50 +1,56 @@
 <script setup>
-import {ref} from 'vue'
-import {IconUsers, IconX} from "@tabler/icons-vue";
-import SidebarItem from './SidebarItem.vue'
-import {onClickOutside} from '@vueuse/core'
+import { ref } from "vue";
+import { IconUsers, IconX } from "@tabler/icons-vue";
+import SidebarItem from "./SidebarItem.vue";
+import { onClickOutside } from "@vueuse/core";
 import useSidebarStore from "@/Stores/useSidebarStore.js";
 
-const target = ref(null)
+const target = ref(null);
 
-const sidebarStore = useSidebarStore()
+const sidebarStore = useSidebarStore();
 
 onClickOutside(target, () => {
-    sidebarStore.isSidebarOpen = false
-})
+    sidebarStore.isSidebarOpen = false;
+});
 
 const menuGroups = ref([
     {
-        name: 'Menu',
+        name: "Menu",
         menuItems: [
             {
                 icon: IconUsers,
-                label: 'Usuarios',
-                route: route('dashboard.users.index')
+                label: "Usuarios",
+                route: route("dashboard.users.index"),
             },
-        ]
+        ],
     },
-])
-
+]);
 </script>
 
 <template>
     <aside
         class="absolute left-0 top-0 z-20 flex h-screen w-72 flex-col overflow-y-hidden bg-green-700 duration-300 ease-linear lg:static lg:translate-x-0"
-        :class="[sidebarStore.isSidebarOpen ? 'translate-x-0' : '-translate-x-full']"
-        ref="target">
-
+        :class="[
+            sidebarStore.isSidebarOpen ? 'translate-x-0' : '-translate-x-full',
+        ]"
+        ref="target"
+    >
         <div class="flex items-center justify-between gap-2 px-6 py-5 lg:py-6">
             <div class="text-center w-full text-white font-bold text-2xl">
                 {{ $page.props.app_name }}
             </div>
 
-            <button class="block lg:hidden" @click="sidebarStore.isSidebarOpen = false">
-                <IconX class="text-white" size="25" stroke="2"/>
+            <button
+                class="block lg:hidden"
+                @click="sidebarStore.isSidebarOpen = false"
+            >
+                <IconX class="text-white" size="25" stroke="2" />
             </button>
         </div>
 
-        <div class="flex flex-col overflow-y-auto duration-300 ease-linear text-white">
+        <div
+            class="flex flex-col overflow-y-auto duration-300 ease-linear text-white"
+        >
             <nav class="mt-0 py-4 px-4 lg:px-6">
                 <template v-for="menuGroup in menuGroups" :key="menuGroup.name">
                     <div>
@@ -57,7 +63,9 @@ const menuGroups = ref([
                                 v-for="(menuItem, index) in menuGroup.menuItems"
                                 :item="menuItem"
                                 :key="index"
-                                @click="() => sidebarStore.page = menuItem.label"
+                                @click="
+                                    () => (sidebarStore.page = menuItem.label)
+                                "
                                 :active="menuItem.label === sidebarStore.page"
                             />
                         </ul>

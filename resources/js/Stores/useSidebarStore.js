@@ -1,17 +1,17 @@
-import {useStorage} from '@vueuse/core'
-import {defineStore} from 'pinia'
-import {ref} from 'vue'
+import { useStorage } from "@vueuse/core";
+import { defineStore } from "pinia";
+import { ref } from "vue";
 
-export const useSidebarStore = defineStore('sidebar', () => {
-    const isSidebarOpen = ref(false)
-    const selected = useStorage('selected', ref('Dashboard'))
-    const page = useStorage('page', ref('Dashboard'))
+export const useSidebarStore = defineStore("sidebar", () => {
+    const isSidebarOpen = ref(false);
+    const selected = useStorage("selected", ref("Dashboard"));
+    const page = useStorage("page", ref("Dashboard"));
 
     function toggleSidebar() {
-        isSidebarOpen.value = !isSidebarOpen.value
+        isSidebarOpen.value = !isSidebarOpen.value;
     }
 
-    return {isSidebarOpen, toggleSidebar, selected, page}
-})
+    return { isSidebarOpen, toggleSidebar, selected, page };
+});
 
-export default useSidebarStore
+export default useSidebarStore;

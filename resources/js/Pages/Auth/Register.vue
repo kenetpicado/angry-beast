@@ -1,93 +1,133 @@
 <script setup>
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
-import {Head, Link, useForm} from '@inertiajs/vue3';
+import GuestLayout from "@/Layouts/GuestLayout.vue";
+import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import InputForm from "@/Components/Form/InputForm.vue";
-import {IconLock, IconMail} from "@tabler/icons-vue";
+import { IconLock, IconMail } from "@tabler/icons-vue";
 import toast from "@/Utils/toast.js";
-import {computed, watch} from "vue";
+import { computed, watch } from "vue";
 
 const form = useForm({
-    name: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
 });
 
 const passwordStatus = computed(() => {
     if (form.password.length < 8) {
-        return 'La contraseña debe contener al menos 8 caracteres'
+        return "La contraseña debe contener al menos 8 caracteres";
     }
 
     if (!/\d/.test(form.password)) {
-        return 'La contraseña debe contener al menos un número'
+        return "La contraseña debe contener al menos un número";
     }
 
     if (!/[A-Z]/.test(form.password)) {
-        return 'La contraseña debe contener al menos una letra mayúscula'
+        return "La contraseña debe contener al menos una letra mayúscula";
     }
 
     if (!/[a-z]/.test(form.password)) {
-        return 'La contraseña debe contener al menos una letra minúscula'
+        return "La contraseña debe contener al menos una letra minúscula";
     }
 
     if (form.password !== form.password_confirmation) {
-        return 'La confirmación de contraseña debe coincidir'
+        return "La confirmación de contraseña debe coincidir";
     }
 
-    return null
-})
+    return null;
+});
 
-watch(() => form.company, (value) => {
-    form.company = value.toUpperCase()
-})
+watch(
+    () => form.company,
+    (value) => {
+        form.company = value.toUpperCase();
+    },
+);
 
 const submit = () => {
-    form.post(route('register.store'), {
+    form.post(route("register.store"), {
         onSuccess: () => {
-            toast.success("Cuenta creada correctamente")
+            toast.success("Cuenta creada correctamente");
         },
         onError: (err) => {
-            console.log(err)
-        }
+            console.log(err);
+        },
     });
 };
 
-const description = "Descubre una forma más eficiente de gestionar tus envíos. Regístrate ahora para acceder a herramientas poderosas que te ayudarán a administrar y optimizar tus registros con facilidad. Únete hoy mismo y lleva tu negocio al siguiente nivel."
-
+const description =
+    "Descubre una forma más eficiente de gestionar tus envíos. Regístrate ahora para acceder a herramientas poderosas que te ayudarán a administrar y optimizar tus registros con facilidad. Únete hoy mismo y lleva tu negocio al siguiente nivel.";
 </script>
 
 <template>
-    <GuestLayout subtitle="Únete hoy mismo" title="Crear cuenta" :description="description">
-        <Head title="Crear cuenta"/>
+    <GuestLayout
+        subtitle="Únete hoy mismo"
+        title="Crear cuenta"
+        :description="description"
+    >
+        <Head title="Crear cuenta" />
 
         <form @submit.prevent="submit">
-            <InputForm v-model="form.name" autofocus label="Nombre completo" name="name" required/>
+            <InputForm
+                v-model="form.name"
+                autofocus
+                label="Nombre completo"
+                name="name"
+                required
+            />
 
-            <InputForm v-model="form.email" label="Correo" name="email" required type="email">
-                <IconMail class="text-stroke" size="25" stroke="2"/>
+            <InputForm
+                v-model="form.email"
+                label="Correo"
+                name="email"
+                required
+                type="email"
+            >
+                <IconMail class="text-stroke" size="25" stroke="2" />
             </InputForm>
 
-            <InputForm v-model="form.password" label="Contraseña" name="password" required type="password">
-                <IconLock class="text-stroke" size="25" stroke="2"/>
+            <InputForm
+                v-model="form.password"
+                label="Contraseña"
+                name="password"
+                required
+                type="password"
+            >
+                <IconLock class="text-stroke" size="25" stroke="2" />
             </InputForm>
 
-            <InputForm v-model="form.password_confirmation" label="Confirmar contraseña" name="password_confirmation"
-                       required type="password">
-                <IconLock class="text-stroke" size="25" stroke="2"/>
+            <InputForm
+                v-model="form.password_confirmation"
+                label="Confirmar contraseña"
+                name="password_confirmation"
+                required
+                type="password"
+            >
+                <IconLock class="text-stroke" size="25" stroke="2" />
             </InputForm>
 
-            <div v-if="passwordStatus && form.password" class="mb-5 text-red-400 text-sm">
+            <div
+                v-if="passwordStatus && form.password"
+                class="mb-5 text-red-400 text-sm"
+            >
                 {{ passwordStatus }}
             </div>
 
-            <PrimaryButton :disabled="passwordStatus != null" class="w-full mt-4" text="Crear cuenta" type="submit"/>
+            <PrimaryButton
+                :disabled="passwordStatus != null"
+                class="w-full mt-4"
+                text="Crear cuenta"
+                type="submit"
+            />
         </form>
 
         <div class="mt-6 text-center">
             <p class="font-medium">
                 Ya tienes cuenta?
-                <Link :href="route('login')" class="text-green-700">Inicia sesión</Link>
+                <Link :href="route('login')" class="text-green-700"
+                    >Inicia sesión</Link
+                >
             </p>
         </div>
     </GuestLayout>

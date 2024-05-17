@@ -7,15 +7,15 @@ export const toast = createToaster({
 });
 
 export const created = () => {
-    toast.success('Creado correctamente')
-}
+    toast.success("Creado correctamente");
+};
 
 export const updated = () => {
-    toast.success('Actualizado correctamente')
-}
+    toast.success("Actualizado correctamente");
+};
 
 export const deleted = () => {
-    toast.success('Eliminado correctamente')
-}
+    toast.success("Eliminado correctamente");
+};
 
-export default toast
+export default toast;

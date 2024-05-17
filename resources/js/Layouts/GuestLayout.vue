@@ -1,5 +1,5 @@
 <script setup>
-defineProps(['title', 'subtitle', 'description'])
+defineProps(["title", "subtitle", "description"]);
 </script>
 
 <template>
@@ -10,10 +10,14 @@ defineProps(['title', 'subtitle', 'description'])
                     <div class="hidden w-full xl:block xl:w-1/2">
                         <div class="py-10 px-26 text-center">
                             <p class="font-medium xl:px-20 text-lg">
-                                {{description}}
+                                {{ description }}
                             </p>
                             <span class="mt-6 inline-block">
-                                <img alt="illustration" class="w-1/3 mx-auto" src="/images/register.png"/>
+                                <img
+                                    alt="illustration"
+                                    class="w-1/3 mx-auto"
+                                    src="/images/register.png"
+                                />
                             </span>
                         </div>
                     </div>
@@ -22,7 +26,9 @@ defineProps(['title', 'subtitle', 'description'])
                             <span class="mb-2 block font-medium">
                                 {{ subtitle }}
                             </span>
-                            <h2 class="mb-9 text-2xl font-bold text-slate-600 sm:text-title-xl2">
+                            <h2
+                                class="mb-9 text-2xl font-bold text-slate-600 sm:text-title-xl2"
+                            >
                                 {{ title }}
                             </h2>
                             <slot></slot>
