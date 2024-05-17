@@ -42,7 +42,7 @@ const description = "Accede rápidamente a tu cuenta. Con nuestra plataforma, ge
         <div class="mt-6 text-center">
             <p class="font-medium">
                 No tienes cuenta?
-                <Link :href="route('register')" class="text-primary">Regístrate</Link>
+                <Link :href="route('register')" class="text-green-700">Regístrate</Link>
             </p>
         </div>
     </GuestLayout>

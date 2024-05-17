@@ -7,8 +7,8 @@ const props = defineProps(['item', 'active'])
 <template>
     <li>
         <Link :href="item.route"
-              class="group relative flex items-center gap-2 rounded-lg py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark"
-              :class="{'bg-graydark': active}">
+              class="group relative flex items-center gap-2 rounded-lg py-2 px-4 font-medium duration-300 ease-in-out hover:bg-green-800"
+              :class="{'bg-green-800': active}">
 
             <component :is="item.icon" size="25" stroke="2"/>
 

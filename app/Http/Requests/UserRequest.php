@@ -16,13 +16,6 @@ class UserRequest extends FormRequest
         return true;
     }
 
-    public function prepareForValidation()
-    {
-        $this->merge([
-            'company_id' => auth()->user()->company_id
-        ]);
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -33,7 +26,6 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'email' => 'required|lowercase|email|unique:'.User::class,
-            'company_id' => 'required',
             'password' => ['required', 'confirmed', Password::defaults()],
         ];
     }

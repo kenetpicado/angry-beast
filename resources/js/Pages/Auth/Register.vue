@@ -9,7 +9,6 @@ import {computed, watch} from "vue";
 
 const form = useForm({
     name: '',
-    company: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -44,7 +43,6 @@ watch(() => form.company, (value) => {
 })
 
 const submit = () => {
-
     form.post(route('register.store'), {
         onSuccess: () => {
             toast.success("Cuenta creada correctamente")
@@ -64,10 +62,7 @@ const description = "Descubre una forma más eficiente de gestionar tus envíos.
         <Head title="Crear cuenta"/>
 
         <form @submit.prevent="submit">
-
-            <InputForm v-model="form.name" autofocus label="Nombre" name="name" required/>
-
-            <InputForm v-model="form.company" label="Nombre de tu empresa" name="company" required/>
+            <InputForm v-model="form.name" autofocus label="Nombre completo" name="name" required/>
 
             <InputForm v-model="form.email" label="Correo" name="email" required type="email">
                 <IconMail class="text-stroke" size="25" stroke="2"/>
@@ -92,7 +87,7 @@ const description = "Descubre una forma más eficiente de gestionar tus envíos.
         <div class="mt-6 text-center">
             <p class="font-medium">
                 Ya tienes cuenta?
-                <Link :href="route('login')" class="text-primary">Inicia sesión</Link>
+                <Link :href="route('login')" class="text-green-700">Inicia sesión</Link>
             </p>
         </div>
     </GuestLayout>

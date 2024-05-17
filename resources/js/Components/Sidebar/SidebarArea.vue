@@ -1,6 +1,6 @@
 <script setup>
 import {ref} from 'vue'
-import {IconHome, IconUsers, IconX} from "@tabler/icons-vue";
+import {IconUsers, IconX} from "@tabler/icons-vue";
 import SidebarItem from './SidebarItem.vue'
 import {onClickOutside} from '@vueuse/core'
 import useSidebarStore from "@/Stores/useSidebarStore.js";
@@ -15,18 +15,8 @@ onClickOutside(target, () => {
 
 const menuGroups = ref([
     {
-        name: 'MENU',
+        name: 'Menu',
         menuItems: [
-            {
-                icon: IconHome,
-                label: 'Compañias',
-                route: route('dashboard.companies.index')
-            },
-            {
-                icon: IconUsers,
-                label: 'Clientes',
-                route: route('dashboard.clients.index')
-            },
             {
                 icon: IconUsers,
                 label: 'Usuarios',
@@ -40,7 +30,7 @@ const menuGroups = ref([
 
 <template>
     <aside
-        class="absolute left-0 top-0 z-20 flex h-screen w-72 flex-col overflow-y-hidden bg-black duration-300 ease-linear lg:static lg:translate-x-0"
+        class="absolute left-0 top-0 z-20 flex h-screen w-72 flex-col overflow-y-hidden bg-green-700 duration-300 ease-linear lg:static lg:translate-x-0"
         :class="[sidebarStore.isSidebarOpen ? 'translate-x-0' : '-translate-x-full']"
         ref="target">
 
@@ -54,11 +44,11 @@ const menuGroups = ref([
             </button>
         </div>
 
-        <div class="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
-            <nav class="mt-5 py-4 px-4 lg:mt-7 lg:px-6">
+        <div class="flex flex-col overflow-y-auto duration-300 ease-linear text-white">
+            <nav class="mt-0 py-4 px-4 lg:px-6">
                 <template v-for="menuGroup in menuGroups" :key="menuGroup.name">
                     <div>
-                        <h3 class="mb-4 ml-4 text-sm font-medium text-bodydark2">
+                        <h3 class="mb-4 ml-4 text-sm font-medium">
                             {{ menuGroup.name }}
                         </h3>
 

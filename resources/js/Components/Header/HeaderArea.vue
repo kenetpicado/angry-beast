@@ -12,14 +12,12 @@ const {toggleSidebar} = useSidebarStore()
         <div class="flex flex-grow items-center justify-between py-4 px-4 shadow-2 md:px-6 2xl:px-11 w-full">
             <div class="flex items-center gap-2 sm:gap-4 lg:hidden">
                 <button
-                    class="z-99999 block rounded-sm border border-stroke bg-white p-2 shadow-sm lg:hidden"
+                    class="block rounded-sm border border-stroke bg-white p-2 shadow-sm lg:hidden"
                     @click="toggleSidebar">
                     <IconList size="25" class="text-dark" stroke="2"/>
                 </button>
             </div>
-            <div class="hidden sm:block">
-
-            </div>
+            <div class="hidden sm:block"></div>
 
             <div class="flex items-center gap-3 sm:gap-7">
                 <ul class="flex items-center gap-2 sm:gap-4">

@@ -25,16 +25,8 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'company' => 'required|unique:companies,name',
             'email' => 'required|lowercase|email|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'company.unique' => 'Este nombre no está disponible.',
         ];
     }
 }

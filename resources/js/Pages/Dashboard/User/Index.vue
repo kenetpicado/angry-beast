@@ -14,10 +14,6 @@ defineProps({
         type: Object,
         required: true
     },
-    companies: {
-        type: Object,
-        required: true
-    }
 })
 
 const openModal = ref(false)
@@ -117,7 +113,6 @@ const passwordStatus = computed(() => {
                     <tr>
                         <th>Nombre</th>
                         <th>Correo</th>
-                        <th>Compañia</th>
                         <th>Acciones</th>
                     </tr>
                     </thead>
@@ -134,9 +129,6 @@ const passwordStatus = computed(() => {
                         </td>
                         <td>
                             {{ user.email }}
-                        </td>
-                        <td>
-                            {{ user.company.name }}
                         </td>
                         <td>
                             <div class="flex gap-3">

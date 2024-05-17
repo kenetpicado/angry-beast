@@ -44,7 +44,7 @@ function format_key(string) {
 
         <div class="relative">
             <input :disabled="disabled" :placeholder="placeholder" :type="type" :autofocus="autofocus" :required="required" @input="$emit('update:modelValue', $event.target.value)" :value="modelValue"
-                class="w-full rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-10 outline-none focus:border-primary focus-visible:shadow-none text-black" />
+                class="w-full rounded-lg border border-slate-300 bg-transparent py-3 pl-5 pr-10 outline-none focus:ring-2 focus:ring-green-600 text-black" />
 
             <span class="absolute right-4 top-3">
                 <slot></slot>

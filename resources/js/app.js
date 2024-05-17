@@ -1,5 +1,4 @@
 import './bootstrap';
-import '../css/satoshi.css';
 import '../css/app.css';
 
 import { createApp, h } from 'vue';
@@ -26,6 +25,6 @@ createInertiaApp({
             .mount(el);
     },
     progress: {
-        color: '#4B5563',
+        color: '#15803d',
     },
 });

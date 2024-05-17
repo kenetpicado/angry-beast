@@ -17,7 +17,7 @@ function getThisPage(url) {
     <div class="flex items-center gap-3 my-4 w-full justify-center" v-if="links.length > 3">
         <template v-for="(link, index) in links" :key="index">
             <button v-if="link.url" type="button" @click.prevent="getThisPage(link.url)"
-                :class="[link.active ? 'bg-primary border-primary text-white' : 'border-stroke text-stroke']"
+                :class="[link.active ? 'bg-green-700 border-green-700 text-white' : 'border-stroke text-stroke']"
                 class="w-8 h-8 select-none rounded-md font-bold border border-2 text-xs flex items-center justify-center">
                 <span v-if="index == 0">
                     <IconChevronLeft size="20" />

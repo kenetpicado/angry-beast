@@ -19,10 +19,10 @@ defineProps(['title', 'subtitle', 'description'])
                     </div>
                     <div class="w-full border-stroke xl:w-1/2 xl:border-l-2">
                         <div class="w-full p-5 sm:p-12 xl:p-17">
-                            <span class="mb-1.5 block font-medium">
+                            <span class="mb-2 block font-medium">
                                 {{ subtitle }}
                             </span>
-                            <h2 class="mb-9 text-2xl font-bold text-black sm:text-title-xl2">
+                            <h2 class="mb-9 text-2xl font-bold text-slate-600 sm:text-title-xl2">
                                 {{ title }}
                             </h2>
                             <slot></slot>

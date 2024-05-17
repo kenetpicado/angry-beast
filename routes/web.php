@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\Dashboard\ClientController;
-use App\Http\Controllers\Dashboard\CompanyController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\ProfileController;
@@ -17,12 +15,6 @@ Route::group([
     function () {
         Route::get('/', DashboardController::class)
             ->name('index');
-
-        Route::resource('companies', CompanyController::class)
-            ->only(['index', 'update', 'store']);
-
-        Route::resource('clients', ClientController::class)
-            ->except(['edit', 'create', 'show']);
 
         Route::resource('users', UserController::class)
             ->except(['edit', 'create', 'show']);
