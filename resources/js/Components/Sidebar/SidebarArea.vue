@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { IconUsers, IconX } from '@tabler/icons-vue'
+import { IconLogout, IconUser, IconUsers, IconX } from '@tabler/icons-vue'
 import SidebarItem from './SidebarItem.vue'
 import { onClickOutside } from '@vueuse/core'
 import useSidebarStore from '@/Stores/useSidebarStore.js'
@@ -21,6 +21,11 @@ const menuGroups = ref([
         icon: IconUsers,
         label: 'Usuarios',
         route: route('dashboard.users.index')
+      },
+      {
+        icon: IconUser,
+        label: 'Perfil',
+        route: route('profile.edit')
       }
     ]
   }
@@ -51,7 +56,7 @@ const menuGroups = ref([
               {{ menuGroup.name }}
             </h3>
 
-            <ul class="mb-6 flex flex-col gap-2">
+            <ul class="mb-4 flex flex-col gap-1">
               <SidebarItem
                 v-for="(menuItem, index) in menuGroup.menuItems"
                 :item="menuItem"
@@ -62,6 +67,14 @@ const menuGroups = ref([
             </ul>
           </div>
         </template>
+        <button
+          @click="() => $inertia.post(route('logout'))"
+          type="button"
+          class="w-full group relative flex items-center gap-2 rounded-lg py-2 px-4 font-medium duration-300 ease-in-out hover:bg-green-800"
+        >
+          <IconLogout size="25" stroke="2" />
+          Salir
+        </button>
       </nav>
     </div>
   </aside>

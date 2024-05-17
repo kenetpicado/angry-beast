@@ -22,9 +22,7 @@ const { toggleSidebar } = useSidebarStore()
       <div class="hidden sm:block"></div>
 
       <div class="flex items-center gap-3 sm:gap-7">
-        <ul class="flex items-center gap-2 sm:gap-4">
-          <DropdownUser />
-        </ul>
+        <DropdownUser />
       </div>
     </div>
   </header>

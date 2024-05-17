@@ -5,7 +5,8 @@
         "dev": "vite",
         "build": "vite build",
         "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-        "format": "prettier --write resources/js/"
+        "format": "prettier --write resources/js/",
+        "format:lint": "npm run format && npm run lint"
     },
     "devDependencies": {
         "@rushstack/eslint-patch": "^1.8.0",
