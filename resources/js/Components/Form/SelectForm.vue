@@ -34,7 +34,7 @@ function format_key(string) {
 
 <template>
   <div class="mb-4">
-    <label class="mb-1 block font-medium">{{ label }}</label>
+    <label class="mb-2 block font-medium">{{ label }}</label>
 
     <div class="relative">
       <select
@@ -43,7 +43,7 @@ function format_key(string) {
         :required="required"
         @input="$emit('update:modelValue', $event.target.value)"
         :value="modelValue"
-        class="w-full rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-10 outline-none focus:border-primary focus-visible:shadow-none text-black"
+        class="w-full rounded-lg border border-stroke bg-transparent py-3 pl-5 pr-10 outline-none focus:border-primary focus-visible:shadow-none text-slate-800"
       >
         <slot></slot>
       </select>
