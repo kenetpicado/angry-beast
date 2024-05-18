@@ -103,7 +103,7 @@ const passwordStatus = computed(() => {
 
       <PrimaryButton text="Nuevo" @click="openModal = true" />
     </div>
-    <div class="bg-white p-0 lg:p-4 rounded-xl flex flex-col">
+    <div class="bg-white p-0 lg:p-4 rounded-sm flex flex-col">
       <div class="max-w-full overflow-x-auto">
         <table class="w-full table-auto text-left text-sm lg:text-base">
           <thead class="uppercase text-xs tracking-widest">
