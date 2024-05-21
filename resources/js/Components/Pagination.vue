@@ -24,12 +24,14 @@ function getThisPage(url) {
         type="button"
         @click.prevent="getThisPage(link.url)"
         :class="[
-          link.active ? 'bg-green-700 border-green-700 text-white' : 'border-slate-300 text-slate-400'
+          link.active
+            ? 'bg-green-700 border-green-700 text-white'
+            : 'border-slate-300 text-slate-400'
         ]"
         class="w-8 h-8 select-none rounded-md font-medium border border-2 text-xs flex items-center justify-center"
       >
         <span v-if="index == 0">
-          <IconChevronLeft size="20"/>
+          <IconChevronLeft size="20" />
         </span>
         <span v-else-if="index == links.length - 1">
           <IconChevronRight size="20" />
