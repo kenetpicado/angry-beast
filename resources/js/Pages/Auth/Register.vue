@@ -107,7 +107,7 @@ const submit = () => {
     <div class="mt-4 text-center">
       <p class="font-medium">
         Ya tienes cuenta?
-        <Link :href="route('login')" class="text-green-700">Inicia sesión</Link>
+        <Link :href="route('login')" class="text-primary">Inicia sesión</Link>
       </p>
     </div>
   </GuestLayout>

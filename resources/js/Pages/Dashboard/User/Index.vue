@@ -120,7 +120,7 @@ const passwordStatus = computed(() => {
             <tr v-for="user in users.data" :key="user.id">
               <td>
                 <div>{{ user.name }}</div>
-                <small class="text-green-700 tracking-wider">Activo: {{ user.active }}</small>
+                <small class="text-primary tracking-wider">Activo: {{ user.active }}</small>
               </td>
               <td>
                 {{ user.email }}

@@ -39,7 +39,7 @@ const menuGroups = ref([
 
 <template>
   <aside
-    class="absolute left-0 top-0 z-20 flex h-screen w-64 flex-col overflow-y-hidden bg-green-700 duration-300 ease-linear lg:static lg:translate-x-0"
+    class="absolute left-0 top-0 z-20 flex h-screen w-64 flex-col overflow-y-hidden bg-primary duration-300 ease-linear lg:static lg:translate-x-0"
     :class="[sidebarStore.isSidebarOpen ? 'translate-x-0' : '-translate-x-full']"
     ref="target"
   >
@@ -75,7 +75,7 @@ const menuGroups = ref([
         <button
           @click="() => $inertia.post(route('logout'))"
           type="button"
-          class="w-full group relative flex items-center gap-2 rounded-lg py-2 px-4 font-medium duration-300 ease-in-out hover:bg-green-800"
+          class="w-full group relative flex items-center gap-2 rounded-lg py-2 px-4 font-medium duration-300 ease-in-out hover:bg-primary-dark"
         >
           <IconLogout size="25" stroke="2" />
           Salir

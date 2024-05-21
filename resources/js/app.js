@@ -8,6 +8,7 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy'
 import { createPinia } from 'pinia'
 import 'vue-universal-modal/dist/index.css'
 import VueUniversalModal from 'vue-universal-modal'
+import { PRIMARY } from '../../theme.js'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
 
@@ -26,6 +27,7 @@ createInertiaApp({
       .mount(el)
   },
   progress: {
-    color: '#15803d'
+    showSpinner: true,
+    color: PRIMARY,
   }
 })

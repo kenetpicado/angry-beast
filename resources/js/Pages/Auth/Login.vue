@@ -49,7 +49,7 @@ const submit = () => {
     <div class="mt-4 text-center">
       <p class="font-medium">
         No tienes cuenta?
-        <Link :href="route('register')" class="text-green-700">Regístrate</Link>
+        <Link :href="route('register')" class="text-primary">Regístrate</Link>
       </p>
     </div>
   </GuestLayout>
