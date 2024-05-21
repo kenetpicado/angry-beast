@@ -55,14 +55,15 @@ const submit = () => {
     }
   })
 }
-
-const description =
-  'Descubre una forma más eficiente de gestionar tus envíos. Regístrate ahora para acceder a herramientas poderosas que te ayudarán a administrar y optimizar tus registros con facilidad. Únete hoy mismo y lleva tu negocio al siguiente nivel.'
 </script>
 
 <template>
-  <GuestLayout subtitle="Únete hoy mismo" title="Crear cuenta" :description="description">
+  <GuestLayout subtitle="Únete hoy mismo" title="Crear cuenta">
     <Head title="Crear cuenta" />
+
+    <template #left>
+      <img alt="illustration" class="w-96 mx-auto" src="/images/register.svg" />
+    </template>
 
     <form @submit.prevent="submit">
       <InputForm v-model="form.name" autofocus label="Nombre completo" name="name" required />
@@ -91,7 +92,7 @@ const description =
         <IconLock class="text-stroke" size="25" stroke="2" />
       </InputForm>
 
-      <div v-if="passwordStatus && form.password" class="mb-5 text-red-400 text-sm">
+      <div v-if="passwordStatus && form.password" class="mb-2 text-red-400 text-sm">
         {{ passwordStatus }}
       </div>
 
@@ -103,7 +104,7 @@ const description =
       />
     </form>
 
-    <div class="mt-6 text-center">
+    <div class="mt-4 text-center">
       <p class="font-medium">
         Ya tienes cuenta?
         <Link :href="route('login')" class="text-green-700">Inicia sesión</Link>

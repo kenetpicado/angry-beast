@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\EmployeeController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,9 @@ Route::group([
 
         Route::resource('users', UserController::class)
             ->except(['edit', 'create', 'show']);
+
+        Route::resource('employees', EmployeeController::class)
+            ->except(['edit', 'create']);
     });
 
 Route::middleware(['auth', 'last.active'])->group(function () {

@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { IconLogout, IconUser, IconUsers, IconX } from '@tabler/icons-vue'
+import { IconLogout, IconUser, IconUserCog, IconUsers, IconX } from '@tabler/icons-vue'
 import SidebarItem from './SidebarItem.vue'
 import { onClickOutside } from '@vueuse/core'
 import useSidebarStore from '@/Stores/useSidebarStore.js'
@@ -21,6 +21,11 @@ const menuGroups = ref([
         icon: IconUsers,
         label: 'Usuarios',
         route: route('dashboard.users.index')
+      },
+      {
+        icon: IconUserCog,
+        label: 'Personal',
+        route: route('dashboard.employees.index')
       },
       {
         icon: IconUser,

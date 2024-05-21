@@ -18,14 +18,15 @@ const submit = () => {
     }
   })
 }
-
-const description =
-  'Accede rápidamente a tu cuenta. Con nuestra plataforma, gestionar tus paquetes es más fácil que nunca. Inicia sesión ahora para tener control sobre tus envíos. Simplifica tu logística con nosotros.'
 </script>
 
 <template>
-  <GuestLayout subtitle="¡Bienvenido de vuelta!" title="Iniciar sesión" :description="description">
+  <GuestLayout subtitle="¡Bienvenido de vuelta!" title="Iniciar sesión">
     <Head title="Iniciar sesión" />
+
+    <template #left>
+      <img alt="illustration" class="w-96 mx-auto" src="/images/login.svg" />
+    </template>
 
     <form @submit.prevent="submit">
       <InputForm v-model="form.email" label="Correo" name="email" required type="email">
@@ -45,7 +46,7 @@ const description =
       <PrimaryButton class="w-full mt-4" text="Iniciar sesión" type="submit" />
     </form>
 
-    <div class="mt-6 text-center">
+    <div class="mt-4 text-center">
       <p class="font-medium">
         No tienes cuenta?
         <Link :href="route('register')" class="text-green-700">Regístrate</Link>
