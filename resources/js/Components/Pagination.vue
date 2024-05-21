@@ -24,9 +24,7 @@ function getThisPage(url) {
         type="button"
         @click.prevent="getThisPage(link.url)"
         :class="[
-          link.active
-            ? 'bg-primary border-primary text-white'
-            : 'border-slate-300 text-slate-400'
+          link.active ? 'bg-primary border-primary text-white' : 'border-slate-300 text-slate-400'
         ]"
         class="w-8 h-8 select-none rounded-md font-medium border border-2 text-xs flex items-center justify-center"
       >
