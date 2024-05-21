@@ -12,6 +12,6 @@
     }
 
     th {
-        @apply px-6 py-4 font-medium;
+        @apply px-6 py-3 font-medium;
     }
 }

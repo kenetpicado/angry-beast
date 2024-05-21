@@ -75,7 +75,7 @@ const menuGroups = ref([
         <button
           @click="() => $inertia.post(route('logout'))"
           type="button"
-          class="w-full group relative flex items-center gap-2 rounded-lg py-2 px-4 font-medium duration-300 ease-in-out hover:bg-primary-dark"
+          class="w-full group relative flex items-center gap-2 rounded-md py-2 px-4 font-medium duration-300 ease-in-out hover:bg-primary-dark"
         >
           <IconLogout size="25" stroke="2" />
           Salir

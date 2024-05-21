@@ -1,7 +1,7 @@
 <template>
   <Modal v-model="openModal" class="z-30">
     <form
-      class="bg-white rounded-xl px-7 py-5 w-full flex flex-col"
+      class="bg-white rounded-md px-7 py-5 w-full flex flex-col"
       style="max-width: 50rem; min-height: 20rem"
       @submit.prevent="$emit('onSubmit')"
     >

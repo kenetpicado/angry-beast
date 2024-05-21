@@ -10,6 +10,7 @@ import { useForm } from '@inertiajs/vue3'
 import { IconEdit, IconEye, IconTrash } from '@tabler/icons-vue'
 import { ref } from 'vue'
 import confirmAction from '@/Utils/confirmation'
+import ActionIcon from '@/Components/ActionIcon.vue'
 
 defineProps({
   employees: {
@@ -89,7 +90,7 @@ function resetValues() {
         <th>Nombre</th>
         <th>Telefono</th>
         <th>Horario</th>
-        <th>Acciones</th>
+        <th></th>
       </template>
 
       <template #body>
@@ -108,14 +109,9 @@ function resetValues() {
           </td>
           <td>
             <div class="flex gap-3">
-              <IconEye
-                role="button"
-                size="25"
-                stroke="2"
-                @click="$inertia.visit(route('dashboard.employees.show', item.id))"
-              />
-              <IconEdit role="button" size="25" stroke="2" @click="edit(item)" />
-              <IconTrash role="button" size="25" stroke="2" @click="destroy(item.id)" />
+              <ActionIcon :icon="IconEye" :href="route('dashboard.employees.show', item.id)" tooltip="Detalles" />
+              <ActionIcon :icon="IconEdit" @click="edit(item)" tooltip="Editar" />
+              <ActionIcon :icon="IconTrash" @click="destroy(item.id)" tooltip="Eliminar" />
             </div>
           </td>
         </tr>

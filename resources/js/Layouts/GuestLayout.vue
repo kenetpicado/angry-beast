@@ -5,7 +5,7 @@ defineProps(['title', 'subtitle', 'description'])
 <template>
   <div class="grid place-content-center min-h-screen">
     <div class="mx-auto max-w-screen-2xl p-4 md:p-6 xl:p-10">
-      <div class="rounded-sm border border-stroke bg-white h-full">
+      <div class="rounded-md border border-stroke bg-white h-full">
         <div class="flex flex-wrap items-center">
           <div class="hidden w-full xl:block xl:w-1/2 grid place-content-center min-w-30">
             <div class="px-20">
