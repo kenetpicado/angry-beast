@@ -99,11 +99,11 @@ const passwordStatus = computed(() => {
 <template>
   <DefaultLayout head="Usuarios">
     <div class="mb-6 flex gap-3 items-center justify-between">
-      <h2 class="text-xl font-semibold">Usuarios</h2>
+      <h2 class="text-2xl font-semibold">Usuarios</h2>
 
       <PrimaryButton text="Nuevo" @click="openModal = true" />
     </div>
-    <div class="bg-white p-0 lg:p-4 rounded-sm flex flex-col">
+    <div class="bg-white p-0 lg:p-4 rounded-md flex flex-col">
       <div class="max-w-full overflow-x-auto">
         <table class="w-full table-auto text-left text-sm lg:text-base">
           <thead class="uppercase text-xs tracking-widest">
@@ -120,7 +120,7 @@ const passwordStatus = computed(() => {
             <tr v-for="user in users.data" :key="user.id">
               <td>
                 <div>{{ user.name }}</div>
-                <small class="text-green-700 tracking-wider">Activo: {{ user.active }}</small>
+                <small class="text-primary tracking-wider">Activo: {{ user.active }}</small>
               </td>
               <td>
                 {{ user.email }}
@@ -140,7 +140,7 @@ const passwordStatus = computed(() => {
 
     <Modal v-model="openModal" class="z-30">
       <form
-        class="bg-white rounded-xl px-7 py-5 w-full flex flex-col"
+        class="bg-white rounded-md px-7 py-5 w-full flex flex-col"
         style="max-width: 50rem; min-height: 20rem"
         @submit.prevent="onSubmit"
       >

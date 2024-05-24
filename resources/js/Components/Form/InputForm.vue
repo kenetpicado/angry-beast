@@ -51,7 +51,7 @@ function format_key(string) {
         :required="required"
         @input="$emit('update:modelValue', $event.target.value)"
         :value="modelValue"
-        class="w-full rounded-lg border border-slate-300 bg-transparent py-3 pl-5 pr-10 outline-none focus:ring-2 focus:ring-green-600 text-slate-800"
+        class="w-full rounded-md border border-slate-300 bg-transparent py-3 pl-5 pr-10 outline-none focus:outline-none focus:ring-2 focus:ring-green-600 text-slate-600"
       />
 
       <span class="absolute right-4 top-3">

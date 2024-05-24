@@ -1,4 +1,5 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
+import { PRIMARY, PRIMARY_DARK } from './theme.js';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -15,12 +16,9 @@ export default {
         },
         extend: {
             colors: {
-                current: 'currentColor',
-                transparent: 'transparent',
-                black: '#1C2434',
-                primary: '#2a9235',
-                secondary: '#80CAEE',
                 stroke: '#E2E8F0',
+                primary: PRIMARY,
+                'primary-dark': PRIMARY_DARK,
             },
         }
     },
