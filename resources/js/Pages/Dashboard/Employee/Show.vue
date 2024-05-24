@@ -26,7 +26,7 @@ const openModal = ref(false)
 
 const { store, update, destroy, form } = useExpenditure({
   model_id: props.employee.id,
-  model_type: 'App\\Models\\Employee',
+  model_type: 'App\\Models\\Employee'
 })
 
 function onSubmit() {
@@ -35,10 +35,8 @@ function onSubmit() {
     return
   }
 
-  if (form.id)
-    update(resetValues)
-  else
-    store(resetValues)
+  if (form.id) update(resetValues)
+  else store(resetValues)
 }
 
 function edit(item) {
@@ -57,7 +55,6 @@ onMounted(() => {
   form.model_id = props.employee.id
   form.model_type = 'App\\Models\\Employee'
 })
-
 </script>
 
 <template>
@@ -86,9 +83,7 @@ onMounted(() => {
           <td>
             {{ item.description }}
           </td>
-          <td class="font-bold">
-            C${{ item.value }}
-          </td>
+          <td class="font-bold">C${{ item.value }}</td>
           <td>
             <div class="flex gap-4">
               <ActionIcon :icon="IconEdit" @click="edit(item)" tooltip="Editar" />

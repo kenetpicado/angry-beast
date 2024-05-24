@@ -16,7 +16,7 @@ defineProps({
   employees: {
     type: Object,
     required: true
-  },
+  }
 })
 
 const openModal = ref(false)

@@ -26,7 +26,7 @@ defineProps({
 const openModal = ref(false)
 
 const { store, update, destroy, form } = useExpenditure({
-  model_type: 'App\\Models\\Concept',
+  model_type: 'App\\Models\\Concept'
 })
 
 function onSubmit() {
@@ -35,10 +35,8 @@ function onSubmit() {
     return
   }
 
-  if (form.id)
-    update(resetValues)
-  else
-    store(resetValues)
+  if (form.id) update(resetValues)
+  else store(resetValues)
 }
 
 function edit(item) {
@@ -55,7 +53,6 @@ function resetValues() {
   openModal.value = false
   form.reset()
 }
-
 </script>
 
 <template>
@@ -80,7 +77,7 @@ function resetValues() {
         <tr v-if="expenditures.data.length == 0">
           <td class="text-center text-slate-400" colspan="3">No hay datos que mostrar</td>
         </tr>
-        <tr v-for="(item) in expenditures.data" :key="item.id">
+        <tr v-for="item in expenditures.data" :key="item.id">
           <td>
             {{ getFormattedDate(item.created_at) }}
           </td>
@@ -93,15 +90,15 @@ function resetValues() {
           <td>
             {{ item.quantity }}
           </td>
-          <td>
-            C${{ item.value }}
-          </td>
-          <td class="font-bold">
-            C${{ item.quantity * item.value }}
-          </td>
+          <td>C${{ item.value }}</td>
+          <td class="font-bold">C${{ item.quantity * item.value }}</td>
           <td>
             <div class="flex gap-4">
-              <ActionIcon :icon="IconEye" :href="route('dashboard.expenditures.show', item.id)" tooltip="Detalles" />
+              <ActionIcon
+                :icon="IconEye"
+                :href="route('dashboard.expenditures.show', item.id)"
+                tooltip="Detalles"
+              />
               <ActionIcon :icon="IconEdit" @click="edit(item)" tooltip="Editar" />
               <ActionIcon :icon="IconTrash" @click="destroy(item.id)" tooltip="Eliminar" />
             </div>
@@ -115,7 +112,13 @@ function resetValues() {
     </TableSection>
 
     <ModalForm v-model="openModal" @onSubmit="onSubmit" @onCancel="resetValues" title="Egreso">
-      <SelectForm v-if="form.model_type == 'App\\Models\\Concept'" v-model="form.model_id" label="Concepto" name="model_type" required>
+      <SelectForm
+        v-if="form.model_type == 'App\\Models\\Concept'"
+        v-model="form.model_id"
+        label="Concepto"
+        name="model_type"
+        required
+      >
         <option value="" selected>Seleccione un concepto</option>
         <option v-for="concept in concepts" :key="concept.id" :value="concept.id">
           {{ concept.name }}

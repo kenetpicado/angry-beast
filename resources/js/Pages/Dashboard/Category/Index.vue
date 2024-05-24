@@ -23,7 +23,7 @@ const openModal = ref(false)
 
 const form = useForm({
   id: null,
-  name: '',
+  name: ''
 })
 
 function onSubmit() {

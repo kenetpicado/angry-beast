@@ -2,7 +2,7 @@ import { useForm } from '@inertiajs/vue3'
 import confirmAction from '@/Utils/confirmation'
 import { created, deleted, updated } from '@/Utils/toast.js'
 
-export function useExpenditure({model_id, model_type}) {
+export function useExpenditure({ model_id, model_type }) {
   const form = useForm({
     id: null,
     model_id: model_id || '',

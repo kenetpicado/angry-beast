@@ -1,6 +1,13 @@
 <script setup>
 import { ref } from 'vue'
-import { IconCategory, IconLogout, IconUser, IconUserCog, IconUsers, IconX } from '@tabler/icons-vue'
+import {
+  IconCategory,
+  IconLogout,
+  IconUser,
+  IconUserCog,
+  IconUsers,
+  IconX
+} from '@tabler/icons-vue'
 import SidebarItem from './SidebarItem.vue'
 import { onClickOutside } from '@vueuse/core'
 import useSidebarStore from '@/Stores/useSidebarStore.js'
@@ -46,7 +53,7 @@ const menuGroups = ref([
         icon: IconUsers,
         label: 'Egresos',
         route: route('dashboard.expenditures.index')
-      },
+      }
     ]
   }
 ])
