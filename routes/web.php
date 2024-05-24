@@ -22,6 +22,7 @@ Route::group([
             ->except(['edit', 'create', 'show']);
 
         Route::resource('employees', EmployeeController::class)
+            ->middleware('verify.employee')
             ->except(['edit', 'create']);
 
         Route::resource('categories', CategoryController::class)

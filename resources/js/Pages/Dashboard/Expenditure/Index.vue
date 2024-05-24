@@ -75,14 +75,14 @@ function resetValues() {
 
       <template #body>
         <tr v-if="expenditures.data.length == 0">
-          <td class="text-center text-slate-400" colspan="3">No hay datos que mostrar</td>
+          <td class="text-center text-slate-400" colspan="7">No hay datos que mostrar</td>
         </tr>
         <tr v-for="item in expenditures.data" :key="item.id">
           <td>
             {{ getFormattedDate(item.created_at) }}
           </td>
           <td>
-            {{ item.model_type.split('\\').pop() }}
+            {{ item.model.name }}
           </td>
           <td>
             {{ item.description }}

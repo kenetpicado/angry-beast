@@ -2,12 +2,37 @@
 
 namespace App\Observers;
 
-use ConceptEnum;
+use App\Enums\CategoryEnum;
+use App\Enums\ConceptEnum;
+use Illuminate\Support\Facades\DB;
 
 class UserObserver
 {
     public function created($user)
     {
-        $user->concepts()->createMany(ConceptEnum::cases());
+        $conceptsArray = [];
+        $categoryArray = [];
+        $now = now();
+
+        foreach (ConceptEnum::cases() as $concept) {
+            $conceptsArray[] = [
+                'name' => $concept,
+                'created_at' => $now,
+                'updated_at' => $now,
+                'user_id' => $user->id
+            ];
+        }
+
+        foreach (CategoryEnum::cases() as $category) {
+            $categoryArray[] = [
+                'name' => $category,
+                'created_at' => $now,
+                'updated_at' => $now,
+                'user_id' => $user->id
+            ];
+        }
+
+        DB::table('concepts')->insert($conceptsArray);
+        DB::table('categories')->insert($categoryArray);
     }
 }
