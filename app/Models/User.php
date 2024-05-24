@@ -22,7 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'company_id',
+        'company',
         'password_updated_at',
         'last_active_at',
     ];
@@ -51,11 +51,6 @@ class User extends Authenticatable
     protected $appends = [
         'active',
     ];
-
-    public function company()
-    {
-        return $this->belongsTo(Company::class);
-    }
 
     public function getActiveAttribute()
     {

@@ -13,7 +13,7 @@ import confirmAction from '@/Utils/confirmation'
 import ActionIcon from '@/Components/ActionIcon.vue'
 
 defineProps({
-  employees: {
+  categories: {
     type: Object,
     required: true
   }
@@ -24,13 +24,11 @@ const openModal = ref(false)
 const form = useForm({
   id: null,
   name: '',
-  phone: '',
-  schedule: ''
 })
 
 function onSubmit() {
   if (form.id) {
-    form.put(route('dashboard.employees.update', form.id), {
+    form.put(route('dashboard.categories.update', form.id), {
       preserveScroll: true,
       preserveState: true,
       onSuccess: () => {
@@ -39,7 +37,7 @@ function onSubmit() {
       }
     })
   } else {
-    form.post(route('dashboard.employees.store'), {
+    form.post(route('dashboard.categories.store'), {
       preserveScroll: true,
       preserveState: true,
       onSuccess: () => {
@@ -53,15 +51,13 @@ function onSubmit() {
 function edit(client) {
   form.id = client.id
   form.name = client.name
-  form.phone = client.phone
-  form.schedule = client.schedule
   openModal.value = true
 }
 
 function destroy(id) {
   confirmAction({
     callback: () => {
-      form.delete(route('dashboard.employees.destroy', id), {
+      form.delete(route('dashboard.categories.destroy', id), {
         preserveScroll: true,
         preserveState: true,
         onSuccess: () => {
@@ -81,7 +77,7 @@ function resetValues() {
 <template>
   <DefaultLayout head="Usuarios">
     <div class="mb-6 flex gap-3 items-center justify-between">
-      <h2 class="text-2xl font-semibold">Personal</h2>
+      <h2 class="text-2xl font-semibold">Grupos</h2>
       <PrimaryButton text="Nuevo" @click="openModal = true" />
     </div>
 
@@ -89,33 +85,25 @@ function resetValues() {
       <template #header>
         <th>#</th>
         <th>Nombre</th>
-        <th>Telefono</th>
-        <th>Horario</th>
         <th>Acciones</th>
       </template>
 
       <template #body>
-        <tr v-if="employees.data.length == 0">
-          <td class="text-center text-slate-400" colspan="4">No hay datos que mostrar</td>
+        <tr v-if="categories.data.length == 0">
+          <td class="text-center text-slate-400" colspan="3">No hay datos que mostrar</td>
         </tr>
-        <tr v-for="(item, index) in employees.data" :key="item.id">
+        <tr v-for="(item, index) in categories.data" :key="item.id">
           <td>
-            {{ index + 1 + (employees.current_page - 1) * employees.per_page }}
+            {{ index + 1 + (categories.current_page - 1) * categories.per_page }}
           </td>
           <td>
             {{ item.name }}
           </td>
           <td>
-            {{ item.phone }}
-          </td>
-          <td>
-            {{ item.schedule }}
-          </td>
-          <td>
             <div class="flex gap-4">
               <ActionIcon
                 :icon="IconEye"
-                :href="route('dashboard.employees.show', item.id)"
+                :href="route('dashboard.categories.show', item.id)"
                 tooltip="Detalles"
               />
               <ActionIcon :icon="IconEdit" @click="edit(item)" tooltip="Editar" />
@@ -126,14 +114,12 @@ function resetValues() {
       </template>
 
       <template #footer>
-        <Pagination :links="employees.links" />
+        <Pagination :links="categories.links" />
       </template>
     </TableSection>
 
-    <ModalForm v-model="openModal" @onSubmit="onSubmit" @onCancel="resetValues" title="Personal">
-      <InputForm v-model="form.name" label="Nombre" name="name" required />
-      <InputForm v-model="form.phone" label="Telefono" name="phone" type="number" />
-      <InputForm v-model="form.schedule" label="Horario" name="horario" />
+    <ModalForm v-model="openModal" @onSubmit="onSubmit" @onCancel="resetValues" title="Grupo">
+      <InputForm class="col-span-2" v-model="form.name" label="Nombre" name="name" required />
     </ModalForm>
   </DefaultLayout>
 </template>

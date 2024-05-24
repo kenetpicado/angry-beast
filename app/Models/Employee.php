@@ -15,4 +15,9 @@ class Employee extends Model
         'schedule',
         'user_id',
     ];
+
+    public function payments()
+    {
+        return $this->morphMany(Expenditure::class, 'model');
+    }
 }

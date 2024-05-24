@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\EmployeeController;
+use App\Http\Controllers\Dashboard\ExpenditureController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +23,11 @@ Route::group([
 
         Route::resource('employees', EmployeeController::class)
             ->except(['edit', 'create']);
+
+        Route::resource('categories', CategoryController::class)
+            ->except(['edit', 'create']);
+
+        Route::resource('expenditures', ExpenditureController::class);
     });
 
 Route::middleware(['auth', 'last.active'])->group(function () {
