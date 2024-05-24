@@ -14,6 +14,13 @@ class ExpenditureRequest extends FormRequest
         return true;
     }
 
+    public function prepareForValidation(): void
+    {
+        $this->merge([
+            'user_id' => auth()->id(),
+        ]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,10 +31,10 @@ class ExpenditureRequest extends FormRequest
         return [
             'model_id' => ['required', 'integer'],
             'model_type' => ['required', 'string'],
-            'concept' => ['required', 'string'],
-            'description' => ['nullable', 'string'],
+            'description' => ['required', 'string'],
             'quantity' => ['nullable', 'numeric'],
             'value' => ['required', 'numeric'],
+            'user_id' => ['required', 'integer'],
         ];
     }
 }

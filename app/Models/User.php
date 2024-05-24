@@ -60,4 +60,9 @@ class User extends Authenticatable
 
         return ($this->last_active_at > Carbon::now()->subMinutes(5)) ? 'Ahora' : $this->last_active_at->diffForHumans();
     }
+
+    public function concepts()
+    {
+        return $this->hasMany(Concept::class);
+    }
 }

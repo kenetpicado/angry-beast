@@ -9,6 +9,18 @@ use Illuminate\Http\Request;
 
 class ExpenditureController extends Controller
 {
+    public function index()
+    {
+        return inertia('Dashboard/Expenditure/Index', [
+            'expenditures' => Expenditure::query()
+                ->with('model')
+                ->where('user_id', auth()->id())
+                ->latest()
+                ->paginate(),
+            'concepts' => auth()->user()->concepts()->get(['id', 'name']),
+        ]);
+    }
+
     public function store(ExpenditureRequest $request)
     {
         Expenditure::create($request->validated());

@@ -38,6 +38,16 @@ const menuGroups = ref([
         route: route('profile.edit')
       }
     ]
+  },
+  {
+    name: 'Contabilidad',
+    menuItems: [
+      {
+        icon: IconUsers,
+        label: 'Egresos',
+        route: route('dashboard.expenditures.index')
+      },
+    ]
   }
 ])
 </script>

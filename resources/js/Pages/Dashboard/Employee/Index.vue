@@ -16,7 +16,7 @@ defineProps({
   employees: {
     type: Object,
     required: true
-  }
+  },
 })
 
 const openModal = ref(false)
@@ -96,7 +96,7 @@ function resetValues() {
 
       <template #body>
         <tr v-if="employees.data.length == 0">
-          <td class="text-center text-slate-400" colspan="4">No hay datos que mostrar</td>
+          <td class="text-center text-slate-400" colspan="5">No hay datos que mostrar</td>
         </tr>
         <tr v-for="(item, index) in employees.data" :key="item.id">
           <td>
