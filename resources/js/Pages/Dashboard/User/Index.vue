@@ -99,7 +99,7 @@ const passwordStatus = computed(() => {
 <template>
   <DefaultLayout head="Usuarios">
     <div class="mb-6 flex gap-3 items-center justify-between">
-      <h2 class="text-xl font-semibold">Usuarios</h2>
+      <h2 class="text-2xl font-semibold">Usuarios</h2>
 
       <PrimaryButton text="Nuevo" @click="openModal = true" />
     </div>

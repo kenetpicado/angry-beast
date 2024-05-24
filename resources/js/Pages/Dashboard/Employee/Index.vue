@@ -81,7 +81,7 @@ function resetValues() {
 <template>
   <DefaultLayout head="Usuarios">
     <div class="mb-6 flex gap-3 items-center justify-between">
-      <h2 class="text-xl font-semibold">Personal</h2>
+      <h2 class="text-2xl font-semibold">Personal</h2>
       <PrimaryButton text="Nuevo" @click="openModal = true" />
     </div>
 
@@ -90,7 +90,7 @@ function resetValues() {
         <th>Nombre</th>
         <th>Telefono</th>
         <th>Horario</th>
-        <th></th>
+        <th>Acciones</th>
       </template>
 
       <template #body>
@@ -108,7 +108,7 @@ function resetValues() {
             {{ item.schedule }}
           </td>
           <td>
-            <div class="flex gap-3">
+            <div class="flex gap-4">
               <ActionIcon
                 :icon="IconEye"
                 :href="route('dashboard.employees.show', item.id)"

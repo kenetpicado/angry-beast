@@ -1,6 +1,6 @@
 <template>
   <component :is="href ? Link : 'button'" type="button" :href="href" :tooltip="tooltip">
-    <component :is="icon" size="25" stroke="2" />
+    <component :is="icon" size="20" stroke="2" />
   </component>
 </template>
 
