@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import {
   IconCategory,
+  IconHorse,
   IconLogout,
   IconUser,
   IconUserCog,
@@ -36,14 +37,14 @@ const menuGroups = ref([
       },
       {
         icon: IconCategory,
-        label: 'Grupos',
-        route: route('dashboard.categories.index')
+        label: 'Especies',
+        route: route('dashboard.species.index')
       },
       {
-        icon: IconUser,
-        label: 'Perfil',
-        route: route('profile.edit')
-      }
+        icon: IconHorse,
+        label: 'Animales',
+        route: route('dashboard.animals.index')
+      },
     ]
   },
   {
@@ -55,6 +56,16 @@ const menuGroups = ref([
         route: route('dashboard.expenditures.index')
       }
     ]
+  },
+  {
+    name: 'Configuración',
+    menuItems: [
+      {
+        icon: IconUser,
+        label: 'Perfil',
+        route: route('profile.edit')
+      }
+    ]
   }
 ])
 </script>
@@ -62,9 +73,7 @@ const menuGroups = ref([
 <template>
   <aside
     class="absolute left-0 top-0 z-20 flex h-screen w-64 flex-col overflow-y-hidden bg-primary duration-300 ease-linear lg:static lg:translate-x-0"
-    :class="[sidebarStore.isSidebarOpen ? 'translate-x-0' : '-translate-x-full']"
-    ref="target"
-  >
+    :class="[sidebarStore.isSidebarOpen ? 'translate-x-0' : '-translate-x-full']" ref="target">
     <div class="flex items-center justify-between gap-2 px-6 py-5 lg:py-6">
       <div class="text-center w-full text-white font-bold text-2xl">
         {{ $page.props.app_name }}
@@ -84,21 +93,13 @@ const menuGroups = ref([
             </h3>
 
             <ul class="mb-4 flex flex-col gap-1">
-              <SidebarItem
-                v-for="(menuItem, index) in menuGroup.menuItems"
-                :item="menuItem"
-                :key="index"
-                @click="() => (sidebarStore.page = menuItem.label)"
-                :active="menuItem.label === sidebarStore.page"
-              />
+              <SidebarItem v-for="(menuItem, index) in menuGroup.menuItems" :item="menuItem" :key="index"
+                @click="() => (sidebarStore.page = menuItem.label)" :active="menuItem.label === sidebarStore.page" />
             </ul>
           </div>
         </template>
-        <button
-          @click="() => $inertia.post(route('logout'))"
-          type="button"
-          class="mt-2 w-full group relative flex items-center gap-2 rounded-md py-2 px-4 font-medium duration-300 ease-in-out hover:bg-primary-dark"
-        >
+        <button @click="() => $inertia.post(route('logout'))" type="button"
+          class="mt-2 w-full group relative flex items-center gap-2 rounded-md py-2 px-4 font-medium duration-300 ease-in-out hover:bg-primary-dark">
           <IconLogout size="25" stroke="2" />
           Salir
         </button>

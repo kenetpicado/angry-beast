@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserEnum;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,6 +21,16 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
             'password_updated_at' => now(),
+            'type' => UserEnum::USER,
+        ]);
+
+        User::create([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+            'password_updated_at' => now(),
+            'type' => UserEnum::ADMIN,
         ]);
     }
 }

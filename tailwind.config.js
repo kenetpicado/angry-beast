@@ -11,9 +11,9 @@ export default {
     ],
 
     theme: {
-        screens: {
-            ...defaultTheme.screens
-        },
+        // screens: {
+        //     ...defaultTheme.screens
+        // },
         extend: {
             colors: {
                 stroke: '#E2E8F0',
@@ -22,6 +22,8 @@ export default {
             },
         }
     },
-
+    plugins: [
+        require('@tailwindcss/forms')
+    ],
     //plugins: [],
 };

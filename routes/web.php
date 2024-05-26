@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\AnimalController;
+use App\Http\Controllers\Dashboard\SpeciesController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\EmployeeController;
 use App\Http\Controllers\Dashboard\ExpenditureController;
@@ -25,10 +26,12 @@ Route::group([
             ->middleware('verify.employee')
             ->except(['edit', 'create']);
 
-        Route::resource('categories', CategoryController::class)
+        Route::resource('species', SpeciesController::class)
             ->except(['edit', 'create']);
 
         Route::resource('expenditures', ExpenditureController::class);
+
+        Route::resource('animals', AnimalController::class);
     });
 
 Route::middleware(['auth', 'last.active'])->group(function () {

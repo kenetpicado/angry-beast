@@ -2,16 +2,21 @@
 
 namespace App\Observers;
 
-use App\Enums\CategoryEnum;
 use App\Enums\ConceptEnum;
+use App\Enums\SpeciesEnum;
+use App\Enums\UserEnum;
 use Illuminate\Support\Facades\DB;
 
 class UserObserver
 {
     public function created($user)
     {
+        if ($user->type == UserEnum::ADMIN) {
+            return;
+        }
+
         $conceptsArray = [];
-        $categoryArray = [];
+        $speciesArray = [];
         $now = now();
 
         foreach (ConceptEnum::cases() as $concept) {
@@ -23,9 +28,9 @@ class UserObserver
             ];
         }
 
-        foreach (CategoryEnum::cases() as $category) {
-            $categoryArray[] = [
-                'name' => $category,
+        foreach (SpeciesEnum::cases() as $item) {
+            $speciesArray[] = [
+                'name' => $item,
                 'created_at' => $now,
                 'updated_at' => $now,
                 'user_id' => $user->id
@@ -33,6 +38,6 @@ class UserObserver
         }
 
         DB::table('concepts')->insert($conceptsArray);
-        DB::table('categories')->insert($categoryArray);
+        DB::table('species')->insert($speciesArray);
     }
 }

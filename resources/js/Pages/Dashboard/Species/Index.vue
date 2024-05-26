@@ -13,7 +13,7 @@ import confirmAction from '@/Utils/confirmation'
 import ActionIcon from '@/Components/ActionIcon.vue'
 
 defineProps({
-  categories: {
+  species: {
     type: Object,
     required: true
   }
@@ -23,12 +23,13 @@ const openModal = ref(false)
 
 const form = useForm({
   id: null,
-  name: ''
+  name: '',
+  description: ''
 })
 
 function onSubmit() {
   if (form.id) {
-    form.put(route('dashboard.categories.update', form.id), {
+    form.put(route('dashboard.species.update', form.id), {
       preserveScroll: true,
       preserveState: true,
       onSuccess: () => {
@@ -37,7 +38,7 @@ function onSubmit() {
       }
     })
   } else {
-    form.post(route('dashboard.categories.store'), {
+    form.post(route('dashboard.species.store'), {
       preserveScroll: true,
       preserveState: true,
       onSuccess: () => {
@@ -48,16 +49,17 @@ function onSubmit() {
   }
 }
 
-function edit(client) {
-  form.id = client.id
-  form.name = client.name
+function edit(item) {
+  form.id = item.id
+  form.name = item.name
+  form.description = item.description
   openModal.value = true
 }
 
 function destroy(id) {
   confirmAction({
     callback: () => {
-      form.delete(route('dashboard.categories.destroy', id), {
+      form.delete(route('dashboard.species.destroy', id), {
         preserveScroll: true,
         preserveState: true,
         onSuccess: () => {
@@ -77,7 +79,7 @@ function resetValues() {
 <template>
   <DefaultLayout head="Usuarios">
     <div class="mb-6 flex gap-3 items-center justify-between">
-      <h2 class="text-2xl font-semibold">Grupos</h2>
+      <h2 class="text-2xl font-semibold">Especies</h2>
       <PrimaryButton text="Nuevo" @click="openModal = true" />
     </div>
 
@@ -89,12 +91,12 @@ function resetValues() {
       </template>
 
       <template #body>
-        <tr v-if="categories.data.length == 0">
+        <tr v-if="species.data.length == 0">
           <td class="text-center text-slate-400" colspan="3">No hay datos que mostrar</td>
         </tr>
-        <tr v-for="(item, index) in categories.data" :key="item.id">
+        <tr v-for="(item, index) in species.data" :key="item.id">
           <td>
-            {{ index + 1 + (categories.current_page - 1) * categories.per_page }}
+            {{ index + 1 + (species.current_page - 1) * species.per_page }}
           </td>
           <td>
             {{ item.name }}
@@ -103,7 +105,7 @@ function resetValues() {
             <div class="flex gap-4">
               <ActionIcon
                 :icon="IconEye"
-                :href="route('dashboard.categories.show', item.id)"
+                :href="route('dashboard.species.show', item.id)"
                 tooltip="Detalles"
               />
               <ActionIcon :icon="IconEdit" @click="edit(item)" tooltip="Editar" />
@@ -114,12 +116,13 @@ function resetValues() {
       </template>
 
       <template #footer>
-        <Pagination :links="categories.links" />
+        <Pagination :links="species.links" />
       </template>
     </TableSection>
 
-    <ModalForm v-model="openModal" @onSubmit="onSubmit" @onCancel="resetValues" title="Grupo">
+    <ModalForm v-model="openModal" @onSubmit="onSubmit" @onCancel="resetValues" title="Especie">
       <InputForm class="col-span-2" v-model="form.name" label="Nombre" name="name" required />
+      <InputForm class="col-span-2" v-model="form.description" label="Descripcion (Opcional)" name="description" />
     </ModalForm>
   </DefaultLayout>
 </template>
