@@ -14,7 +14,7 @@ class AnimalController extends Controller
         return inertia('Dashboard/Animal/Index', [
             'animals' => Animal::query()
                 ->where('user_id', auth()->id())
-                ->select('id', 'name', 'user_id', 'code')
+                ->select('id', 'name', 'user_id', 'code', 'photo')
                 ->paginate(),
         ]);
     }
@@ -26,7 +26,25 @@ class AnimalController extends Controller
 
     public function store(AnimalRequest $request)
     {
-        Animal::create($request->validated());
+        if ($request->hasFile('photo')) {
+            $temporalPhoto = $request->file('photo');
+
+            $request->merge([
+                'photo' => null,
+            ]);
+        }
+
+        $stored = Animal::create($request->validated());
+
+        if (isset($temporalPhoto)) {
+            $file = $stored->addMedia($temporalPhoto)
+                ->usingFileName($stored->id . '.' . $temporalPhoto->getClientOriginalExtension())
+                ->toMediaCollection('profile');
+
+            $stored->update([
+                'photo' => $file->getFullUrl(),
+            ]);
+        }
 
         return redirect()->route('dashboard.animals.index');
     }
@@ -47,6 +65,8 @@ class AnimalController extends Controller
 
     public function destroy(Animal $animal)
     {
+        $animal->getMedia()->each->delete();
+
         $animal->delete();
 
         return back();
