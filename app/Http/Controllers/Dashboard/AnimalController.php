@@ -5,10 +5,16 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AnimalRequest;
 use App\Models\Animal;
+use App\Services\AnimalService;
 use Illuminate\Http\Request;
 
 class AnimalController extends Controller
 {
+    public function __construct(
+        private readonly AnimalService $animalService
+    ) {
+    }
+
     public function index()
     {
         return inertia('Dashboard/Animal/Index', [
@@ -26,34 +32,14 @@ class AnimalController extends Controller
 
     public function store(AnimalRequest $request)
     {
-        if ($request->hasFile('photo')) {
-            $temporalPhoto = $request->file('photo');
-
-            $request->merge([
-                'photo' => null,
-            ]);
-        }
-
-        $stored = Animal::create($request->validated());
-
-        if (isset($temporalPhoto)) {
-            $file = $stored->addMedia($temporalPhoto)
-                ->usingFileName($stored->id . '.' . $temporalPhoto->getClientOriginalExtension())
-                ->toMediaCollection('profile');
-
-            $stored->update([
-                'photo' => $file->getFullUrl(),
-            ]);
-        }
+        $this->animalService->store($request->validated());
 
         return redirect()->route('dashboard.animals.index');
     }
 
     public function show(Animal $animal)
     {
-        return inertia('Dashboard/Animal/Show', [
-            'animal' => $animal,
-        ]);
+        return inertia('Dashboard/Animal/Show', compact('animal'));
     }
 
     public function update(AnimalRequest $request, Animal $animal)

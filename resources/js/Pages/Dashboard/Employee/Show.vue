@@ -83,7 +83,7 @@ onMounted(() => {
           <td>
             {{ item.description }}
           </td>
-          <td class="font-bold">C${{ item.value }}</td>
+          <td class="font-bold">C${{ item.value.toLocaleString() }}</td>
           <td>
             <div class="flex gap-4">
               <ActionIcon :icon="IconEdit" @click="edit(item)" tooltip="Editar" />

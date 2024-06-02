@@ -57,7 +57,7 @@ function removeImage() {
                     <div class="rounded-md border border-stroke bg-white shadow-default">
                         <div class="border-b border-stroke py-4 px-7">
                             <h3 class="font-medium">
-                                Informacion del animal
+                                Datos generales
                             </h3>
                         </div>
                         <div class="p-7">
@@ -95,12 +95,12 @@ function removeImage() {
                     <div class="rounded-md border border-stroke bg-white shadow-default">
                         <div class="border-b border-stroke py-4 px-7">
                             <h3 class="font-medium">
-                                Foto del animal
+                                Foto
                             </h3>
                         </div>
                         <div class="p-7">
-                            <div v-if="preview" class="mb-5">
-                                <img :src="preview" alt="" class="mb-2 w-full rounded-md">
+                            <div v-if="preview" class="mb-4 w-full flex justify-center">
+                                <img :src="preview" alt="" class="mb-2 w-auto h-[35rem] rounded-md">
                             </div>
                             <div v-else
                                 class="relative mb-5 block w-full cursor-pointer appearance-none rounded-md border-2 border-dashed border-primary bg-gray py-4 px-4">
@@ -113,7 +113,9 @@ function removeImage() {
                                         <IconUpload size="20" stroke="2" class="text-slate-400" />
                                     </span>
                                     <p class="text-sm font-medium">
-                                        <span class="text-primary">Click to upload</span>
+                                        <span class="text-primary">
+                                            Subir foto
+                                        </span>
                                     </p>
                                 </div>
                             </div>
