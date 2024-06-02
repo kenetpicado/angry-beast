@@ -19,13 +19,16 @@ const form = useForm({
     name: props.animal.name,
     code: props.animal.code,
     gender: props.animal.gender || 'Hembra',
-    race: '',
-    initial_weight: '',
-    initial_height: '',
-    birth_date: '',
-    adoption_date: '',
-    entry_date: '',
-    photo: ''
+    race: props.animal.race || '',
+    initial_weight: props.animal.initial_weight || '',
+    initial_height: props.animal.initial_height || '',
+    birth_date: props.animal.birth_date || '',
+    adoption_date: props.animal.adoption_date || '',
+    entry_date: props.animal.entry_date || '',
+    exit_date: props.animal.exit_date || '',
+    death_date: props.animal.death_date || '',
+    cause_of_death: props.animal.cause_of_death || '',
+    photo: props.animal.photo || ''
 })
 
 </script>
@@ -122,6 +125,12 @@ const form = useForm({
                                             name="adoption_date" type="date" />
                                         <InputForm v-model="form.entry_date" label="Fecha de ingreso" name="entry_date"
                                             type="date" />
+                                        <InputForm v-model="form.exit_date" label="Fecha de salida" name="exit_date"
+                                            type="date" />
+                                        <InputForm v-model="form.death_date" label="Fecha de muerte" name="death_date"
+                                            type="date" />
+                                        <InputForm v-model="form.cause_of_death" label="Causa de muerte"
+                                            name="cause_of_death" />
                                     </template>
                                 </div>
                                 <button @click="edit = !edit" type="button" class="col-span-2 text-primary">
