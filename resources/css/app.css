@@ -3,17 +3,21 @@
 @tailwind utilities;
 
 @layer base {
-    body {
-        @apply relative z-0 bg-slate-100 text-base font-normal text-slate-500;
-    }
+  body {
+    @apply relative z-0 bg-slate-100 text-base font-normal text-slate-500;
+  }
 
-    td {
-        @apply px-6 py-4;
-    }
+  td {
+    @apply px-6 py-4;
+  }
 
-    th {
-        @apply px-6 py-3 font-medium;
-    }
+  th {
+    @apply px-6 py-4 font-medium;
+  }
+
+  tr {
+    @apply hover:bg-slate-50;
+  }
 }
 
 input::-webkit-outer-spin-button,
