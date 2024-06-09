@@ -7,7 +7,6 @@ export function confirmAction({ title, icon, confirmButtonText, cancelButtonText
     icon: icon || 'warning',
     showCancelButton: true,
     confirmButtonColor: PRIMARY,
-    cancelButtonColor: '#e74a3b',
     confirmButtonText: confirmButtonText || 'Confirmar',
     cancelButtonText: cancelButtonText || 'Cancelar'
   }).then((result) => {

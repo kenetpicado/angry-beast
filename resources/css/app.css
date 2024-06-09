@@ -3,20 +3,33 @@
 @tailwind utilities;
 
 @layer base {
-    body {
-        @apply relative z-0 bg-slate-100 text-base font-normal text-slate-500;
+  body {
+    @apply relative z-0 bg-slate-100 text-base font-normal text-slate-500;
+  }
+
+  td {
+    @apply px-6 py-4;
+  }
+
+  th {
+    @apply px-6 py-4 font-bold text-xs;
+  }
+
+  tr {
+    @apply hover:bg-slate-50;
+  }
+}
+
+@layer components {
+    .badge-red {
+        @apply text-red-600 bg-red-100 px-2 py-1 rounded-lg
     }
 
-    td {
-        @apply px-6 py-4;
-    }
-
-    th {
-        @apply px-6 py-3 font-medium;
+    .badge-primary {
+        @apply text-primary bg-primary-light px-2 py-1 rounded-lg
     }
 }
 
-/* REMOVE ARROWS */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

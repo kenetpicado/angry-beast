@@ -7,7 +7,7 @@ import TableSection from '@/Components/TableSection.vue'
 import DefaultLayout from '@/Layouts/DefaultLayout.vue'
 import { created, deleted, updated } from '@/Utils/toast.js'
 import { useForm } from '@inertiajs/vue3'
-import { IconEdit, IconEye, IconTrash } from '@tabler/icons-vue'
+import { IconEdit, IconTrash, IconEye } from '@tabler/icons-vue'
 import { ref } from 'vue'
 import confirmAction from '@/Utils/confirmation'
 import ActionIcon from '@/Components/ActionIcon.vue'
@@ -87,6 +87,7 @@ function resetValues() {
 
     <TableSection>
       <template #header>
+        <th>#</th>
         <th>Nombre</th>
         <th>Telefono</th>
         <th>Horario</th>
@@ -95,9 +96,12 @@ function resetValues() {
 
       <template #body>
         <tr v-if="employees.data.length == 0">
-          <td class="text-center text-slate-400" colspan="4">No hay datos que mostrar</td>
+          <td class="text-center text-slate-400" colspan="5">No hay datos que mostrar</td>
         </tr>
-        <tr v-for="item in employees.data" :key="item.id">
+        <tr v-for="(item, index) in employees.data" :key="item.id">
+          <td>
+            {{ index + 1 + (employees.current_page - 1) * employees.per_page }}
+          </td>
           <td>
             {{ item.name }}
           </td>
@@ -126,7 +130,7 @@ function resetValues() {
       </template>
     </TableSection>
 
-    <ModalForm v-model="openModal" @onSubmit="onSubmit" @onCancel="resetValues">
+    <ModalForm v-model="openModal" @onSubmit="onSubmit" @onCancel="resetValues" title="Personal">
       <InputForm v-model="form.name" label="Nombre" name="name" required />
       <InputForm v-model="form.phone" label="Telefono" name="phone" type="number" />
       <InputForm v-model="form.schedule" label="Horario" name="horario" />

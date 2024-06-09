@@ -11,7 +11,8 @@ const props = defineProps(['auth'])
 
 const form = useForm({
   name: props.auth.name,
-  email: props.auth.email
+  email: props.auth.email,
+  company: props.auth.company
 })
 
 const formPassword = useForm({

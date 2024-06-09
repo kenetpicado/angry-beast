@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AnimalController;
+use App\Http\Controllers\Dashboard\ConceptController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\EmployeeController;
+use App\Http\Controllers\Dashboard\PhotoController;
+use App\Http\Controllers\Dashboard\SpeciesController;
+use App\Http\Controllers\Dashboard\TransactionController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -17,10 +22,24 @@ Route::group([
             ->name('index');
 
         Route::resource('users', UserController::class)
+            ->middleware(['type:ADMIN|USER'])
             ->except(['edit', 'create', 'show']);
 
         Route::resource('employees', EmployeeController::class)
+            ->middleware('verify.employee')
             ->except(['edit', 'create']);
+
+        Route::resource('species', SpeciesController::class)
+            ->except(['edit', 'create']);
+
+        Route::resource('transactions', TransactionController::class);
+
+        Route::resource('animals', AnimalController::class);
+
+        Route::resource('concepts', ConceptController::class);
+
+        Route::resource('photo', PhotoController::class)
+            ->parameter('photo', 'animal');
     });
 
 Route::middleware(['auth', 'last.active'])->group(function () {

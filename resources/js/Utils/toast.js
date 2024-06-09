@@ -18,4 +18,8 @@ export const deleted = () => {
   toast.success('Eliminado correctamente')
 }
 
+export const error = (message) => {
+  toast.error(message || 'Ha ocurrido un error')
+}
+
 export default toast

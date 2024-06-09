@@ -1,13 +1,25 @@
 <script setup>
 import { ref } from 'vue'
-import { IconLogout, IconUser, IconUserCog, IconUsers, IconX } from '@tabler/icons-vue'
+import {
+  IconCategory,
+  IconCategory2,
+  IconHome,
+  IconHorse,
+  IconLogout,
+  IconUser,
+  IconUserCog,
+  IconUsers,
+  IconX
+} from '@tabler/icons-vue'
 import SidebarItem from './SidebarItem.vue'
 import { onClickOutside } from '@vueuse/core'
 import useSidebarStore from '@/Stores/useSidebarStore.js'
+import useLocalPage from '@/Composables/useLocalPage'
 
 const target = ref(null)
 
 const sidebarStore = useSidebarStore()
+const { isType } = useLocalPage()
 
 onClickOutside(target, () => {
   sidebarStore.isSidebarOpen = false
@@ -18,19 +30,62 @@ const menuGroups = ref([
     name: 'Menu',
     menuItems: [
       {
+        icon: IconHome,
+        label: 'Inicio',
+        route: route('dashboard.index'),
+        show: true
+      },
+      {
         icon: IconUsers,
         label: 'Usuarios',
-        route: route('dashboard.users.index')
+        route: route('dashboard.users.index'),
+        show: isType('ADMIN')
       },
       {
         icon: IconUserCog,
         label: 'Personal',
-        route: route('dashboard.employees.index')
+        route: route('dashboard.employees.index'),
+        show: true
       },
+      {
+        icon: IconCategory,
+        label: 'Especies',
+        route: route('dashboard.species.index'),
+        show: true
+      },
+      {
+        icon: IconHorse,
+        label: 'Animales',
+        route: route('dashboard.animals.index'),
+        show: true
+      }
+    ]
+  },
+  {
+    name: 'Contabilidad',
+    menuItems: [
+      {
+        icon: IconUsers,
+        label: 'Transacciones',
+        route: route('dashboard.transactions.index'),
+        show: true
+      },
+      {
+        icon: IconCategory2,
+        label: 'Conceptos',
+        route: route('dashboard.concepts.index'),
+        show: true
+      }
+    ]
+  },
+  {
+    name: 'Configuración',
+    menuItems: [
       {
         icon: IconUser,
         label: 'Perfil',
-        route: route('profile.edit')
+        route: route('profile.edit'),
+        show: true
       }
     ]
   }
@@ -62,13 +117,14 @@ const menuGroups = ref([
             </h3>
 
             <ul class="mb-4 flex flex-col gap-1">
-              <SidebarItem
-                v-for="(menuItem, index) in menuGroup.menuItems"
-                :item="menuItem"
-                :key="index"
-                @click="() => (sidebarStore.page = menuItem.label)"
-                :active="menuItem.label === sidebarStore.page"
-              />
+              <template v-for="(menuItem, index) in menuGroup.menuItems" :key="index">
+                <SidebarItem
+                  v-if="menuItem.show"
+                  :item="menuItem"
+                  @click="() => (sidebarStore.page = menuItem.label)"
+                  :active="menuItem.label === sidebarStore.page"
+                />
+              </template>
             </ul>
           </div>
         </template>

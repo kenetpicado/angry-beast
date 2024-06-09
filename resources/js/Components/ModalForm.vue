@@ -5,7 +5,7 @@
       style="max-width: 50rem; min-height: 20rem"
       @submit.prevent="$emit('onSubmit')"
     >
-      <h2 class="text-xl font-semibold mb-5">Personal</h2>
+      <h2 class="text-xl font-semibold mb-5">{{ title }}</h2>
       <div class="flex-1">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <slot></slot>
@@ -25,4 +25,5 @@ import SecondaryButton from '@/Components/Buttons/SecondaryButton.vue'
 
 const openModal = defineModel()
 defineEmits(['onSubmit', 'onCancel'])
+defineProps(['title'])
 </script>

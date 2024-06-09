@@ -13,7 +13,6 @@ class EmployeeController extends Controller
         return inertia('Dashboard/Employee/Index', [
             'employees' => Employee::query()
                 ->where('user_id', auth()->id())
-                ->orderBy('name')
                 ->paginate(),
         ]);
     }
@@ -29,6 +28,7 @@ class EmployeeController extends Controller
     {
         return inertia('Dashboard/Employee/Show', [
             'employee' => $employee,
+            'payments' => $employee->payments()->latest()->paginate(),
         ]);
     }
 
