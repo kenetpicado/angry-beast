@@ -44,8 +44,8 @@ function handlePhotoChange(event) {
 }
 
 function removeImage() {
-  preview.value = ''
-  form.photo = ''
+  preview.value = null
+  form.photo = null
 }
 </script>
 
@@ -60,7 +60,7 @@ function removeImage() {
             </div>
             <div class="p-7">
               <form @submit.prevent="handleSubmit">
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   <InputForm v-model="form.name" label="Nombre" name="name" required />
                   <InputForm v-model="form.code" label="Codigo" name="code" required />
                   <SelectForm v-model="form.gender" label="Genero" name="gender" required>
@@ -116,7 +116,11 @@ function removeImage() {
             </div>
             <div class="p-7">
               <div v-if="preview" class="mb-4 w-full flex justify-center">
-                <img :src="preview" alt="" class="mb-2 w-auto max-h-[35rem] rounded-md object-contain" />
+                <img
+                  :src="preview"
+                  alt=""
+                  class="mb-2 w-auto max-h-[35rem] rounded-md object-contain"
+                />
               </div>
               <div
                 v-else
@@ -140,7 +144,7 @@ function removeImage() {
                 </div>
               </div>
 
-              <div class="flex justify-end">
+              <div class="flex justify-end" v-if="form.photo">
                 <button type="button" class="text-primary font-medium" @click="removeImage">
                   Eliminar
                 </button>

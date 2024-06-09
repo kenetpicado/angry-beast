@@ -57,6 +57,10 @@ class ConceptController extends Controller
 
     public function destroy(Concept $concept)
     {
+        if ($concept->transactions()->exists()) {
+            return back()->withErrors(['message' => 'No se puede eliminar el concepto porque tiene registros relacionados']);
+        }
+
         $concept->delete();
 
         return back();

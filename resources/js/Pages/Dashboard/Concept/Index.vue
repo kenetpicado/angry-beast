@@ -5,7 +5,7 @@ import ModalForm from '@/Components/ModalForm.vue'
 import Pagination from '@/Components/Pagination.vue'
 import TableSection from '@/Components/TableSection.vue'
 import DefaultLayout from '@/Layouts/DefaultLayout.vue'
-import { created, deleted, updated } from '@/Utils/toast.js'
+import { created, deleted, error, updated } from '@/Utils/toast.js'
 import { useForm } from '@inertiajs/vue3'
 import { IconEdit, IconTrash, IconEye } from '@tabler/icons-vue'
 import { ref } from 'vue'
@@ -58,6 +58,9 @@ function destroy(id) {
         preserveState: true,
         onSuccess: () => {
           deleted()
+        },
+        onError: (err) => {
+          error(err.message)
         }
       })
     }

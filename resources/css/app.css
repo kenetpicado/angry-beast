@@ -26,7 +26,7 @@
     }
 
     .badge-primary {
-        @apply text-primary bg-green-100 px-2 py-1 rounded-lg
+        @apply text-primary bg-primary-light px-2 py-1 rounded-lg
     }
 }
 
