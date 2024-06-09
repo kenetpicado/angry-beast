@@ -5,11 +5,13 @@ import ModalForm from '@/Components/ModalForm.vue'
 import Pagination from '@/Components/Pagination.vue'
 import TableSection from '@/Components/TableSection.vue'
 import DefaultLayout from '@/Layouts/DefaultLayout.vue'
-import { IconEdit, IconTrash } from '@tabler/icons-vue'
-import { onMounted, ref } from 'vue'
+import { IconEdit, IconTrash, IconUserDollar } from '@tabler/icons-vue'
+import { ref } from 'vue'
 import ActionIcon from '@/Components/ActionIcon.vue'
 import getFormattedDate from '@/Utils/date'
-import useExpenditure from '@/Composables/useExpenditure'
+import useTransaction from '@/Composables/useTransaction'
+import Tabs from '@/Components/Tabs.vue'
+import transaction_type from '@/Utils/types'
 
 const props = defineProps({
   employee: {
@@ -23,10 +25,12 @@ const props = defineProps({
 })
 
 const openModal = ref(false)
+const tab = ref('pagos')
 
-const { store, update, destroy, form } = useExpenditure({
+const { store, update, destroy, form } = useTransaction({
   model_id: props.employee.id,
-  model_type: 'App\\Models\\Employee'
+  model_type: 'App\\Models\\Employee',
+  type: transaction_type.EGRESO
 })
 
 function onSubmit() {
@@ -51,18 +55,24 @@ function resetValues() {
   form.reset()
 }
 
-onMounted(() => {
-  form.model_id = props.employee.id
-  form.model_type = 'App\\Models\\Employee'
-})
+const tabs = [
+  {
+    label: 'Pagos',
+    value: 'pagos',
+    icon: IconUserDollar
+  },
+]
+
 </script>
 
 <template>
   <DefaultLayout head="Usuarios">
-    <div class="mb-6 flex gap-3 items-center justify-between">
-      <h2 class="text-2xl font-semibold">Pagos: {{ employee.name }}</h2>
+    <div class="mb-4 flex gap-3 items-center justify-between">
+      <h2 class="text-2xl font-semibold">{{ employee.name }}</h2>
       <PrimaryButton text="Nuevo" @click="openModal = true" />
     </div>
+
+    <Tabs :options="tabs" v-model="tab" />
 
     <TableSection>
       <template #header>

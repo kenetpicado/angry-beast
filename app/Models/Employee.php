@@ -18,6 +18,6 @@ class Employee extends Model
 
     public function payments()
     {
-        return $this->morphMany(Expenditure::class, 'model');
+        return $this->morphMany(Transaction::class, 'model');
     }
 }

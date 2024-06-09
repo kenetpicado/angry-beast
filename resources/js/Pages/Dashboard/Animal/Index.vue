@@ -49,7 +49,7 @@ function destroy(id) {
 
       <template #body>
         <tr v-if="animals.data.length == 0">
-          <td class="text-center text-slate-400" colspan="4">No hay datos que mostrar</td>
+          <td class="text-center" colspan="4">No hay datos que mostrar</td>
         </tr>
         <tr v-for="(item, index) in animals.data" :key="item.id">
           <td>

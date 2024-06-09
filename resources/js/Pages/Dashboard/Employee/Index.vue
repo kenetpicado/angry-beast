@@ -7,7 +7,7 @@ import TableSection from '@/Components/TableSection.vue'
 import DefaultLayout from '@/Layouts/DefaultLayout.vue'
 import { created, deleted, updated } from '@/Utils/toast.js'
 import { useForm } from '@inertiajs/vue3'
-import { IconEdit, IconCurrencyDollar, IconTrash } from '@tabler/icons-vue'
+import { IconEdit, IconTrash, IconEye } from '@tabler/icons-vue'
 import { ref } from 'vue'
 import confirmAction from '@/Utils/confirmation'
 import ActionIcon from '@/Components/ActionIcon.vue'
@@ -114,9 +114,9 @@ function resetValues() {
           <td>
             <div class="flex gap-4">
               <ActionIcon
-                :icon="IconCurrencyDollar"
+                :icon="IconEye"
                 :href="route('dashboard.employees.show', item.id)"
-                tooltip="Pagos"
+                tooltip="Detalles"
               />
               <ActionIcon :icon="IconEdit" @click="edit(item)" tooltip="Editar" />
               <ActionIcon :icon="IconTrash" @click="destroy(item.id)" tooltip="Eliminar" />

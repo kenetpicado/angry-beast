@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import {
   IconCategory,
+  IconCategory2,
   IconHome,
   IconHorse,
   IconLogout,
@@ -65,8 +66,14 @@ const menuGroups = ref([
     menuItems: [
       {
         icon: IconUsers,
-        label: 'Egresos',
-        route: route('dashboard.expenditures.index'),
+        label: 'Transacciones',
+        route: route('dashboard.transactions.index'),
+        show: true
+      },
+      {
+        icon: IconCategory2,
+        label: 'Conceptos',
+        route: route('dashboard.concepts.index'),
         show: true
       }
     ]

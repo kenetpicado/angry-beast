@@ -12,12 +12,22 @@
   }
 
   th {
-    @apply px-6 py-4 font-medium;
+    @apply px-6 py-4 font-bold text-xs;
   }
 
   tr {
     @apply hover:bg-slate-50;
   }
+}
+
+@layer components {
+    .badge-red {
+        @apply text-red-600 bg-red-100 px-2 py-1 rounded-lg
+    }
+
+    .badge-primary {
+        @apply text-primary bg-green-100 px-2 py-1 rounded-lg
+    }
 }
 
 input::-webkit-outer-spin-button,
