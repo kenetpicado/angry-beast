@@ -116,7 +116,7 @@ function removeImage() {
             </div>
             <div class="p-7">
               <div v-if="preview" class="mb-4 w-full flex justify-center">
-                <img :src="preview" alt="" class="mb-2 w-auto h-[35rem] rounded-md" />
+                <img :src="preview" alt="" class="mb-2 w-auto max-h-[35rem] rounded-md object-contain" />
               </div>
               <div
                 v-else

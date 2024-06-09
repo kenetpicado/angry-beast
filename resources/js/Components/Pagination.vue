@@ -31,10 +31,10 @@ function getThisPage(url) {
         ]"
         class="w-8 h-8 select-none rounded-md font-bold border border-2 text-xs flex items-center justify-center"
       >
-        <span v-if="index == 0">
+        <span v-if="index === 0">
           <IconChevronLeft size="20" stroke="2" />
         </span>
-        <span v-else-if="index == links.length - 1">
+        <span v-else-if="index === links.length - 1">
           <IconChevronRight size="20" stroke="2" />
         </span>
         <span v-else class="cursor-pointer">{{ link.label }}</span>

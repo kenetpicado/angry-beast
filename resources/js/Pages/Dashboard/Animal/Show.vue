@@ -1,7 +1,6 @@
 <script setup>
 import DefaultLayout from '@/Layouts/DefaultLayout.vue'
 import { useForm } from '@inertiajs/vue3'
-import { IconEdit } from '@tabler/icons-vue'
 import { defineProps, ref } from 'vue'
 import InputForm from '@/Components/Form/InputForm.vue'
 import SelectForm from '@/Components/Form/SelectForm.vue'
