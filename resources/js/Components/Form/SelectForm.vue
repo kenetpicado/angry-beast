@@ -43,7 +43,7 @@ function format_key(string) {
         :required="required"
         @input="$emit('update:modelValue', $event.target.value)"
         :value="modelValue"
-        style="appearance: none;"
+        style="appearance: none"
         class="w-full rounded-md border border-slate-300 bg-white py-3 pl-5 pr-10 text-slate-600 focus:border-green-600 focus:ring-green-600"
       >
         <slot></slot>

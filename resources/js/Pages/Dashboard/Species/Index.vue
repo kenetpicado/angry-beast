@@ -122,7 +122,12 @@ function resetValues() {
 
     <ModalForm v-model="openModal" @onSubmit="onSubmit" @onCancel="resetValues" title="Especie">
       <InputForm class="col-span-2" v-model="form.name" label="Nombre" name="name" required />
-      <InputForm class="col-span-2" v-model="form.description" label="Descripcion (Opcional)" name="description" />
+      <InputForm
+        class="col-span-2"
+        v-model="form.description"
+        label="Descripcion (Opcional)"
+        name="description"
+      />
     </ModalForm>
   </DefaultLayout>
 </template>

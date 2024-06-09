@@ -5,8 +5,7 @@ import { IconChevronLeft, IconChevronRight } from '@tabler/icons-vue'
 defineProps(['links'])
 
 function getThisPage(url) {
-    if (!url)
-        return
+  if (!url) return
 
   router.get(
     url,
@@ -23,7 +22,7 @@ function getThisPage(url) {
   <div class="flex items-center gap-3 my-4 w-full justify-center" v-if="links.length > 3">
     <template v-for="(link, index) in links" :key="index">
       <button
-          :disabled="!link.url"
+        :disabled="!link.url"
         type="button"
         @click.prevent="getThisPage(link.url)"
         :class="[
@@ -33,7 +32,7 @@ function getThisPage(url) {
         class="w-8 h-8 select-none rounded-md font-bold border border-2 text-xs flex items-center justify-center"
       >
         <span v-if="index == 0">
-          <IconChevronLeft size="20" stroke="2"  />
+          <IconChevronLeft size="20" stroke="2" />
         </span>
         <span v-else-if="index == links.length - 1">
           <IconChevronRight size="20" stroke="2" />

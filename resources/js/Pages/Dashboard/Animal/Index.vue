@@ -29,7 +29,6 @@ function destroy(id) {
     }
   })
 }
-
 </script>
 
 <template>

@@ -13,40 +13,19 @@ import useTransaction from '@/Composables/useTransaction'
 import Tabs from '@/Components/Tabs.vue'
 import transaction_type from '@/Utils/types'
 
-const props = defineProps({
-  employee: {
-    type: Object,
-    required: true
-  },
-  payments: {
-    type: Object,
-    required: true
-  }
-})
+const props = defineProps(['employee', 'payments'])
 
 const openModal = ref(false)
 const tab = ref('pagos')
 
-const { store, update, destroy, form } = useTransaction({
+const { destroy, form, onSubmit, setValues } = useTransaction({
   model_id: props.employee.id,
   model_type: 'App\\Models\\Employee',
   type: transaction_type.EGRESO
 })
 
-function onSubmit() {
-  if (form.value <= 0) {
-    error('El monto debe ser mayor a 0')
-    return
-  }
-
-  if (form.id) update(resetValues)
-  else store(resetValues)
-}
-
 function edit(item) {
-  form.id = item.id
-  form.description = item.description
-  form.value = item.value
+  setValues(item)
   openModal.value = true
 }
 
@@ -60,9 +39,8 @@ const tabs = [
     label: 'Pagos',
     value: 'pagos',
     icon: IconUserDollar
-  },
+  }
 ]
-
 </script>
 
 <template>
@@ -108,7 +86,12 @@ const tabs = [
       </template>
     </TableSection>
 
-    <ModalForm v-model="openModal" @onSubmit="onSubmit" @onCancel="resetValues" title="Pago">
+    <ModalForm
+      v-model="openModal"
+      @onSubmit="onSubmit(() => (openModal = false))"
+      @onCancel="resetValues"
+      title="Pago"
+    >
       <InputForm v-model="form.description" label="Descripcion" required name="description" />
       <InputForm v-model="form.value" label="Monto" name="value" type="number" required />
     </ModalForm>
