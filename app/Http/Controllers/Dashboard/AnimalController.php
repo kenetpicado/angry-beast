@@ -27,7 +27,7 @@ class AnimalController extends Controller
     public function create()
     {
         return inertia('Dashboard/Animal/Create', [
-            'species' => Species::auth()->get(['id', 'name'])
+            'species' => Species::auth()->get(['id', 'name']),
         ]);
     }
 
@@ -42,7 +42,7 @@ class AnimalController extends Controller
     {
         return inertia('Dashboard/Animal/Show', [
             'animal' => $animal->load('specie'),
-            'species' => Species::auth()->get(['id', 'name'])
+            'species' => Species::auth()->get(['id', 'name']),
         ]);
     }
 

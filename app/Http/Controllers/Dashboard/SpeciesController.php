@@ -13,7 +13,7 @@ class SpeciesController extends Controller
     {
         return inertia('Dashboard/Species/Index', [
             'species' => Species::withCount('animals')->paginate(),
-            'speciesless' => Animal::auth()->whereNull('specie_id')->count()
+            'speciesless' => Animal::auth()->whereNull('specie_id')->count(),
         ]);
     }
 

@@ -24,7 +24,7 @@ class Animal extends Model implements HasMedia
         'entry_date',
         'photo',
         'user_id',
-        'specie_id'
+        'specie_id',
     ];
 
     public function scopeAuth($query)

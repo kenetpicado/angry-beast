@@ -4,14 +4,24 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TransactionRequest;
+use App\Models\Concept;
 use App\Models\Transaction;
+use App\Services\TransactionService;
+use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    public function index()
+    public function __construct(
+        private readonly TransactionService $transactionService
+    ) {
+
+    }
+
+    public function index(Request $request)
     {
         return inertia('Dashboard/Transaction/Index', [
-            'transactions' => Transaction::with('model')->auth()->latest()->paginate(),
+            'transactions' => $this->transactionService->getTransactions($request->all()),
+            'concepts' => Concept::auth()->get(['id', 'name']),
         ]);
     }
 
