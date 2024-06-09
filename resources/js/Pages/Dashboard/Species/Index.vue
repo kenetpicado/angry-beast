@@ -12,12 +12,7 @@ import { ref } from 'vue'
 import confirmAction from '@/Utils/confirmation'
 import ActionIcon from '@/Components/ActionIcon.vue'
 
-defineProps({
-  species: {
-    type: Object,
-    required: true
-  }
-})
+defineProps(['species', 'speciesless'])
 
 const openModal = ref(false)
 
@@ -87,19 +82,28 @@ function resetValues() {
       <template #header>
         <th>#</th>
         <th>Nombre</th>
+        <th>Cantidad</th>
         <th>Acciones</th>
       </template>
 
       <template #body>
-        <tr v-if="species.data.length == 0">
-          <td class="text-center text-slate-400" colspan="3">No hay datos que mostrar</td>
+        <tr>
+          <td>1</td>
+          <td>Ninguna</td>
+          <td>
+            {{ speciesless }}
+          </td>
+          <td></td>
         </tr>
         <tr v-for="(item, index) in species.data" :key="item.id">
           <td>
-            {{ index + 1 + (species.current_page - 1) * species.per_page }}
+            {{ index + 2 + (species.current_page - 1) * species.per_page }}
           </td>
           <td>
             {{ item.name }}
+          </td>
+          <td>
+            {{ item.animals_count }}
           </td>
           <td>
             <div class="flex gap-4">

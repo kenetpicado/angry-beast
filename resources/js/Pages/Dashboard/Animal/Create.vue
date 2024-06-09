@@ -8,21 +8,12 @@ import { created } from '@/Utils/toast.js'
 import { useForm } from '@inertiajs/vue3'
 import { IconUpload } from '@tabler/icons-vue'
 import { ref } from 'vue'
+import useAnimal from '@/Composables/useAnimal.js'
 
 const preview = ref('')
 
-const form = useForm({
-  name: '',
-  code: '',
-  gender: 'Hembra',
-  race: '',
-  initial_weight: '',
-  initial_height: '',
-  birth_date: '',
-  adoption_date: '',
-  entry_date: '',
-  photo: ''
-})
+const props = defineProps(['species'])
+const { removeImage, form, handlePhotoChange } = useAnimal()
 
 function handleSubmit() {
   form.post(route('dashboard.animals.store'), {
@@ -32,20 +23,6 @@ function handleSubmit() {
       created()
     }
   })
-}
-
-function handlePhotoChange(event) {
-  form.photo = event.target.files[0]
-  const reader = new FileReader()
-  reader.readAsDataURL(form.photo)
-  reader.onload = () => {
-    preview.value = reader.result
-  }
-}
-
-function removeImage() {
-  preview.value = null
-  form.photo = null
 }
 </script>
 
@@ -63,6 +40,10 @@ function removeImage() {
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   <InputForm v-model="form.name" label="Nombre" name="name" required />
                   <InputForm v-model="form.code" label="Codigo" name="code" required />
+                  <SelectForm v-model="form.specie_id" label="Especie" name="specie_id">
+                    <option value="">Ninguna</option>
+                    <option v-for="specie in species" :value="specie.id">{{ specie.name }}</option>
+                  </SelectForm>
                   <SelectForm v-model="form.gender" label="Genero" name="gender" required>
                     <option value="Macho">Macho</option>
                     <option value="Hembra">Hembra</option>
@@ -100,7 +81,10 @@ function removeImage() {
                   />
                 </div>
                 <div class="flex justify-end gap-4">
-                  <SecondaryButton @click="$inertia.visit(route('dashboard.animals.index'))" text="Cancelar" />
+                  <SecondaryButton
+                    @click="$inertia.visit(route('dashboard.animals.index'))"
+                    text="Cancelar"
+                  />
                   <PrimaryButton :loading="form.processing" text="Guardar" type="submit" />
                 </div>
               </form>

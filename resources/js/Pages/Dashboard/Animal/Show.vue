@@ -10,12 +10,12 @@ import useAnimal from '@/Composables/useAnimal.js'
 import { getBasicDate } from '@/Utils/date.js'
 import Tabs from '@/Components/Tabs.vue'
 import { IconDetails, IconVaccine } from '@tabler/icons-vue'
-import {router} from '@inertiajs/vue3'
+import { router } from '@inertiajs/vue3'
 
 const edit = ref(false)
 const tab = ref('detalles')
 
-const props = defineProps(['animal'])
+const props = defineProps(['animal', 'species'])
 const { preview, confirmRemoveImage, handlePhotoChange, form, updatePhoto, update } = useAnimal()
 
 function cancelUpdatePhoto() {
@@ -37,10 +37,9 @@ const tabs = [
 ]
 
 function afterUpdate() {
-    router.reload({only: ['animal']})
-    edit.value = false
+  router.reload({ only: ['animal'] })
+  edit.value = false
 }
-
 </script>
 
 <template>
@@ -70,6 +69,10 @@ function afterUpdate() {
                     <div>
                       <label class="text-base font-bold">Código</label>
                       <p class="text-base">{{ animal.code }}</p>
+                    </div>
+                    <div>
+                      <label class="text-base font-bold">Especie</label>
+                      <p class="text-base">{{ animal.specie?.name || 'Ninguna' }}</p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Género</label>
@@ -124,6 +127,12 @@ function afterUpdate() {
                   <template v-else>
                     <InputForm v-model="form.name" label="Nombre" name="name" required />
                     <InputForm v-model="form.code" label="Código" name="code" required />
+                    <SelectForm v-model="form.specie_id" label="Especie" name="specie_id">
+                      <option value="">Ninguna</option>
+                      <option v-for="specie in species" :value="specie.id">
+                        {{ specie.name }}
+                      </option>
+                    </SelectForm>
                     <SelectForm v-model="form.gender" label="Genero" name="gender" required>
                       <option value="Macho">Macho</option>
                       <option value="Hembra">Hembra</option>

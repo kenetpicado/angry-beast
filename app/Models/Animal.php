@@ -24,5 +24,16 @@ class Animal extends Model implements HasMedia
         'entry_date',
         'photo',
         'user_id',
+        'specie_id'
     ];
+
+    public function scopeAuth($query)
+    {
+        return $query->where('user_id', auth()->id());
+    }
+
+    public function specie()
+    {
+        return $this->belongsTo(Species::class);
+    }
 }

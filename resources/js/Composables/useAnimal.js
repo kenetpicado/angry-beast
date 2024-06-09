@@ -20,7 +20,8 @@ export function useAnimal() {
     exit_date: props.animal?.exit_date || '',
     death_date: props.animal?.death_date || '',
     cause_of_death: props.animal?.cause_of_death || '',
-    photo: props.animal?.photo || ''
+    photo: props.animal?.photo || '',
+    specie_id: props.animal?.specie_id || ''
   })
 
   const preview = ref(props.animal?.photo)
@@ -39,6 +40,11 @@ export function useAnimal() {
         })
       }
     })
+  }
+
+  function removeImage() {
+    preview.value = ''
+    form.photo = ''
   }
 
   function handlePhotoChange(event) {
@@ -76,13 +82,13 @@ export function useAnimal() {
       preserveScroll: true,
       preserveState: true,
       onSuccess: () => {
-          if(onDone) onDone()
+        if (onDone) onDone()
         updated()
-      },
+      }
     })
   }
 
-  return { form, confirmRemoveImage, preview, handlePhotoChange, updatePhoto, update }
+  return { form, confirmRemoveImage, preview, handlePhotoChange, updatePhoto, update, removeImage }
 }
 
 export default useAnimal

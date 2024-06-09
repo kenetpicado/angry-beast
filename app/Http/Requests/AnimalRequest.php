@@ -39,6 +39,7 @@ class AnimalRequest extends FormRequest
             'adoption_date' => ['nullable', 'date'],
             'entry_date' => ['nullable', 'date'],
             'user_id' => ['required', 'integer'],
+            'specie_id' => ['nullable', 'integer'],
         ] + (
             $this->isMethod('post')
                 ? ['photo' => ['nullable', 'image']]
