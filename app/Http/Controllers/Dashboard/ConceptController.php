@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ConceptRequest;
 use App\Models\Concept;
 use App\Models\Transaction;
-use Illuminate\Http\Request;
 
 class ConceptController extends Controller
 {

@@ -71,7 +71,18 @@ export function useAnimal() {
     )
   }
 
-  return { form, confirmRemoveImage, preview, handlePhotoChange, updatePhoto }
+  function update(onDone) {
+    form.put(route('dashboard.animals.update', form.id), {
+      preserveScroll: true,
+      preserveState: true,
+      onSuccess: () => {
+          if(onDone) onDone()
+        updated()
+      },
+    })
+  }
+
+  return { form, confirmRemoveImage, preview, handlePhotoChange, updatePhoto, update }
 }
 
 export default useAnimal

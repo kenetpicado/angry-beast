@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('description')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('specie_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
         });
     }

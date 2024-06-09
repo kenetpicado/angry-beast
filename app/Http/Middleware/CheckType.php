@@ -15,7 +15,7 @@ class CheckType
      */
     public function handle(Request $request, Closure $next, string $type): Response
     {
-        if (!in_array(auth()->user()->type, explode('|', $type))) {
+        if (! in_array(auth()->user()->type, explode('|', $type))) {
             abort(403);
         }
 

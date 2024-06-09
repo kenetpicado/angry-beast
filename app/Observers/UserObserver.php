@@ -24,7 +24,7 @@ class UserObserver
                 'name' => $concept,
                 'created_at' => $now,
                 'updated_at' => $now,
-                'user_id' => $user->id
+                'user_id' => $user->id,
             ];
         }
 
@@ -33,7 +33,7 @@ class UserObserver
                 'name' => $item,
                 'created_at' => $now,
                 'updated_at' => $now,
-                'user_id' => $user->id
+                'user_id' => $user->id,
             ];
         }
 

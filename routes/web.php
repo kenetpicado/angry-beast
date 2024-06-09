@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\Dashboard\AnimalController;
 use App\Http\Controllers\Dashboard\ConceptController;
-use App\Http\Controllers\Dashboard\PhotoController;
-use App\Http\Controllers\Dashboard\SpeciesController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\EmployeeController;
+use App\Http\Controllers\Dashboard\PhotoController;
+use App\Http\Controllers\Dashboard\SpeciesController;
 use App\Http\Controllers\Dashboard\TransactionController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\ProfileController;

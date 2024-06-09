@@ -99,9 +99,8 @@ function removeImage() {
                     type="date"
                   />
                 </div>
-
                 <div class="flex justify-end gap-4">
-                  <SecondaryButton text="Cancelar" />
+                  <SecondaryButton @click="$inertia.visit(route('dashboard.animals.index'))" text="Cancelar" />
                   <PrimaryButton :loading="form.processing" text="Guardar" type="submit" />
                 </div>
               </form>

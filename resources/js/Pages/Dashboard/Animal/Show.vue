@@ -10,12 +10,13 @@ import useAnimal from '@/Composables/useAnimal.js'
 import { getBasicDate } from '@/Utils/date.js'
 import Tabs from '@/Components/Tabs.vue'
 import { IconDetails, IconVaccine } from '@tabler/icons-vue'
+import {router} from '@inertiajs/vue3'
 
 const edit = ref(false)
 const tab = ref('detalles')
 
 const props = defineProps(['animal'])
-const { preview, confirmRemoveImage, handlePhotoChange, form, updatePhoto } = useAnimal()
+const { preview, confirmRemoveImage, handlePhotoChange, form, updatePhoto, update } = useAnimal()
 
 function cancelUpdatePhoto() {
   preview.value = ''
@@ -34,11 +35,22 @@ const tabs = [
     icon: IconVaccine
   }
 ]
+
+function afterUpdate() {
+    router.reload({only: ['animal']})
+    edit.value = false
+}
+
 </script>
 
 <template>
   <DefaultLayout head="Detalles">
     <div class="mx-auto max-w-270">
+      <div class="mb-4 flex gap-3 items-center justify-between h-12">
+        <h2 class="text-2xl font-semibold">{{ animal.name }}</h2>
+        <PrimaryButton v-if="tab == 'vacunas'" text="Nuevo" />
+      </div>
+
       <Tabs :options="tabs" v-model="tab" />
 
       <div class="grid grid-cols-5 gap-8">
@@ -48,7 +60,7 @@ const tabs = [
               <h3 class="font-medium">Datos generales</h3>
             </div>
             <div class="p-7">
-              <form @submit.prevent="onSubmit">
+              <form @submit.prevent="update(() => afterUpdate())">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   <template v-if="!edit">
                     <div>

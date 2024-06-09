@@ -4,11 +4,19 @@
       @click="model = option.value"
       v-for="option in options"
       type="button"
-      class="flex items-center gap-1 rounded-md mr-2"
+      class="flex items-center gap-1 rounded-md"
       :key="option"
       :class="[model == option.value ? 'text-primary' : 'text-gray-400']"
     >
-      <component :is="option.icon" size="20" stroke="2" />
+      <span class="p-1.5 rounded-lg" :class="[model == option.value ? 'bg-primary' : '']">
+        <component
+          :is="option.icon"
+          size="18"
+          stroke="2"
+          :class="[model == option.value ? 'text-white' : '']"
+        />
+      </span>
+
       {{ option.label }}
     </button>
   </div>
