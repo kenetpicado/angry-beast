@@ -15,7 +15,7 @@ import { router } from '@inertiajs/vue3'
 const edit = ref(false)
 const tab = ref('detalles')
 
-const props = defineProps(['animal', 'species'])
+defineProps(['animal', 'species'])
 const { preview, confirmRemoveImage, handlePhotoChange, form, updatePhoto, update } = useAnimal()
 
 function cancelUpdatePhoto() {
@@ -80,48 +80,57 @@ function afterUpdate() {
                     </div>
                     <div>
                       <label class="text-base font-bold">Raza</label>
-                      <p class="text-base">{{ animal.race }}</p>
+                      <p class="text-base">
+                        {{ animal.race || 'Sin registrar' }}
+                      </p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Peso inicial</label>
-                      <p class="text-base">{{ animal.initial_weight }}</p>
+                      <p class="text-base">
+                        {{ animal.initial_weight || 'Sin registrar' }}
+                      </p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Altura inicial</label>
-                      <p class="text-base">{{ animal.initial_height }}</p>
+                      <p class="text-base">
+                        {{ animal.initial_height || 'Sin registrar' }}
+                      </p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Fecha de nacimiento</label>
-                      <p class="text-base">{{ getBasicDate(animal.birth_date) }}</p>
+                      <p class="text-base">
+                        {{ getBasicDate(animal.birth_date) }}
+                      </p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Fecha de adopción</label>
-                      <p class="text-base">{{ getBasicDate(animal.adoption_date) }}</p>
+                      <p class="text-base">
+                        {{ getBasicDate(animal.adoption_date) }}
+                      </p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Fecha de ingreso</label>
-                      <p class="text-base">{{ getBasicDate(animal.entry_date) }}</p>
+                      <p class="text-base">
+                        {{ getBasicDate(animal.entry_date) }}
+                      </p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Fecha de salida</label>
-                      <p v-if="animal.exit_date" class="text-base">
+                      <p class="text-base">
                         {{ getBasicDate(animal.exit_date) }}
                       </p>
-                      <p v-else class="text-base">Sin registrar</p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Fecha de muerte</label>
-                      <p v-if="animal.death_date" class="text-base">
+                      <p class="text-base">
                         {{ getBasicDate(animal.death_date) }}
                       </p>
-                      <p v-else class="text-base">Sin registrar</p>
                     </div>
                     <div class="mb-4">
                       <label class="text-base font-bold">Causa de muerte</label>
-                      <p v-if="animal.death_cause" class="text-base">
-                        {{ getBasicDate(animal.death_cause) }}
+                      <p class="text-base">
+                        {{ animal.cause_of_death || 'Sin registrar' }}
                       </p>
-                      <p v-else class="text-base">Sin registrar</p>
                     </div>
                   </template>
                   <template v-else>
@@ -129,7 +138,7 @@ function afterUpdate() {
                     <InputForm v-model="form.code" label="Código" name="code" required />
                     <SelectForm v-model="form.specie_id" label="Especie" name="specie_id">
                       <option value="">Ninguna</option>
-                      <option v-for="specie in species" :value="specie.id">
+                      <option v-for="specie in species" :value="specie.id" :key="specie.id">
                         {{ specie.name }}
                       </option>
                     </SelectForm>

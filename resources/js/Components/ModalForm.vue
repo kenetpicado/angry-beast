@@ -6,7 +6,7 @@
       @submit.prevent="$emit('onSubmit')"
     >
       <h2 class="text-xl font-semibold mb-5">{{ title }}</h2>
-      <div class="flex-1">
+      <div class="flex-1 mb-4">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <slot></slot>
         </div>

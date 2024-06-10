@@ -5,15 +5,11 @@ import InputForm from '@/Components/Form/InputForm.vue'
 import SelectForm from '@/Components/Form/SelectForm.vue'
 import DefaultLayout from '@/Layouts/DefaultLayout.vue'
 import { created } from '@/Utils/toast.js'
-import { useForm } from '@inertiajs/vue3'
 import { IconUpload } from '@tabler/icons-vue'
-import { ref } from 'vue'
 import useAnimal from '@/Composables/useAnimal.js'
 
-const preview = ref('')
-
-const props = defineProps(['species'])
-const { removeImage, form, handlePhotoChange } = useAnimal()
+defineProps(['species'])
+const { removeImage, form, handlePhotoChange, preview } = useAnimal()
 
 function handleSubmit() {
   form.post(route('dashboard.animals.store'), {
@@ -42,7 +38,7 @@ function handleSubmit() {
                   <InputForm v-model="form.code" label="Codigo" name="code" required />
                   <SelectForm v-model="form.specie_id" label="Especie" name="specie_id">
                     <option value="">Ninguna</option>
-                    <option v-for="specie in species" :value="specie.id">{{ specie.name }}</option>
+                    <option v-for="specie in species" :value="specie.id" :key="specie.id">{{ specie.name }}</option>
                   </SelectForm>
                   <SelectForm v-model="form.gender" label="Genero" name="gender" required>
                     <option value="Macho">Macho</option>
