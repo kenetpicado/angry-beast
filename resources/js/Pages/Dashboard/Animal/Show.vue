@@ -75,8 +75,8 @@ function afterUpdate() {
                       <p class="text-base">{{ animal.specie?.name || 'Ninguna' }}</p>
                     </div>
                     <div>
-                      <label class="text-base font-bold">Género</label>
-                      <p class="text-base">{{ animal.gender }}</p>
+                      <label class="text-base font-bold">Sexo</label>
+                      <p class="text-base">{{ animal.sex }}</p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Raza</label>
@@ -103,12 +103,6 @@ function afterUpdate() {
                       </p>
                     </div>
                     <div>
-                      <label class="text-base font-bold">Fecha de adopción</label>
-                      <p class="text-base">
-                        {{ getBasicDate(animal.adoption_date) }}
-                      </p>
-                    </div>
-                    <div>
                       <label class="text-base font-bold">Fecha de ingreso</label>
                       <p class="text-base">
                         {{ getBasicDate(animal.entry_date) }}
@@ -129,7 +123,13 @@ function afterUpdate() {
                     <div class="mb-4">
                       <label class="text-base font-bold">Causa de muerte</label>
                       <p class="text-base">
-                        {{ animal.cause_of_death || 'Sin registrar' }}
+                        {{ animal.death_cause || 'Sin registrar' }}
+                      </p>
+                    </div>
+                    <div class="mb-4">
+                      <label class="text-base font-bold">Descripción (Observaciones)</label>
+                      <p class="text-base">
+                        {{ animal.description || 'Ninguna' }}
                       </p>
                     </div>
                   </template>
@@ -142,7 +142,7 @@ function afterUpdate() {
                         {{ specie.name }}
                       </option>
                     </SelectForm>
-                    <SelectForm v-model="form.gender" label="Genero" name="gender" required>
+                    <SelectForm v-model="form.sex" label="Sexo" name="sex" required>
                       <option value="Macho">Macho</option>
                       <option value="Hembra">Hembra</option>
                     </SelectForm>
@@ -166,12 +166,6 @@ function afterUpdate() {
                       type="date"
                     />
                     <InputForm
-                      v-model="form.adoption_date"
-                      label="Fecha de adopción"
-                      name="adoption_date"
-                      type="date"
-                    />
-                    <InputForm
                       v-model="form.entry_date"
                       label="Fecha de ingreso"
                       name="entry_date"
@@ -190,9 +184,14 @@ function afterUpdate() {
                       type="date"
                     />
                     <InputForm
-                      v-model="form.cause_of_death"
+                      v-model="form.death_cause"
                       label="Causa de muerte"
                       name="cause_of_death"
+                    />
+                    <InputForm
+                      v-model="form.description"
+                      label="Descripción (Observaciones)"
+                      name="description"
                     />
                     <div class="flex gap-4 items-center justify-end col-span-2">
                       <SecondaryButton text="Cancelar" @click="edit = false" />

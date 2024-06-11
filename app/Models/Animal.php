@@ -15,19 +15,19 @@ class Animal extends Model implements HasMedia
     protected $fillable = [
         'name',
         'code',
-        'gender',
+        'sex',
         'race',
         'initial_weight',
         'initial_height',
         'birth_date',
-        'adoption_date',
         'entry_date',
         'exit_date',
         'death_date',
-        'cause_of_death',
+        'death_cause',
         'photo',
         'user_id',
         'specie_id',
+        'description',
     ];
 
     public function scopeAuth($query)

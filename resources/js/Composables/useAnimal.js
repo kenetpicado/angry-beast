@@ -10,18 +10,18 @@ export function useAnimal() {
     id: props.animal?.id,
     name: props.animal?.name,
     code: props.animal?.code,
-    gender: props.animal?.gender || 'Hembra',
+    sex: props.animal?.sex || 'Hembra',
     race: props.animal?.race || '',
     initial_weight: props.animal?.initial_weight || '',
     initial_height: props.animal?.initial_height || '',
     birth_date: props.animal?.birth_date || '',
-    adoption_date: props.animal?.adoption_date || '',
     entry_date: props.animal?.entry_date || '',
     exit_date: props.animal?.exit_date || '',
     death_date: props.animal?.death_date || '',
-    cause_of_death: props.animal?.cause_of_death || '',
+    death_cause: props.animal?.death_cause || '',
     photo: props.animal?.photo || '',
-    specie_id: props.animal?.specie_id || ''
+    specie_id: props.animal?.specie_id || '',
+    description: props.animal?.description || ''
   })
 
   const preview = ref(props.animal?.photo)

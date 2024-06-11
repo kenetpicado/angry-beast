@@ -40,7 +40,7 @@ function handleSubmit() {
                     <option value="">Ninguna</option>
                     <option v-for="specie in species" :value="specie.id" :key="specie.id">{{ specie.name }}</option>
                   </SelectForm>
-                  <SelectForm v-model="form.gender" label="Genero" name="gender" required>
+                  <SelectForm v-model="form.sex" label="Sexo" name="sex" required>
                     <option value="Macho">Macho</option>
                     <option value="Hembra">Hembra</option>
                   </SelectForm>
@@ -64,16 +64,15 @@ function handleSubmit() {
                     type="date"
                   />
                   <InputForm
-                    v-model="form.adoption_date"
-                    label="Fecha de adopción"
-                    name="adoption_date"
-                    type="date"
-                  />
-                  <InputForm
                     v-model="form.entry_date"
                     label="Fecha de ingreso"
                     name="entry_date"
                     type="date"
+                  />
+                  <InputForm
+                    v-model="form.description"
+                    label="Descripción (Observaciones)"
+                    name="description"
                   />
                 </div>
                 <div class="flex justify-end gap-4">

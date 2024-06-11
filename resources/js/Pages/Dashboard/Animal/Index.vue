@@ -8,13 +8,12 @@ import confirmAction from '@/Utils/confirmation'
 import { deleted } from '@/Utils/toast.js'
 import { router } from '@inertiajs/vue3'
 import { IconEye, IconTrash } from '@tabler/icons-vue'
+import SelectForm from '@/Components/Form/SelectForm.vue'
+import InputForm from '@/Components/Form/InputForm.vue'
+import { reactive } from 'vue'
+import { watchDebounced } from '@vueuse/core'
 
-defineProps({
-  animals: {
-    type: Object,
-    required: true
-  }
-})
+defineProps(['animals', 'species'])
 
 function destroy(id) {
   confirmAction({
@@ -29,6 +28,31 @@ function destroy(id) {
     }
   })
 }
+
+const queryParams = reactive({
+  specie_id: '',
+  search: ''
+})
+
+watchDebounced(
+  queryParams,
+  () => {
+    let params = { ...queryParams }
+
+    for (const key in params) {
+      if (!params[key]) delete params[key]
+    }
+
+    router.get(route('dashboard.animals.index'), params, {
+      preserveState: true,
+      preserveScroll: true,
+      only: ['animals'],
+      replace: true
+    })
+  },
+  { debounce: 500, maxWait: 1000 }
+)
+
 </script>
 
 <template>
@@ -38,17 +62,33 @@ function destroy(id) {
       <PrimaryButton text="Nuevo" @click="$inertia.visit(route('dashboard.animals.create'))" />
     </div>
 
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mb-3">
+      <SelectForm v-model="queryParams.specie_id" label="Especie">
+        <option value="" selected>Todos</option>
+        <option v-for="item in species" :key="item" :value="item.id">
+          {{ item.name }}
+        </option>
+      </SelectForm>
+      <InputForm
+        v-model="queryParams.search"
+        label="Buscar"
+        type="search"
+        placeholder="Buscar"
+      />
+    </div>
+
     <TableSection>
       <template #header>
         <th>#</th>
         <th>Nombre</th>
         <th>Codigo</th>
+        <th>Especie</th>
         <th>Acciones</th>
       </template>
 
       <template #body>
         <tr v-if="animals.data.length == 0">
-          <td class="text-center" colspan="4">No hay datos que mostrar</td>
+          <td class="text-center" colspan="5">No hay datos que mostrar</td>
         </tr>
         <tr v-for="(item, index) in animals.data" :key="item.id">
           <td>
@@ -59,6 +99,9 @@ function destroy(id) {
           </td>
           <td>
             {{ item.code }}
+          </td>
+          <td>
+            {{ item.specie?.name || 'Ninguna' }}
           </td>
           <td>
             <div class="flex gap-4">

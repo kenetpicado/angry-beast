@@ -7,6 +7,7 @@ use App\Http\Requests\AnimalRequest;
 use App\Models\Animal;
 use App\Models\Species;
 use App\Services\AnimalService;
+use Illuminate\Http\Request;
 
 class AnimalController extends Controller
 {
@@ -15,12 +16,11 @@ class AnimalController extends Controller
     ) {
     }
 
-    public function index()
+    public function index(Request $request)
     {
         return inertia('Dashboard/Animal/Index', [
-            'animals' => Animal::auth()
-                ->select('id', 'name', 'user_id', 'code', 'photo')
-                ->paginate(),
+            'animals' => $this->animalService->getAnimals($request->all()),
+            'species' => Species::auth()->get(['id', 'name']),
         ]);
     }
 

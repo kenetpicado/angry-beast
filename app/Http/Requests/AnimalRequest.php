@@ -31,18 +31,18 @@ class AnimalRequest extends FormRequest
         return [
             'name' => ['required'],
             'code' => ['required'],
-            'gender' => ['nullable'],
+            'sex' => ['nullable'],
             'race' => ['nullable'],
             'initial_weight' => ['nullable', 'numeric'],
             'initial_height' => ['nullable', 'numeric'],
             'birth_date' => ['nullable', 'date'],
-            'adoption_date' => ['nullable', 'date'],
             'entry_date' => ['nullable', 'date'],
             'exit_date' => ['nullable', 'date'],
             'death_date' => ['nullable', 'date'],
-            'cause_of_death' => ['nullable'],
+            'death_cause' => ['nullable'],
             'user_id' => ['required', 'integer'],
             'specie_id' => ['nullable', 'integer'],
+            'description' => ['nullable'],
         ] + (
             $this->isMethod('post')
                 ? ['photo' => ['nullable', 'image']]

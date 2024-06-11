@@ -107,11 +107,6 @@ function resetValues() {
           </td>
           <td>
             <div class="flex gap-4">
-              <ActionIcon
-                :icon="IconEye"
-                :href="route('dashboard.species.show', item.id)"
-                tooltip="Detalles"
-              />
               <ActionIcon :icon="IconEdit" @click="edit(item)" tooltip="Editar" />
               <ActionIcon :icon="IconTrash" @click="destroy(item.id)" tooltip="Eliminar" />
             </div>
