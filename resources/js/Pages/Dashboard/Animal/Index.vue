@@ -52,7 +52,6 @@ watchDebounced(
   },
   { debounce: 500, maxWait: 1000 }
 )
-
 </script>
 
 <template>
@@ -69,12 +68,7 @@ watchDebounced(
           {{ item.name }}
         </option>
       </SelectForm>
-      <InputForm
-        v-model="queryParams.search"
-        label="Buscar"
-        type="search"
-        placeholder="Buscar"
-      />
+      <InputForm v-model="queryParams.search" label="Buscar" type="search" placeholder="Buscar" />
     </div>
 
     <TableSection>

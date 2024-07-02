@@ -38,7 +38,9 @@ function handleSubmit() {
                   <InputForm v-model="form.code" label="Codigo" name="code" required />
                   <SelectForm v-model="form.specie_id" label="Especie" name="specie_id">
                     <option value="">Ninguna</option>
-                    <option v-for="specie in species" :value="specie.id" :key="specie.id">{{ specie.name }}</option>
+                    <option v-for="specie in species" :value="specie.id" :key="specie.id">
+                      {{ specie.name }}
+                    </option>
                   </SelectForm>
                   <SelectForm v-model="form.sex" label="Sexo" name="sex" required>
                     <option value="Macho">Macho</option>
