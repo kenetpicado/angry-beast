@@ -1,5 +1,5 @@
-export const PRIMARY = '#15803d';
-export const PRIMARY_DARK = '#166534';
+export const PRIMARY = '#155e75';
+export const PRIMARY_DARK = '#164e63';
 
-export const PRIMARY_LIGHT = '#dcfce7'
+export const PRIMARY_LIGHT = '#cffafe'
 

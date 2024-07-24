@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\UserEnum;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +17,8 @@ class UserService
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'password_updated_at' => now(),
+            'type' => UserEnum::USER
         ]);
-
-        event(new Registered($user));
 
         Auth::login($user);
     }

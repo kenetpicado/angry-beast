@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-white rounded-md flex flex-col">
+  <div class="bg-white rounded-md flex flex-col border">
     <div class="max-w-full overflow-x-auto">
-      <table class="w-full table-auto text-left text-sm border-collapse">
+      <table class="w-full table-auto text-left text-sm border-collapse" :class="tableClass">
         <thead class="uppercase">
           <tr>
             <slot name="header"></slot>
@@ -15,3 +15,7 @@
     <slot name="footer"></slot>
   </div>
 </template>
+
+<script setup>
+defineProps(['tableClass'])
+</script>

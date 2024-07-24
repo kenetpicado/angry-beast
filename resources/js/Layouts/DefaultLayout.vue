@@ -6,7 +6,7 @@ defineProps(['head'])
 </script>
 
 <template>
-  <div class="flex h-screen overflow-hidden">
+  <div class="flex h-screen overflow-hidden bg-slate-100">
     <SidebarArea />
     <Head :title="head" />
     <div class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">

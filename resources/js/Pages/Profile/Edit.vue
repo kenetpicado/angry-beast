@@ -59,8 +59,8 @@ const passwordStatus = computed(() => {
 <template>
   <DefaultLayout head="Perfil">
     <div class="mx-auto max-w-270">
-      <div class="grid grid-cols-4 gap-8">
-        <form class="col-span-4 xl:col-span-2" @submit.prevent="handleSubmitProfile">
+      <div class="grid grid-cols-4 gap-4">
+        <form class="col-span-4 lg:col-span-2" @submit.prevent="handleSubmitProfile">
           <div class="flex flex-col rounded-md border border-stroke bg-white h-full">
             <div class="border-b border-stroke py-4 px-7">
               <h3 class="font-medium">Informacion personal</h3>
@@ -81,7 +81,7 @@ const passwordStatus = computed(() => {
             </div>
           </div>
         </form>
-        <form class="col-span-4 xl:col-span-2 h-full" @submit.prevent="handleSubmit">
+        <form class="col-span-4 lg:col-span-2 h-full" @submit.prevent="handleSubmit">
           <div class="flex flex-col rounded-md border border-stroke bg-white h-full">
             <div class="border-b border-stroke py-4 px-7">
               <h3 class="font-medium">Contraseña</h3>

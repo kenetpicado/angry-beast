@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('type');
             $table->double('value');
             $table->integer('quantity')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

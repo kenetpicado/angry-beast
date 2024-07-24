@@ -61,10 +61,6 @@ const submit = () => {
   <GuestLayout subtitle="Únete hoy mismo" title="Crear cuenta">
     <Head title="Crear cuenta" />
 
-    <template #left>
-      <img alt="illustration" class="w-96 mx-auto" src="/images/register.svg" />
-    </template>
-
     <form @submit.prevent="submit">
       <InputForm v-model="form.name" autofocus label="Nombre completo" name="name" required />
 
@@ -92,11 +88,12 @@ const submit = () => {
         <IconLock class="text-stroke" size="25" stroke="2" />
       </InputForm>
 
-      <div v-if="passwordStatus && form.password" class="mb-2 text-red-400 text-sm">
+      <div v-if="passwordStatus && form.password" class="mb-2 text-red-500 text-xs">
         {{ passwordStatus }}
       </div>
 
       <PrimaryButton
+        :loading="form.processing"
         :disabled="passwordStatus != null"
         class="w-full mt-4"
         text="Crear cuenta"

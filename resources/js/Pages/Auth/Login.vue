@@ -24,10 +24,6 @@ const submit = () => {
   <GuestLayout subtitle="¡Bienvenido de vuelta!" title="Iniciar sesión">
     <Head title="Iniciar sesión" />
 
-    <template #left>
-      <img alt="illustration" class="w-96 mx-auto" src="/images/login.svg" />
-    </template>
-
     <form @submit.prevent="submit">
       <InputForm v-model="form.email" label="Correo" name="email" required type="email">
         <IconMail class="text-stroke" size="25" stroke="2" />
@@ -43,7 +39,7 @@ const submit = () => {
         <IconLock class="text-stroke" size="25" stroke="2" />
       </InputForm>
 
-      <PrimaryButton class="w-full mt-4" text="Iniciar sesión" type="submit" />
+      <PrimaryButton class="w-full mt-4" text="Iniciar sesión" type="submit" :loading="form.processing" />
     </form>
 
     <div class="mt-4 text-center">
