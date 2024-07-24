@@ -3,24 +3,41 @@
 namespace App\Services;
 
 use App\Models\Animal;
+use App\Models\AnimalDetail;
 
 class AnimalService
 {
     public function store(array $data): void
     {
-        if (isset($data['photo'])) {
-            $temporalPhoto = $data['photo'];
-            $data['photo'] = null;
+        $animal = Animal::create([
+            'code' => $data['code'],
+            'name' => $data['name'],
+            'specie_id' => $data['specie_id'],
+            'user_id' => auth()->id(),
+        ]);
+
+        foreach ($data['details'] as $key => $value) {
+            if (!isset($value)) {
+                continue;
+            }
+
+            AnimalDetail::create([
+                'key' => $key,
+                'animal_id' => $animal->id,
+                'value' => $value
+            ]);
         }
 
-        $stored = Animal::create($data);
+        if (isset($data['details']['photo'])) {
+            $temporalPhoto = $data['details']['photo'];
+        }
 
         if (isset($temporalPhoto)) {
-            $file = $stored->addMedia($temporalPhoto)
-                ->usingFileName($stored->id.'.'.$temporalPhoto->getClientOriginalExtension())
+            $file = $animal->addMedia($temporalPhoto)
+                ->usingFileName($animal->id.'.'.$temporalPhoto->getClientOriginalExtension())
                 ->toMediaCollection('profile');
 
-            $stored->update(['photo' => $file->getFullUrl()]);
+            $animal->update(['photo' => $file->getFullUrl()]);
         }
     }
 

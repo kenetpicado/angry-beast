@@ -10,6 +10,7 @@ export function useAnimal() {
     id: props.animal?.id,
     name: props.animal?.name,
     code: props.animal?.code,
+
     gender: props.animal?.gender || 'Hembra',
     race: props.animal?.race || '',
     initial_weight: props.animal?.initial_weight || '',

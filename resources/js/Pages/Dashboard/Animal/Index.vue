@@ -41,8 +41,8 @@ function destroy(id) {
     <TableSection>
       <template #header>
         <th>#</th>
-        <th>Nombre</th>
         <th>Codigo</th>
+        <th>Nombre</th>
         <th>Acciones</th>
       </template>
 
@@ -55,10 +55,10 @@ function destroy(id) {
             {{ index + 1 + (animals.current_page - 1) * animals.per_page }}
           </td>
           <td>
-            {{ item.name }}
+              {{ item.code }}
           </td>
           <td>
-            {{ item.code }}
+            {{ item.name }}
           </td>
           <td>
             <div class="flex gap-4">

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AnimalRequest extends FormRequest
 {
@@ -14,13 +15,6 @@ class AnimalRequest extends FormRequest
         return true;
     }
 
-    public function prepareForValidation(): void
-    {
-        $this->merge([
-            'user_id' => auth()->id(),
-        ]);
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -29,20 +23,13 @@ class AnimalRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required'],
-            'code' => ['required'],
-            'gender' => ['nullable'],
-            'race' => ['nullable'],
-            'initial_weight' => ['nullable', 'numeric'],
-            'initial_height' => ['nullable', 'numeric'],
-            'birth_date' => ['nullable', 'date'],
-            'adoption_date' => ['nullable', 'date'],
-            'entry_date' => ['nullable', 'date'],
-            'user_id' => ['required', 'integer'],
-        ] + (
-            $this->isMethod('post')
-                ? ['photo' => ['nullable', 'image']]
-                : []
-        );
+            'code' => [
+                'required',
+                Rule::unique('animals')->where('user_id', auth()->id())->ignore($this->route('animal'))
+            ],
+            'name' => ['nullable'],
+            'specie_id' => ['nullable'],
+            'details' => ['nullable', 'array']
+        ];
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AnimalRequest;
 use App\Models\Animal;
+use App\Models\AnimalDetail;
+use App\Models\Species;
 use App\Services\AnimalService;
 
 class AnimalController extends Controller
@@ -17,16 +19,15 @@ class AnimalController extends Controller
     public function index()
     {
         return inertia('Dashboard/Animal/Index', [
-            'animals' => Animal::query()
-                ->where('user_id', auth()->id())
-                ->select('id', 'name', 'user_id', 'code', 'photo')
-                ->paginate(),
+            'animals' => Animal::where('user_id', auth()->id())->paginate(),
         ]);
     }
 
     public function create()
     {
-        return inertia('Dashboard/Animal/Create');
+        return inertia('Dashboard/Animal/Create', [
+            'species' => Species::all(['id', 'name'])
+        ]);
     }
 
     public function store(AnimalRequest $request)
@@ -38,7 +39,10 @@ class AnimalController extends Controller
 
     public function show(Animal $animal)
     {
-        return inertia('Dashboard/Animal/Show', compact('animal'));
+        return inertia('Dashboard/Animal/Show', [
+            'animal' => $animal,
+            'details' => AnimalDetail::pluck('value', 'key')
+        ]);
     }
 
     public function update(AnimalRequest $request, Animal $animal)

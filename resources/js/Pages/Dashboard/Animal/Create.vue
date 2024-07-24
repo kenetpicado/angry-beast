@@ -4,27 +4,37 @@ import SecondaryButton from '@/Components/Buttons/SecondaryButton.vue'
 import InputForm from '@/Components/Form/InputForm.vue'
 import SelectForm from '@/Components/Form/SelectForm.vue'
 import DefaultLayout from '@/Layouts/DefaultLayout.vue'
-import { created } from '@/Utils/toast.js'
+import { created, error } from '@/Utils/toast.js'
 import { useForm } from '@inertiajs/vue3'
 import { IconUpload } from '@tabler/icons-vue'
 import { ref } from 'vue'
 
 const preview = ref('')
 
+const props = defineProps(['species'])
+
 const form = useForm({
   name: '',
   code: '',
-  gender: 'Hembra',
-  race: '',
-  initial_weight: '',
-  initial_height: '',
-  birth_date: '',
-  adoption_date: '',
-  entry_date: '',
-  photo: ''
+  specie_id: '',
+  details: {
+    gender: 'Hembra',
+    race: '',
+    initial_weight: '',
+    initial_height: '',
+    birth_date: '',
+    adoption_date: '',
+    entry_date: '',
+    photo: ''
+  }
 })
 
 function handleSubmit() {
+  if (form.code.includes(' ')) {
+    error('El codigo no debe contener espacios en blanco')
+    return
+  }
+
   form.post(route('dashboard.animals.store'), {
     preserveState: true,
     preserveScroll: true,
@@ -35,9 +45,9 @@ function handleSubmit() {
 }
 
 function handlePhotoChange(event) {
-  form.photo = event.target.files[0]
+  form.details.photo = event.target.files[0]
   const reader = new FileReader()
-  reader.readAsDataURL(form.photo)
+  reader.readAsDataURL(form.details.photo)
   reader.onload = () => {
     preview.value = reader.result
   }
@@ -45,7 +55,7 @@ function handlePhotoChange(event) {
 
 function removeImage() {
   preview.value = null
-  form.photo = null
+  form.details.photo = null
 }
 </script>
 
@@ -61,39 +71,48 @@ function removeImage() {
             <div class="p-7">
               <form @submit.prevent="handleSubmit">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  <InputForm v-model="form.name" label="Nombre" name="name" required />
                   <InputForm v-model="form.code" label="Codigo" name="code" required />
-                  <SelectForm v-model="form.gender" label="Genero" name="gender" required>
+                  <InputForm v-model="form.name" label="Nombre" name="name" />
+                  <div class="col-span-2 font-bold text-lg mb-2">
+                    Detalles
+                  </div>
+                  <SelectForm v-model="form.specie_id" label="Especie" name="specie_id">
+                    <option value="">Ninguna</option>
+                    <option v-for="specie in species" :value="specie.id">
+                      {{ specie.name }}
+                    </option>
+                  </SelectForm>
+                  <SelectForm v-model="form.details.gender" label="Genero" name="gender" required>
                     <option value="Macho">Macho</option>
                     <option value="Hembra">Hembra</option>
                   </SelectForm>
-                  <InputForm v-model="form.race" label="Raza" name="race" />
+                  <InputForm v-model="form.details.race" label="Raza" name="race" />
                   <InputForm
-                    v-model="form.initial_weight"
+                    v-model="form.details.initial_weight"
                     label="Peso Inicial"
                     name="initial_weight"
                     type="number"
                   />
                   <InputForm
-                    v-model="form.initial_height"
+                    v-model="form.details.initial_height"
                     label="Altura Inicial"
                     name="initial_height"
                     type="number"
                   />
                   <InputForm
-                    v-model="form.birth_date"
+                    v-model="form.details.birth_date"
                     label="Fecha de nacimiento"
                     name="birth_date"
                     type="date"
                   />
                   <InputForm
-                    v-model="form.adoption_date"
+                    v-model="form.details.adoption_date"
                     label="Fecha de adopción"
                     name="adoption_date"
                     type="date"
                   />
                   <InputForm
-                    v-model="form.entry_date"
+                    v-model="form.details.entry_date"
                     label="Fecha de ingreso"
                     name="entry_date"
                     type="date"

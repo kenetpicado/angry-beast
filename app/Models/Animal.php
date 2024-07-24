@@ -15,14 +15,6 @@ class Animal extends Model implements HasMedia
     protected $fillable = [
         'name',
         'code',
-        /*'gender',
-        'race',
-        'initial_weight',
-        'initial_height',
-        'birth_date',
-        'adoption_date',
-        'entry_date',
-        'photo',*/
         'user_id',
         'specie_id',
     ];

@@ -15,21 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('code');
             $table->string('name')->nullable();
-            /*$table->string('gender')->nullable();
-            $table->string('race')->nullable();
-            $table->float('initial_weight')->nullable();
-            $table->float('initial_height')->nullable();
-            $table->date('birth_date')->nullable();
             $table->string('photo')->nullable();
-            $table->date('adoption_date')->nullable();
-            $table->date('entry_date')->nullable();
-            $table->date('exit_date')->nullable();
-            $table->date('death_date')->nullable();
-            $table->string('cause_of_death')->nullable();
-            $table->string('status')->nullable();
-            $table->string('description')->nullable();*/
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('specie_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ import {router} from '@inertiajs/vue3'
 const edit = ref(false)
 const tab = ref('detalles')
 
-const props = defineProps(['animal'])
+const props = defineProps(['animal', 'details'])
 const { preview, confirmRemoveImage, handlePhotoChange, form, updatePhoto, update } = useAnimal()
 
 function cancelUpdatePhoto() {
@@ -50,7 +50,7 @@ function afterUpdate() {
         <h2 class="text-2xl font-semibold">{{ animal.name }}</h2>
         <PrimaryButton v-if="tab == 'vacunas'" text="Nuevo" />
       </div>
-
+<pre>{{details}}</pre>
       <Tabs :options="tabs" v-model="tab" />
 
       <div class="grid grid-cols-5 gap-8">
