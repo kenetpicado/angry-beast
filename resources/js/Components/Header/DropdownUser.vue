@@ -6,7 +6,6 @@
       <span class="block text-sm font-medium">
         {{ $page.props.auth.name }}
       </span>
-      <span class="block text-xs font-medium"> Administrador </span>
     </span>
 
     <span class="h-12 w-12 rounded-full overflow-hidden border flex items-center justify-center">

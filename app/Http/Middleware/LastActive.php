@@ -15,7 +15,9 @@ class LastActive
      */
     public function handle(Request $request, Closure $next): Response
     {
-        auth()->user()->update(['last_active_at' => now()]);
+        if (auth()->check() && (now()->diffInMinutes(auth()->user()->last_active_at) >= 5 || auth()->user()->last_active_at == null)) {
+            auth()->user()->update(['last_active_at' => now()]);
+        }
 
         return $next($request);
     }

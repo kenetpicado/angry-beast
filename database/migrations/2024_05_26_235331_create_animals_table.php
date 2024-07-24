@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('animals', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('code');
-            $table->string('gender')->nullable();
+            $table->string('name')->nullable();
+            /*$table->string('gender')->nullable();
             $table->string('race')->nullable();
             $table->float('initial_weight')->nullable();
             $table->float('initial_height')->nullable();
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->date('death_date')->nullable();
             $table->string('cause_of_death')->nullable();
             $table->string('status')->nullable();
-            $table->string('description')->nullable();
+            $table->string('description')->nullable();*/
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('specie_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();

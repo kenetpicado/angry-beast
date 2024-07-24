@@ -22,7 +22,6 @@ Route::group([
             ->name('index');
 
         Route::resource('users', UserController::class)
-            ->middleware(['type:ADMIN|USER'])
             ->except(['edit', 'create', 'show']);
 
         Route::resource('employees', EmployeeController::class)
