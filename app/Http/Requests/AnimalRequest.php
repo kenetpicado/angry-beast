@@ -29,6 +29,7 @@ class AnimalRequest extends FormRequest
             ],
             'name' => ['nullable'],
             'specie_id' => ['nullable'],
+            'photo' => ['nullable', 'file'],
             'details' => ['nullable', 'array']
         ];
     }

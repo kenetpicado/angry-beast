@@ -17,6 +17,7 @@ const form = useForm({
   name: '',
   code: '',
   specie_id: '',
+  photo: '',
   details: {
     gender: 'Hembra',
     race: '',
@@ -25,7 +26,6 @@ const form = useForm({
     birth_date: '',
     adoption_date: '',
     entry_date: '',
-    photo: ''
   }
 })
 
@@ -45,9 +45,9 @@ function handleSubmit() {
 }
 
 function handlePhotoChange(event) {
-  form.details.photo = event.target.files[0]
+  form.photo = event.target.files[0]
   const reader = new FileReader()
-  reader.readAsDataURL(form.details.photo)
+  reader.readAsDataURL(form.photo)
   reader.onload = () => {
     preview.value = reader.result
   }
@@ -55,7 +55,7 @@ function handlePhotoChange(event) {
 
 function removeImage() {
   preview.value = null
-  form.details.photo = null
+  form.photo = null
 }
 </script>
 

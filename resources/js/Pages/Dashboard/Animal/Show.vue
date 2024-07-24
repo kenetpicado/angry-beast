@@ -11,16 +11,35 @@ import { getBasicDate } from '@/Utils/date.js'
 import Tabs from '@/Components/Tabs.vue'
 import { IconDetails, IconVaccine } from '@tabler/icons-vue'
 import {router} from '@inertiajs/vue3'
+import { useForm } from '@inertiajs/vue3'
 
 const edit = ref(false)
 const tab = ref('detalles')
 
 const props = defineProps(['animal', 'details'])
-const { preview, confirmRemoveImage, handlePhotoChange, form, updatePhoto, update } = useAnimal()
+const { confirmRemoveImage, handlePhotoChange, updatePhoto, update } = useAnimal()
+
+const preview = ref(props.animal?.photo)
+
+const form = useForm({
+  name: props.animal.name,
+  code: props.animal.code,
+  specie_id: props.animal.specie_id,
+  photo: props.animal.photo,
+  details: {
+    gender: props.details.gender,
+    race: props.details.race,
+    initial_weight: props.details.initial_weight,
+    initial_height: props.details.initial_height,
+    birth_date: props.details.birth_date,
+    adoption_date: props.details.adoption_date,
+    entry_date: props.details.entry_date,
+  }
+})
 
 function cancelUpdatePhoto() {
   preview.value = ''
-  form.photo = ''
+  form.details.photo = ''
 }
 
 const tabs = [
@@ -50,7 +69,7 @@ function afterUpdate() {
         <h2 class="text-2xl font-semibold">{{ animal.name }}</h2>
         <PrimaryButton v-if="tab == 'vacunas'" text="Nuevo" />
       </div>
-<pre>{{details}}</pre>
+
       <Tabs :options="tabs" v-model="tab" />
 
       <div class="grid grid-cols-5 gap-8">
@@ -73,50 +92,50 @@ function afterUpdate() {
                     </div>
                     <div>
                       <label class="text-base font-bold">Género</label>
-                      <p class="text-base">{{ animal.gender }}</p>
+                      <p class="text-base">{{ details.gender }}</p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Raza</label>
-                      <p class="text-base">{{ animal.race }}</p>
+                      <p class="text-base">{{ details.race }}</p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Peso inicial</label>
-                      <p class="text-base">{{ animal.initial_weight }}</p>
+                      <p class="text-base">{{ details.initial_weight }}</p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Altura inicial</label>
-                      <p class="text-base">{{ animal.initial_height }}</p>
+                      <p class="text-base">{{ details.initial_height }}</p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Fecha de nacimiento</label>
-                      <p class="text-base">{{ getBasicDate(animal.birth_date) }}</p>
+                      <p class="text-base">{{ getBasicDate(details.birth_date) }}</p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Fecha de adopción</label>
-                      <p class="text-base">{{ getBasicDate(animal.adoption_date) }}</p>
+                      <p class="text-base">{{ getBasicDate(details.adoption_date) }}</p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Fecha de ingreso</label>
-                      <p class="text-base">{{ getBasicDate(animal.entry_date) }}</p>
+                      <p class="text-base">{{ getBasicDate(details.entry_date) }}</p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Fecha de salida</label>
-                      <p v-if="animal.exit_date" class="text-base">
-                        {{ getBasicDate(animal.exit_date) }}
+                      <p v-if="details.exit_date" class="text-base">
+                        {{ getBasicDate(details.exit_date) }}
                       </p>
                       <p v-else class="text-base">Sin registrar</p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Fecha de muerte</label>
                       <p v-if="animal.death_date" class="text-base">
-                        {{ getBasicDate(animal.death_date) }}
+                        {{ getBasicDate(details.death_date) }}
                       </p>
                       <p v-else class="text-base">Sin registrar</p>
                     </div>
                     <div class="mb-4">
                       <label class="text-base font-bold">Causa de muerte</label>
                       <p v-if="animal.death_cause" class="text-base">
-                        {{ getBasicDate(animal.death_cause) }}
+                        {{ getBasicDate(details.death_cause) }}
                       </p>
                       <p v-else class="text-base">Sin registrar</p>
                     </div>
@@ -124,55 +143,55 @@ function afterUpdate() {
                   <template v-else>
                     <InputForm v-model="form.name" label="Nombre" name="name" required />
                     <InputForm v-model="form.code" label="Código" name="code" required />
-                    <SelectForm v-model="form.gender" label="Genero" name="gender" required>
+                    <SelectForm v-model="form.details.gender" label="Genero" name="gender" required>
                       <option value="Macho">Macho</option>
                       <option value="Hembra">Hembra</option>
                     </SelectForm>
-                    <InputForm v-model="form.race" label="Raza" name="race" />
+                    <InputForm v-model="form.details.race" label="Raza" name="race" />
                     <InputForm
-                      v-model="form.initial_weight"
+                      v-model="form.details.initial_weight"
                       label="Peso Inicial"
                       name="initial_weight"
                       type="number"
                     />
                     <InputForm
-                      v-model="form.initial_height"
+                      v-model="form.details.initial_height"
                       label="Altura Inicial"
                       name="initial_height"
                       type="number"
                     />
                     <InputForm
-                      v-model="form.birth_date"
+                      v-model="form.details.birth_date"
                       label="Fecha de nacimiento"
                       name="birth_date"
                       type="date"
                     />
                     <InputForm
-                      v-model="form.adoption_date"
+                      v-model="form.details.adoption_date"
                       label="Fecha de adopción"
                       name="adoption_date"
                       type="date"
                     />
                     <InputForm
-                      v-model="form.entry_date"
+                      v-model="form.details.entry_date"
                       label="Fecha de ingreso"
                       name="entry_date"
                       type="date"
                     />
                     <InputForm
-                      v-model="form.exit_date"
+                      v-model="form.details.exit_date"
                       label="Fecha de salida"
                       name="exit_date"
                       type="date"
                     />
                     <InputForm
-                      v-model="form.death_date"
+                      v-model="form.details.death_date"
                       label="Fecha de muerte"
                       name="death_date"
                       type="date"
                     />
                     <InputForm
-                      v-model="form.cause_of_death"
+                      v-model="form.details.cause_of_death"
                       label="Causa de muerte"
                       name="cause_of_death"
                     />

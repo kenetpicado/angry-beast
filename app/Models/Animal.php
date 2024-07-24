@@ -15,6 +15,7 @@ class Animal extends Model implements HasMedia
     protected $fillable = [
         'name',
         'code',
+        'photo',
         'user_id',
         'specie_id',
     ];

@@ -28,13 +28,9 @@ class AnimalService
             ]);
         }
 
-        if (isset($data['details']['photo'])) {
-            $temporalPhoto = $data['details']['photo'];
-        }
-
-        if (isset($temporalPhoto)) {
-            $file = $animal->addMedia($temporalPhoto)
-                ->usingFileName($animal->id.'.'.$temporalPhoto->getClientOriginalExtension())
+        if (isset($data['photo'])) {
+            $file = $animal->addMedia($data['photo'])
+                ->usingFileName($animal->id.'.'.$data['photo']->getClientOriginalExtension())
                 ->toMediaCollection('profile');
 
             $animal->update(['photo' => $file->getFullUrl()]);
