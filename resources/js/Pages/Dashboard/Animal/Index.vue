@@ -55,7 +55,7 @@ function destroy(id) {
             {{ index + 1 + (animals.current_page - 1) * animals.per_page }}
           </td>
           <td>
-              {{ item.code }}
+            {{ item.code }}
           </td>
           <td>
             {{ item.name }}

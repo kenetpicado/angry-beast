@@ -39,7 +39,12 @@ const submit = () => {
         <IconLock class="text-stroke" size="25" stroke="2" />
       </InputForm>
 
-      <PrimaryButton class="w-full mt-4" text="Iniciar sesión" type="submit" :loading="form.processing" />
+      <PrimaryButton
+        class="w-full mt-4"
+        text="Iniciar sesión"
+        type="submit"
+        :loading="form.processing"
+      />
     </form>
 
     <div class="mt-4 text-center">

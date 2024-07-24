@@ -8,7 +8,7 @@ function getThisPage(url) {
   if (!url) return
 
   router.get(
-      url,
+    url,
     {},
     {
       preserveState: true,

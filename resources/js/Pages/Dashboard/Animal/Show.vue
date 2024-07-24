@@ -10,14 +10,14 @@ import useAnimal from '@/Composables/useAnimal.js'
 import { getBasicDate } from '@/Utils/date.js'
 import Tabs from '@/Components/Tabs.vue'
 import { IconDetails, IconVaccine } from '@tabler/icons-vue'
-import {router} from '@inertiajs/vue3'
+import { router } from '@inertiajs/vue3'
 import { useForm } from '@inertiajs/vue3'
 
 const edit = ref(false)
 const tab = ref('detalles')
 
 const props = defineProps(['animal', 'details'])
-const { confirmRemoveImage, handlePhotoChange, updatePhoto, update } = useAnimal()
+const { confirmRemoveImage, updatePhoto, update } = useAnimal()
 
 const preview = ref(props.animal?.photo)
 
@@ -33,7 +33,7 @@ const form = useForm({
     initial_height: props.details.initial_height,
     birth_date: props.details.birth_date,
     adoption_date: props.details.adoption_date,
-    entry_date: props.details.entry_date,
+    entry_date: props.details.entry_date
   }
 })
 
@@ -56,10 +56,18 @@ const tabs = [
 ]
 
 function afterUpdate() {
-    router.reload({only: ['animal']})
-    edit.value = false
+  router.reload({ only: ['animal'] })
+  edit.value = false
 }
 
+function handlePhotoChange(event) {
+  form.photo = event.target.files[0]
+  const reader = new FileReader()
+  reader.readAsDataURL(form.photo)
+  reader.onload = () => {
+    preview.value = reader.result
+  }
+}
 </script>
 
 <template>
@@ -83,12 +91,12 @@ function afterUpdate() {
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   <template v-if="!edit">
                     <div>
-                      <label class="text-base font-bold">Nombre</label>
-                      <p class="text-base">{{ animal.name }}</p>
-                    </div>
-                    <div>
                       <label class="text-base font-bold">Código</label>
                       <p class="text-base">{{ animal.code }}</p>
+                    </div>
+                    <div>
+                      <label class="text-base font-bold">Nombre</label>
+                      <p class="text-base">{{ animal.name }}</p>
                     </div>
                     <div>
                       <label class="text-base font-bold">Género</label>
@@ -141,8 +149,8 @@ function afterUpdate() {
                     </div>
                   </template>
                   <template v-else>
-                    <InputForm v-model="form.name" label="Nombre" name="name" required />
                     <InputForm v-model="form.code" label="Código" name="code" required />
+                    <InputForm v-model="form.name" label="Nombre" name="name" required />
                     <SelectForm v-model="form.details.gender" label="Genero" name="gender" required>
                       <option value="Macho">Macho</option>
                       <option value="Hembra">Hembra</option>

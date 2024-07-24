@@ -25,7 +25,7 @@ const form = useForm({
     initial_height: '',
     birth_date: '',
     adoption_date: '',
-    entry_date: '',
+    entry_date: ''
   }
 })
 
@@ -73,9 +73,7 @@ function removeImage() {
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   <InputForm v-model="form.code" label="Codigo" name="code" required />
                   <InputForm v-model="form.name" label="Nombre" name="name" />
-                  <div class="col-span-2 font-bold text-lg mb-2">
-                    Detalles
-                  </div>
+                  <div class="col-span-2 font-bold text-lg mb-2">Detalles</div>
                   <SelectForm v-model="form.specie_id" label="Especie" name="specie_id">
                     <option value="">Ninguna</option>
                     <option v-for="specie in species" :value="specie.id">
@@ -119,7 +117,10 @@ function removeImage() {
                   />
                 </div>
                 <div class="flex justify-end gap-4">
-                  <SecondaryButton @click="$inertia.visit(route('dashboard.animals.index'))" text="Cancelar" />
+                  <SecondaryButton
+                    @click="$inertia.visit(route('dashboard.animals.index'))"
+                    text="Cancelar"
+                  />
                   <PrimaryButton :loading="form.processing" text="Guardar" type="submit" />
                 </div>
               </form>

@@ -24,8 +24,6 @@ export function useAnimal() {
     photo: props.animal?.photo || ''
   })
 
-  const preview = ref(props.animal?.photo)
-
   function confirmRemoveImage() {
     confirmAction({
       callback: () => {
@@ -40,15 +38,6 @@ export function useAnimal() {
         })
       }
     })
-  }
-
-  function handlePhotoChange(event) {
-    form.photo = event.target.files[0]
-    const reader = new FileReader()
-    reader.readAsDataURL(form.photo)
-    reader.onload = () => {
-      preview.value = reader.result
-    }
   }
 
   function updatePhoto() {
@@ -77,13 +66,13 @@ export function useAnimal() {
       preserveScroll: true,
       preserveState: true,
       onSuccess: () => {
-          if(onDone) onDone()
+        if (onDone) onDone()
         updated()
-      },
+      }
     })
   }
 
-  return { form, confirmRemoveImage, preview, handlePhotoChange, updatePhoto, update }
+  return { form, confirmRemoveImage, updatePhoto, update }
 }
 
 export default useAnimal
