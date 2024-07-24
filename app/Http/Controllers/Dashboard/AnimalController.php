@@ -40,7 +40,8 @@ class AnimalController extends Controller
     public function show(Animal $animal)
     {
         return inertia('Dashboard/Animal/Show', [
-            'animal' => $animal,
+            'animal' => $animal->load('specie'),
+            'species' => Species::all(['id', 'name']),
             'details' => $animal->details()->pluck('value', 'key')
         ]);
     }

@@ -24,4 +24,9 @@ class Animal extends Model implements HasMedia
     {
         return $this->hasMany(AnimalDetail::class);
     }
+
+    public function specie()
+    {
+        return $this->belongsTo(Species::class);
+    }
 }

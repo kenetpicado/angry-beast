@@ -17,7 +17,7 @@ import { deleted, updated } from '@/Utils/toast.js'
 const edit = ref(false)
 const tab = ref('detalles')
 
-const props = defineProps(['animal', 'details'])
+const props = defineProps(['animal', 'details', 'species'])
 
 const preview = ref(props.animal?.photo)
 const isUploadingPhoto = ref(false)
@@ -166,6 +166,10 @@ function updatePhoto() {
                       <p class="text-base">{{ animal.name }}</p>
                     </div>
                     <div>
+                      <label class="text-base font-bold">Especie</label>
+                      <p class="text-base">{{ animal.specie?.name ?? 'Ninguna' }}</p>
+                    </div>
+                    <div>
                       <label class="text-base font-bold">Género</label>
                       <p class="text-base">{{ details.gender }}</p>
                     </div>
@@ -181,44 +185,45 @@ function updatePhoto() {
                       <label class="text-base font-bold">Altura inicial</label>
                       <p class="text-base">{{ details.initial_height }}</p>
                     </div>
-                    <div>
+                    <div v-if="details.birth_date">
                       <label class="text-base font-bold">Fecha de nacimiento</label>
                       <p class="text-base">{{ getBasicDate(details.birth_date) }}</p>
                     </div>
-                    <div>
+                    <div v-if="details.adoption_date">
                       <label class="text-base font-bold">Fecha de adopción</label>
                       <p class="text-base">{{ getBasicDate(details.adoption_date) }}</p>
                     </div>
-                    <div>
+                    <div v-if="details.entry_date">
                       <label class="text-base font-bold">Fecha de ingreso</label>
                       <p class="text-base">{{ getBasicDate(details.entry_date) }}</p>
                     </div>
-                    <div>
+                    <div v-if="details.exit_date" >
                       <label class="text-base font-bold">Fecha de salida</label>
-                      <p v-if="details.exit_date" class="text-base">
+                      <p class="text-base">
                         {{ getBasicDate(details.exit_date) }}
                       </p>
-                      <p v-else class="text-base">Sin registrar</p>
                     </div>
-                    <div>
+                    <div v-if="details.death_date">
                       <label class="text-base font-bold">Fecha de muerte</label>
-                      <p v-if="details.death_date" class="text-base">
+                      <p class="text-base">
                         {{ getBasicDate(details.death_date) }}
                       </p>
-                      <p v-else class="text-base">Sin registrar</p>
                     </div>
-                    <div class="mb-4">
+                    <div v-if="details.cause_of_death">
                       <label class="text-base font-bold">Causa de muerte</label>
-                      <p v-if="details.cause_of_death" class="text-base">
+                      <p class="text-base">
                         {{ details.cause_of_death }}
                       </p>
-                      <p v-else class="text-base">Sin registrar</p>
                     </div>
                   </template>
                   <template v-else>
                     <InputForm v-model="form.code" label="Código" name="code" required />
-                    <InputForm v-model="form.name" label="Nombre" name="name" required />
-                    <SelectForm v-model="form.details.gender" label="Genero" name="gender" required>
+                    <InputForm v-model="form.name" label="Nombre" name="name" />
+                    <SelectForm v-model="form.specie_id" label="Especie" name="specie_id">
+                      <option value="">Ninguna</option>
+                      <option v-for="specie in species" :value="specie.id">{{ specie.name }}</option>
+                    </SelectForm>
+                    <SelectForm v-model="form.details.gender" label="Genero" name="gender">
                       <option value="Macho">Macho</option>
                       <option value="Hembra">Hembra</option>
                     </SelectForm>
@@ -277,7 +282,7 @@ function updatePhoto() {
                   </template>
                 </div>
               </form>
-              <button v-if="!edit" type="button" class="text-primary" @click="edit = true">
+              <button v-if="!edit" type="button" class="text-primary mt-4" @click="edit = true">
                 Editar
               </button>
             </div>
