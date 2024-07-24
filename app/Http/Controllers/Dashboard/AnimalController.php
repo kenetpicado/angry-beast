@@ -41,13 +41,13 @@ class AnimalController extends Controller
     {
         return inertia('Dashboard/Animal/Show', [
             'animal' => $animal,
-            'details' => AnimalDetail::pluck('value', 'key')
+            'details' => $animal->details()->pluck('value', 'key')
         ]);
     }
 
     public function update(AnimalRequest $request, Animal $animal)
     {
-        $animal->update($request->validated());
+        $this->animalService->updateAnimal($request->validated(), $animal);
 
         return back();
     }

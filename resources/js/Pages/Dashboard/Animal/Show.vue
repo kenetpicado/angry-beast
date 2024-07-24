@@ -6,34 +6,39 @@ import SelectForm from '@/Components/Form/SelectForm.vue'
 import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue'
 import SecondaryButton from '@/Components/Buttons/SecondaryButton.vue'
 import { IconUpload } from '@tabler/icons-vue'
-import useAnimal from '@/Composables/useAnimal.js'
 import { getBasicDate } from '@/Utils/date.js'
 import Tabs from '@/Components/Tabs.vue'
 import { IconDetails, IconVaccine } from '@tabler/icons-vue'
 import { router } from '@inertiajs/vue3'
 import { useForm } from '@inertiajs/vue3'
+import confirmAction from '@/Utils/confirmation'
+import { deleted, updated } from '@/Utils/toast.js'
 
 const edit = ref(false)
 const tab = ref('detalles')
 
 const props = defineProps(['animal', 'details'])
-const { confirmRemoveImage, updatePhoto, update } = useAnimal()
 
 const preview = ref(props.animal?.photo)
+const isUploadingPhoto = ref(false)
 
 const form = useForm({
+  id: props.animal.id,
   name: props.animal.name,
   code: props.animal.code,
   specie_id: props.animal.specie_id,
   photo: props.animal.photo,
   details: {
-    gender: props.details.gender,
-    race: props.details.race,
-    initial_weight: props.details.initial_weight,
-    initial_height: props.details.initial_height,
-    birth_date: props.details.birth_date,
-    adoption_date: props.details.adoption_date,
-    entry_date: props.details.entry_date
+    gender: props.details.gender || 'Hembra',
+    race: props.details.race || '',
+    initial_weight: props.details.initial_weight || '',
+    initial_height: props.details.initial_height || '',
+    birth_date: props.details.birth_date || '',
+    adoption_date: props.details.adoption_date || '',
+    entry_date: props.details.entry_date || '',
+    exit_date: props.details.exit_date || '',
+    death_date: props.details.death_date || '',
+    cause_of_death: props.details.cause_of_death || ''
   }
 })
 
@@ -68,6 +73,68 @@ function handlePhotoChange(event) {
     preview.value = reader.result
   }
 }
+
+function confirmRemoveImage() {
+  confirmAction({
+    callback: () => {
+      router.delete(route('dashboard.photo.destroy', form.id), {
+        preserveScroll: true,
+        preserveState: true,
+        onSuccess: () => {
+          form.photo = ''
+          preview.value = ''
+          deleted()
+        }
+      })
+    }
+  })
+}
+
+function update() {
+  if (form.code.includes(' ')) {
+    error('El codigo no debe contener espacios en blanco')
+    return
+  }
+
+  form
+  .transform((data) => ({
+    ...data,
+    photo: null,
+  }))
+  .put(route('dashboard.animals.update', form.id), {
+    preserveScroll: true,
+    preserveState: true,
+    onSuccess: () => {
+      afterUpdate()
+      updated()
+    },
+    onError: (err) => {
+      console.log(err)
+    }
+  })
+}
+
+function updatePhoto() {
+  isUploadingPhoto.value = true
+  router.post(
+    route('dashboard.photo.store'),
+    {
+      photo: form.photo,
+      animal_id: form.id
+    },
+    {
+      preserveScroll: true,
+      preserveState: true,
+      onSuccess: () => {
+        form.photo = ''
+        updated()
+      },
+      onFinish: () => {
+        isUploadingPhoto.value = false
+      }
+    }
+  )
+}
 </script>
 
 <template>
@@ -81,13 +148,13 @@ function handlePhotoChange(event) {
       <Tabs :options="tabs" v-model="tab" />
 
       <div class="grid grid-cols-5 gap-8">
-        <div class="col-span-5 xl:col-span-3">
+        <div class="col-span-5 lg:col-span-3">
           <div class="rounded-md border border-stroke bg-white shadow-default">
             <div class="border-b border-stroke py-4 px-7">
               <h3 class="font-medium">Datos generales</h3>
             </div>
             <div class="p-7">
-              <form @submit.prevent="update(() => afterUpdate())">
+              <form @submit.prevent="update()">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   <template v-if="!edit">
                     <div>
@@ -135,15 +202,15 @@ function handlePhotoChange(event) {
                     </div>
                     <div>
                       <label class="text-base font-bold">Fecha de muerte</label>
-                      <p v-if="animal.death_date" class="text-base">
+                      <p v-if="details.death_date" class="text-base">
                         {{ getBasicDate(details.death_date) }}
                       </p>
                       <p v-else class="text-base">Sin registrar</p>
                     </div>
                     <div class="mb-4">
                       <label class="text-base font-bold">Causa de muerte</label>
-                      <p v-if="animal.death_cause" class="text-base">
-                        {{ getBasicDate(details.death_cause) }}
+                      <p v-if="details.cause_of_death" class="text-base">
+                        {{ details.cause_of_death }}
                       </p>
                       <p v-else class="text-base">Sin registrar</p>
                     </div>
@@ -217,7 +284,7 @@ function handlePhotoChange(event) {
           </div>
         </div>
 
-        <div class="col-span-5 xl:col-span-2">
+        <div class="col-span-5 lg:col-span-2">
           <div class="rounded-md border border-stroke bg-white shadow-default">
             <div class="border-b border-stroke py-4 px-7">
               <h3 class="font-medium">Foto</h3>
@@ -257,7 +324,7 @@ function handlePhotoChange(event) {
               >
                 <SecondaryButton text="Cancelar" @click="cancelUpdatePhoto" />
                 <PrimaryButton
-                  :loading="form.processing"
+                  :loading="isUploadingPhoto"
                   text="Guardar"
                   type="button"
                   @click="updatePhoto"

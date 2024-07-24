@@ -19,4 +19,9 @@ class Animal extends Model implements HasMedia
         'user_id',
         'specie_id',
     ];
+
+    public function details()
+    {
+        return $this->hasMany(AnimalDetail::class);
+    }
 }

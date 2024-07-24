@@ -38,6 +38,7 @@ Route::group([
         Route::resource('concepts', ConceptController::class);
 
         Route::resource('photo', PhotoController::class)
+            ->only(['store', 'destroy'])
             ->parameter('photo', 'animal');
     });
 
