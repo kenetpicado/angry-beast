@@ -30,7 +30,7 @@ class EventTypeController extends Controller
     {
         return inertia('Dashboard/EventType/Show', [
             'event_type' => $eventType,
-            'events' => $eventType->events()->paginate()
+            'events' => $eventType->events()->latest()->paginate()
         ]);
     }
 

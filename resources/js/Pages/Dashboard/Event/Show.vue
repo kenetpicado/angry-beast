@@ -25,7 +25,7 @@ const form = useForm({
   model_id: props.event_type.id,
   model_type: 'App\\Models\\EventType',
   description: '',
-  quantity: 0,
+  quantity: 0
 })
 
 function edit(item) {
@@ -83,7 +83,6 @@ function destroy(id) {
     }
   })
 }
-
 </script>
 
 <template>
@@ -105,9 +104,7 @@ function destroy(id) {
 
       <template #body>
         <tr v-if="events.data.length == 0">
-          <td class="text-center text-slate-400" colspan="6">
-            No hay datos que mostrar
-          </td>
+          <td class="text-center text-slate-400" colspan="6">No hay datos que mostrar</td>
         </tr>
         <tr v-for="item in events.data" :key="item.id">
           <td>

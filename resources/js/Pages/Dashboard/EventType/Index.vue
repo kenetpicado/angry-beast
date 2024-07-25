@@ -113,7 +113,12 @@ function resetValues() {
       </template>
     </TableSection>
 
-    <ModalForm v-model="openModal" @onSubmit="onSubmit" @onCancel="resetValues" title="Tipo de evento">
+    <ModalForm
+      v-model="openModal"
+      @onSubmit="onSubmit"
+      @onCancel="resetValues"
+      title="Tipo de evento"
+    >
       <InputForm v-model="form.name" label="Nombre" name="name" required class="col-span-2" />
     </ModalForm>
   </DefaultLayout>

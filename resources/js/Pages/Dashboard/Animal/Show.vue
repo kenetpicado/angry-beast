@@ -97,21 +97,21 @@ function update() {
   }
 
   form
-  .transform((data) => ({
-    ...data,
-    photo: null,
-  }))
-  .put(route('dashboard.animals.update', form.id), {
-    preserveScroll: true,
-    preserveState: true,
-    onSuccess: () => {
-      afterUpdate()
-      updated()
-    },
-    onError: (err) => {
-      console.log(err)
-    }
-  })
+    .transform((data) => ({
+      ...data,
+      photo: null
+    }))
+    .put(route('dashboard.animals.update', form.id), {
+      preserveScroll: true,
+      preserveState: true,
+      onSuccess: () => {
+        afterUpdate()
+        updated()
+      },
+      onError: (err) => {
+        console.log(err)
+      }
+    })
 }
 
 function updatePhoto() {
@@ -197,7 +197,7 @@ function updatePhoto() {
                       <label class="text-base font-bold">Fecha de ingreso</label>
                       <p class="text-base">{{ getBasicDate(details.entry_date) }}</p>
                     </div>
-                    <div v-if="details.exit_date" >
+                    <div v-if="details.exit_date">
                       <label class="text-base font-bold">Fecha de salida</label>
                       <p class="text-base">
                         {{ getBasicDate(details.exit_date) }}
@@ -221,7 +221,9 @@ function updatePhoto() {
                     <InputForm v-model="form.name" label="Nombre" name="name" />
                     <SelectForm v-model="form.specie_id" label="Especie" name="specie_id">
                       <option value="">Ninguna</option>
-                      <option v-for="specie in species" :value="specie.id">{{ specie.name }}</option>
+                      <option v-for="specie in species" :value="specie.id">
+                        {{ specie.name }}
+                      </option>
                     </SelectForm>
                     <SelectForm v-model="form.details.gender" label="Genero" name="gender">
                       <option value="Macho">Macho</option>

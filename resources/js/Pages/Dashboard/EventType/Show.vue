@@ -14,30 +14,21 @@ import { useForm } from '@inertiajs/vue3'
 import { created, deleted, updated } from '@/Utils/toast.js'
 import { router } from '@inertiajs/vue3'
 import confirmAction from '@/Utils/confirmation'
+import useEvent from '@/Composables/useEvent.js'
 
 const props = defineProps(['events', 'event_type'])
 
 const openModal = ref(false)
 const tab = ref('EVENTS')
 
-const form = useForm({
-  id: null,
+const { storeEvent, updateEvent, formEvent, setEventValues } = useEvent({
   model_id: props.event_type.id,
-  model_type: 'App\\Models\\EventType',
-  description: '',
-  quantity: 0,
+  model_type: 'App\\Models\\EventType'
 })
 
 function edit(item) {
-  form.id = item.id
-  form.description = item.description
-  form.quantity = item.quantity
+  setEventValues(item)
   openModal.value = true
-}
-
-function resetValues() {
-  openModal.value = false
-  form.reset()
 }
 
 const tabs = [
@@ -49,41 +40,16 @@ const tabs = [
 ]
 
 function onSubmit() {
-  if (form.id) {
-    form.put(route('dashboard.events.update', form.id), {
-      preserveScroll: true,
-      preserveState: true,
-      onSuccess: () => {
-        updated()
-        resetValues()
-      }
-    })
+  if (formEvent.id) {
+    updateEvent(() => (openModal.value = false))
   } else {
-    form.post(route('dashboard.events.store'), {
-      preserveScroll: true,
-      preserveState: true,
-      onSuccess: () => {
-        created()
-        resetValues()
-      }
-    })
+    storeEvent(() => (openModal.value = false))
   }
 }
 
-function destroy(id) {
-  confirmAction({
-    callback: () => {
-      router.delete(route('dashboard.events.destroy', id), {
-        preserveScroll: true,
-        preserveState: true,
-        onSuccess: () => {
-          deleted()
-        }
-      })
-    }
-  })
+function onCancel() {
+  form.reset()
 }
-
 </script>
 
 <template>
@@ -105,9 +71,7 @@ function destroy(id) {
 
       <template #body>
         <tr v-if="events.data.length == 0">
-          <td class="text-center text-slate-400" colspan="6">
-            No hay datos que mostrar
-          </td>
+          <td class="text-center text-slate-400" colspan="6">No hay datos que mostrar</td>
         </tr>
         <tr v-for="item in events.data" :key="item.id">
           <td>
@@ -136,12 +100,18 @@ function destroy(id) {
     <ModalForm
       v-model="openModal"
       @onSubmit="onSubmit()"
-      @onCancel="resetValues"
+      @onCancel="onCancel"
       title="Evento"
-      :loading="form.processing"
+      :loading="formEvent.processing"
     >
-      <InputForm v-model="form.description" label="Descripción" required name="description" />
-      <InputForm v-model="form.quantity" label="Cantidad" name="quantity" type="number" required />
+      <InputForm v-model="formEvent.description" label="Descripción" required name="description" />
+      <InputForm
+        v-model="formEvent.quantity"
+        label="Cantidad"
+        name="quantity"
+        type="number"
+        required
+      />
     </ModalForm>
   </DefaultLayout>
 </template>

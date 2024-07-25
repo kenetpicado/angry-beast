@@ -64,7 +64,7 @@ const menuGroups = ref([
         label: 'Tipos de eventos',
         route: route('dashboard.event-types.index'),
         show: true
-      },
+      }
     ]
   },
   {
@@ -87,7 +87,7 @@ const menuGroups = ref([
         label: 'Personal',
         route: route('dashboard.employees.index'),
         show: true
-      },
+      }
     ]
   },
   {
