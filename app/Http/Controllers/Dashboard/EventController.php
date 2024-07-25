@@ -9,12 +9,14 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return inertia('Dashboard/Event/Index', [
+            'events' => Event::query()
+                ->where('user_id', auth()->id())
+                ->with('model')
+                ->paginate()
+        ]);
     }
 
     /**

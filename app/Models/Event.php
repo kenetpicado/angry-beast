@@ -10,4 +10,9 @@ class Event extends Model
     use HasFactory;
 
     protected $fillable = ['model_id', 'model_type', 'description', 'quantity'];
+
+    public function model()
+    {
+        return $this->morphTo();
+    }
 }
