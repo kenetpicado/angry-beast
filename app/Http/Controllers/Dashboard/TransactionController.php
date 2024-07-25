@@ -11,13 +11,17 @@ class TransactionController extends Controller
     public function index()
     {
         return inertia('Dashboard/Transaction/Index', [
-            'transactions' => Transaction::with('model')->auth()->latest()->paginate(),
+            'transactions' => auth()->user()
+                ->transactions()
+                ->with('model')
+                ->latest()
+                ->paginate(),
         ]);
     }
 
     public function store(TransactionRequest $request)
     {
-        Transaction::create($request->validated());
+        auth()->user()->transactions()->create($request->validated());
 
         return back();
     }

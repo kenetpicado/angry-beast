@@ -14,13 +14,6 @@ class TransactionRequest extends FormRequest
         return true;
     }
 
-    public function prepareForValidation(): void
-    {
-        $this->merge([
-            'user_id' => auth()->id(),
-        ]);
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -35,7 +28,6 @@ class TransactionRequest extends FormRequest
             'type' => ['required', 'string'],
             'quantity' => ['nullable', 'numeric'],
             'value' => ['required', 'numeric'],
-            'user_id' => ['required', 'integer'],
         ];
     }
 }

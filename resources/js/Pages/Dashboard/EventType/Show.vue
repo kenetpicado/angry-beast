@@ -48,7 +48,8 @@ function onSubmit() {
 }
 
 function onCancel() {
-  form.reset()
+  formEvent.reset()
+  openModal.value = false
 }
 </script>
 
