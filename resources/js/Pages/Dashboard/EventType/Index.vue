@@ -58,9 +58,6 @@ function destroy(id) {
         preserveState: true,
         onSuccess: () => {
           deleted()
-        },
-        onError: (err) => {
-          error(err.message)
         }
       })
     }
@@ -74,7 +71,7 @@ function resetValues() {
 </script>
 
 <template>
-  <DefaultLayout head="Conceptos">
+  <DefaultLayout head="Tipos de eventos">
     <div class="mb-6 flex gap-3 items-center justify-between">
       <h2 class="text-2xl font-semibold">Tipos de eventos</h2>
       <PrimaryButton text="Nuevo" @click="openModal = true" />
@@ -102,7 +99,7 @@ function resetValues() {
             <div class="flex gap-4">
               <ActionIcon
                 :icon="IconEye"
-                :href="route('dashboard.concepts.show', item.id)"
+                :href="route('dashboard.event-types.show', item.id)"
                 tooltip="Detalles"
               />
               <ActionIcon :icon="IconEdit" @click="edit(item)" tooltip="Editar" />

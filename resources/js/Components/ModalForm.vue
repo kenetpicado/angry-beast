@@ -13,7 +13,7 @@
       </div>
       <div class="flex gap-3 items-center justify-end">
         <SecondaryButton text="Cancelar" @click="$emit('onCancel')" />
-        <PrimaryButton text="Guardar" type="submit" />
+        <PrimaryButton text="Guardar" type="submit" :loading="loading" />
       </div>
     </form>
   </Modal>
@@ -25,5 +25,12 @@ import SecondaryButton from '@/Components/Buttons/SecondaryButton.vue'
 
 const openModal = defineModel()
 defineEmits(['onSubmit', 'onCancel'])
-defineProps(['title'])
+
+defineProps({
+  title: String,
+  loading: {
+    type: Boolean,
+    default: false
+  }
+})
 </script>

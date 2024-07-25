@@ -26,6 +26,14 @@ class EventTypeController extends Controller
         return back();
     }
 
+    public function show(EventType $eventType)
+    {
+        return inertia('Dashboard/EventType/Show', [
+            'event_type' => $eventType,
+            'events' => $eventType->events()->paginate()
+        ]);
+    }
+
     public function update(EventTypeRequest $request, EventType $eventType)
     {
         $eventType->update($request->validated());

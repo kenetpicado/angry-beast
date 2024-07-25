@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\AnimalController;
 use App\Http\Controllers\Dashboard\ConceptController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\EmployeeController;
+use App\Http\Controllers\Dashboard\EventController;
 use App\Http\Controllers\Dashboard\EventTypeController;
 use App\Http\Controllers\Dashboard\PhotoController;
 use App\Http\Controllers\Dashboard\SpeciesController;
