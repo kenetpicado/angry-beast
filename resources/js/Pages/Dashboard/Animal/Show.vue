@@ -385,9 +385,7 @@ function onCancel() {
 
           <template #body>
             <tr v-if="events.data.length == 0">
-              <td class="text-center text-slate-400" colspan="6">
-                No hay datos que mostrar
-              </td>
+              <td class="text-center text-slate-400" colspan="6">No hay datos que mostrar</td>
             </tr>
             <tr v-for="item in events.data" :key="item.id">
               <td>
@@ -414,21 +412,26 @@ function onCancel() {
         </TableSection>
 
         <ModalForm
-      v-model="openModal"
-      @onSubmit="onSubmit()"
-      @onCancel="onCancel"
-      title="Evento"
-      :loading="formEvent.processing"
-    >
-      <InputForm v-model="formEvent.description" label="Descripción" required name="description" />
-      <InputForm
-        v-model="formEvent.quantity"
-        label="Cantidad"
-        name="quantity"
-        type="number"
-        required
-      />
-    </ModalForm>
+          v-model="openModal"
+          @onSubmit="onSubmit()"
+          @onCancel="onCancel"
+          title="Evento"
+          :loading="formEvent.processing"
+        >
+          <InputForm
+            v-model="formEvent.description"
+            label="Descripción"
+            required
+            name="description"
+          />
+          <InputForm
+            v-model="formEvent.quantity"
+            label="Cantidad"
+            name="quantity"
+            type="number"
+            required
+          />
+        </ModalForm>
       </div>
     </div>
   </DefaultLayout>

@@ -5,6 +5,7 @@ import DefaultLayout from '@/Layouts/DefaultLayout.vue'
 import { IconTrash } from '@tabler/icons-vue'
 import ActionIcon from '@/Components/ActionIcon.vue'
 import useEvent from '@/Composables/useEvent.js'
+import getFormattedDate from '@/Utils/date.js'
 
 defineProps(['events'])
 const { destroyEvent } = useEvent({})
@@ -18,7 +19,7 @@ const { destroyEvent } = useEvent({})
 
     <TableSection>
       <template #header>
-        <th>#</th>
+        <th>Fecha</th>
         <th>Nombre</th>
         <th>Descripción</th>
         <th>Cantidad</th>
@@ -31,10 +32,15 @@ const { destroyEvent } = useEvent({})
         </tr>
         <tr v-for="(item, index) in events.data" :key="item.id">
           <td>
-            {{ index + 1 + (events.current_page - 1) * events.per_page }}
+           {{ getFormattedDate(item.created_at) }}
           </td>
           <td>
-            {{ item.model?.name }}
+            <span v-if="item.model_type.includes('Animal')">
+              Animal: {{ item.model.code }}
+            </span>
+            <span v-else>
+             {{ item.model?.name }}
+            </span>
           </td>
           <td>
             {{ item.description }}

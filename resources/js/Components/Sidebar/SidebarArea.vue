@@ -9,7 +9,11 @@ import {
   IconUser,
   IconUserCog,
   IconUsers,
-  IconX
+  IconX,
+  IconBulb,
+  IconCurrencyDollar,
+  IconFlag,
+  IconFileDollar
 } from '@tabler/icons-vue'
 import SidebarItem from './SidebarItem.vue'
 import { onClickOutside } from '@vueuse/core'
@@ -54,13 +58,13 @@ const menuGroups = ref([
         show: true
       },
       {
-        icon: IconUsers,
+        icon: IconBulb,
         label: 'Eventos',
         route: route('dashboard.events.index'),
         show: true
       },
       {
-        icon: IconUsers,
+        icon: IconFlag,
         label: 'Tipos de eventos',
         route: route('dashboard.event-types.index'),
         show: true
@@ -71,13 +75,13 @@ const menuGroups = ref([
     name: 'Contabilidad',
     menuItems: [
       {
-        icon: IconUsers,
+        icon: IconCurrencyDollar,
         label: 'Transacciones',
         route: route('dashboard.transactions.index'),
         show: true
       },
       {
-        icon: IconCategory2,
+        icon: IconFileDollar,
         label: 'Conceptos',
         route: route('dashboard.concepts.index'),
         show: true
