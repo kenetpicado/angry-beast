@@ -3,6 +3,7 @@
 namespace App\Models;
 
 //use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\EventType;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -64,5 +65,10 @@ class User extends Authenticatable
     public function concepts()
     {
         return $this->hasMany(Concept::class);
+    }
+
+    public function eventTypes()
+    {
+        return $this->hasMany(EventType::class);
     }
 }

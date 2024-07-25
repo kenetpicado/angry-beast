@@ -42,12 +42,6 @@ const menuGroups = ref([
         show: isType('ADMIN')
       },
       {
-        icon: IconUserCog,
-        label: 'Personal',
-        route: route('dashboard.employees.index'),
-        show: true
-      },
-      {
         icon: IconCategory,
         label: 'Especies',
         route: route('dashboard.species.index'),
@@ -58,7 +52,19 @@ const menuGroups = ref([
         label: 'Animales',
         route: route('dashboard.animals.index'),
         show: true
-      }
+      },
+      {
+        icon: IconUsers,
+        label: 'Eventos',
+        route: route('dashboard.events.index'),
+        show: true
+      },
+      {
+        icon: IconUsers,
+        label: 'Tipos de eventos',
+        route: route('dashboard.event-types.index'),
+        show: true
+      },
     ]
   },
   {
@@ -75,7 +81,13 @@ const menuGroups = ref([
         label: 'Conceptos',
         route: route('dashboard.concepts.index'),
         show: true
-      }
+      },
+      {
+        icon: IconUserCog,
+        label: 'Personal',
+        route: route('dashboard.employees.index'),
+        show: true
+      },
     ]
   },
   {

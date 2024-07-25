@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\AnimalController;
 use App\Http\Controllers\Dashboard\ConceptController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\EmployeeController;
+use App\Http\Controllers\Dashboard\EventTypeController;
 use App\Http\Controllers\Dashboard\PhotoController;
 use App\Http\Controllers\Dashboard\SpeciesController;
 use App\Http\Controllers\Dashboard\TransactionController;
@@ -36,6 +37,10 @@ Route::group([
         Route::resource('animals', AnimalController::class);
 
         Route::resource('concepts', ConceptController::class);
+
+        Route::resource('event-types', EventTypeController::class);
+
+        Route::resource('events', EventController::class);
 
         Route::resource('photo', PhotoController::class)
             ->only(['store', 'destroy'])
