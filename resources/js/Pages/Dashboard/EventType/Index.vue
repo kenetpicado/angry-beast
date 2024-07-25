@@ -5,13 +5,12 @@ import ModalForm from '@/Components/ModalForm.vue'
 import Pagination from '@/Components/Pagination.vue'
 import TableSection from '@/Components/TableSection.vue'
 import DefaultLayout from '@/Layouts/DefaultLayout.vue'
-import { created, deleted, error, updated } from '@/Utils/toast.js'
+import { created, deleted, updated } from '@/Utils/toast.js'
 import { useForm } from '@inertiajs/vue3'
 import { IconEdit, IconTrash, IconEye } from '@tabler/icons-vue'
 import { ref } from 'vue'
 import confirmAction from '@/Utils/confirmation'
 import ActionIcon from '@/Components/ActionIcon.vue'
-import getFormattedDate from '@/Utils/date.js'
 
 defineProps(['event_types'])
 
