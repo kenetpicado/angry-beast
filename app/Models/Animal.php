@@ -29,4 +29,9 @@ class Animal extends Model implements HasMedia
     {
         return $this->belongsTo(Species::class);
     }
+
+    public function events()
+    {
+        return $this->morphMany(Event::class, 'model');
+    }
 }

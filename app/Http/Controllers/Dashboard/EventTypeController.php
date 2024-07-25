@@ -43,6 +43,12 @@ class EventTypeController extends Controller
 
     public function destroy(EventType $eventType)
     {
+        if ($eventType->events()->count()) {
+            return back()->withErrors([
+                'message' => 'No es posible eliminar porque tiene eventos registrados'
+            ]);
+        }
+
         $eventType->delete();
 
         return back();

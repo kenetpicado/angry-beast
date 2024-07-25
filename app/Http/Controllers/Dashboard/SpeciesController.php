@@ -11,13 +11,15 @@ class SpeciesController extends Controller
     public function index()
     {
         return inertia('Dashboard/Species/Index', [
-            'species' => Species::paginate(),
+            'species' => auth()->user()->species()
+                ->withCount('animals')
+                ->paginate(),
         ]);
     }
 
     public function store(SpeciesRequest $request)
     {
-        Species::create($request->validated());
+        auth()->user()->species()->create($request->validated());
 
         return back();
     }

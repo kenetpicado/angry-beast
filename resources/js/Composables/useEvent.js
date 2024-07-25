@@ -3,7 +3,6 @@ import confirmAction from '@/Utils/confirmation'
 import { created, deleted, updated, error } from '@/Utils/toast.js'
 
 export function useEvent({ model_id, model_type }) {
-
   const formEvent = useForm({
     id: null,
     model_id: model_id || '',
@@ -18,6 +17,7 @@ export function useEvent({ model_id, model_type }) {
       preserveState: true,
       onSuccess: () => {
         created()
+        formEvent.reset()
         if (typeof onSuccessCallback === 'function') {
           onSuccessCallback()
         }
@@ -25,12 +25,16 @@ export function useEvent({ model_id, model_type }) {
     })
   }
 
-  function updateEvent() {
+  function updateEvent(onSuccessCallback) {
     formEvent.put(route('dashboard.events.update', formEvent.id), {
       preserveScroll: true,
       preserveState: true,
       onSuccess: () => {
         updated()
+        formEvent.reset()
+        if (typeof onSuccessCallback === 'function') {
+          onSuccessCallback()
+        }
       }
     })
   }

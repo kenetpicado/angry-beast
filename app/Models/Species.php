@@ -14,4 +14,9 @@ class Species extends Model
         'description',
         'user_id',
     ];
+
+    public function animals()
+    {
+        return $this->hasMany(Animal::class, 'specie_id');
+    }
 }

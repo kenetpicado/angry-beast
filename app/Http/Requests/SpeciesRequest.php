@@ -14,13 +14,6 @@ class SpeciesRequest extends FormRequest
         return true;
     }
 
-    public function prepareForValidation(): void
-    {
-        $this->merge([
-            'user_id' => auth()->id(),
-        ]);
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -31,7 +24,6 @@ class SpeciesRequest extends FormRequest
         return [
             'name' => ['required', 'max:255'],
             'description' => ['nullable', 'max:255'],
-            'user_id' => ['required'],
         ];
     }
 }

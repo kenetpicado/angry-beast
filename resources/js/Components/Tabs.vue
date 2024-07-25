@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white mb-4 rounded-md flex gap-4 items-center p-4">
+  <div class="bg-white mb-4 rounded-md flex gap-4 items-center p-4 border">
     <button
       @click="model = option.value"
       v-for="option in options"

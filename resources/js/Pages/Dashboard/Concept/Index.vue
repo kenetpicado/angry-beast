@@ -104,11 +104,13 @@ function resetValues() {
             <span v-if="item.last_egreso" class="badge-red">
               {{ getFormattedDate(item.last_egreso) }}
             </span>
+            <span v-else> No registrado </span>
           </td>
           <td>
             <span v-if="item.last_ingreso" class="badge-primary">
               {{ getFormattedDate(item.last_ingreso) }}
             </span>
+            <span v-else> No registrado </span>
           </td>
           <td>
             <div class="flex gap-4">

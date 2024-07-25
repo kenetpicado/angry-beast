@@ -42,7 +42,8 @@ class AnimalController extends Controller
         return inertia('Dashboard/Animal/Show', [
             'animal' => $animal->load('specie'),
             'species' => Species::all(['id', 'name']),
-            'details' => $animal->details()->pluck('value', 'key')
+            'details' => $animal->details()->pluck('value', 'key'),
+            'events' => $animal->events()->latest()->paginate(),
         ]);
     }
 

@@ -2,25 +2,35 @@
 import DefaultLayout from '@/Layouts/DefaultLayout.vue'
 import { defineProps, ref } from 'vue'
 import InputForm from '@/Components/Form/InputForm.vue'
+import ModalForm from '@/Components/ModalForm.vue'
 import SelectForm from '@/Components/Form/SelectForm.vue'
 import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue'
 import SecondaryButton from '@/Components/Buttons/SecondaryButton.vue'
-import { IconUpload } from '@tabler/icons-vue'
-import { getBasicDate } from '@/Utils/date.js'
+import getFormattedDate, { getBasicDate } from '@/Utils/date.js'
 import Tabs from '@/Components/Tabs.vue'
-import { IconDetails, IconVaccine } from '@tabler/icons-vue'
+import { IconEye, IconVaccine, IconUpload, IconTrash, IconEdit } from '@tabler/icons-vue'
 import { router } from '@inertiajs/vue3'
 import { useForm } from '@inertiajs/vue3'
 import confirmAction from '@/Utils/confirmation'
 import { deleted, updated } from '@/Utils/toast.js'
+import Pagination from '@/Components/Pagination.vue'
+import TableSection from '@/Components/TableSection.vue'
+import ActionIcon from '@/Components/ActionIcon.vue'
+import useEvent from '@/Composables/useEvent.js'
 
 const edit = ref(false)
 const tab = ref('detalles')
 
-const props = defineProps(['animal', 'details', 'species'])
+const props = defineProps(['animal', 'details', 'species', 'events'])
 
 const preview = ref(props.animal?.photo)
 const isUploadingPhoto = ref(false)
+const openModal = ref(false)
+
+const { storeEvent, updateEvent, formEvent, setEventValues, destroyEvent } = useEvent({
+  model_id: props.animal.id,
+  model_type: 'App\\Models\\Animal'
+})
 
 const form = useForm({
   id: props.animal.id,
@@ -51,11 +61,11 @@ const tabs = [
   {
     label: 'Detalles',
     value: 'detalles',
-    icon: IconDetails
+    icon: IconEye
   },
   {
-    label: 'Vacunas',
-    value: 'vacunas',
+    label: 'Eventos',
+    value: 'eventos',
     icon: IconVaccine
   }
 ]
@@ -135,19 +145,36 @@ function updatePhoto() {
     }
   )
 }
+
+function editEvent(item) {
+  setEventValues(item)
+  openModal.value = true
+}
+
+function onSubmit() {
+  if (formEvent.id) {
+    updateEvent(() => (openModal.value = false))
+  } else {
+    storeEvent(() => (openModal.value = false))
+  }
+}
+
+function onCancel() {
+  formEvent.reset()
+}
 </script>
 
 <template>
   <DefaultLayout head="Detalles">
     <div class="mx-auto max-w-270">
       <div class="mb-4 flex gap-3 items-center justify-between h-12">
-        <h2 class="text-2xl font-semibold">{{ animal.name }}</h2>
-        <PrimaryButton v-if="tab == 'vacunas'" text="Nuevo" />
+        <h2 class="text-2xl font-semibold">{{ animal.code }}</h2>
+        <PrimaryButton v-if="tab == 'eventos'" text="Nuevo" @click="openModal = true" />
       </div>
 
       <Tabs :options="tabs" v-model="tab" />
 
-      <div class="grid grid-cols-5 gap-8">
+      <div v-if="tab == 'detalles'" class="grid grid-cols-5 gap-8">
         <div class="col-span-5 lg:col-span-3">
           <div class="rounded-md border border-stroke bg-white shadow-default">
             <div class="border-b border-stroke py-4 px-7">
@@ -345,6 +372,63 @@ function updatePhoto() {
             </div>
           </div>
         </div>
+      </div>
+
+      <div v-if="tab == 'eventos'">
+        <TableSection>
+          <template #header>
+            <th>Fecha</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Acciones</th>
+          </template>
+
+          <template #body>
+            <tr v-if="events.data.length == 0">
+              <td class="text-center text-slate-400" colspan="6">
+                No hay datos que mostrar
+              </td>
+            </tr>
+            <tr v-for="item in events.data" :key="item.id">
+              <td>
+                {{ getFormattedDate(item.created_at) }}
+              </td>
+              <td>
+                {{ item.description }}
+              </td>
+              <td>
+                {{ item.quantity }}
+              </td>
+              <td>
+                <div class="flex gap-4">
+                  <ActionIcon :icon="IconEdit" @click="editEvent(item)" tooltip="Editar" />
+                  <ActionIcon :icon="IconTrash" @click="destroyEvent(item.id)" tooltip="Eliminar" />
+                </div>
+              </td>
+            </tr>
+          </template>
+
+          <template #footer>
+            <Pagination :links="events.links" />
+          </template>
+        </TableSection>
+
+        <ModalForm
+      v-model="openModal"
+      @onSubmit="onSubmit()"
+      @onCancel="onCancel"
+      title="Evento"
+      :loading="formEvent.processing"
+    >
+      <InputForm v-model="formEvent.description" label="Descripción" required name="description" />
+      <InputForm
+        v-model="formEvent.quantity"
+        label="Cantidad"
+        name="quantity"
+        type="number"
+        required
+      />
+    </ModalForm>
       </div>
     </div>
   </DefaultLayout>

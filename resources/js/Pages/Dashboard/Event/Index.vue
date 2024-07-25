@@ -4,11 +4,10 @@ import TableSection from '@/Components/TableSection.vue'
 import DefaultLayout from '@/Layouts/DefaultLayout.vue'
 import { IconTrash } from '@tabler/icons-vue'
 import ActionIcon from '@/Components/ActionIcon.vue'
-import useEvent from "@/Composables/useEvent.js"
+import useEvent from '@/Composables/useEvent.js'
 
 defineProps(['events'])
 const { destroyEvent } = useEvent({})
-
 </script>
 
 <template>

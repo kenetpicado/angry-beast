@@ -87,6 +87,7 @@ function resetValues() {
       <template #header>
         <th>#</th>
         <th>Nombre</th>
+        <th>Cantidad</th>
         <th>Acciones</th>
       </template>
 
@@ -102,12 +103,10 @@ function resetValues() {
             {{ item.name }}
           </td>
           <td>
+            {{ item.animals_count }}
+          </td>
+          <td>
             <div class="flex gap-4">
-              <ActionIcon
-                :icon="IconEye"
-                :href="route('dashboard.species.show', item.id)"
-                tooltip="Detalles"
-              />
               <ActionIcon :icon="IconEdit" @click="edit(item)" tooltip="Editar" />
               <ActionIcon :icon="IconTrash" @click="destroy(item.id)" tooltip="Eliminar" />
             </div>
@@ -120,7 +119,13 @@ function resetValues() {
       </template>
     </TableSection>
 
-    <ModalForm v-model="openModal" @onSubmit="onSubmit" @onCancel="resetValues" title="Especie">
+    <ModalForm
+      :loading="form.processing"
+      v-model="openModal"
+      @onSubmit="onSubmit"
+      @onCancel="resetValues"
+      title="Especie"
+    >
       <InputForm class="col-span-2" v-model="form.name" label="Nombre" name="name" required />
       <InputForm
         class="col-span-2"
