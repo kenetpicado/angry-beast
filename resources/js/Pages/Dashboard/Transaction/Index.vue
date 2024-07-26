@@ -6,9 +6,43 @@ import { IconTrash } from '@tabler/icons-vue'
 import ActionIcon from '@/Components/ActionIcon.vue'
 import getFormattedDate from '@/Utils/date'
 import useTransaction from '@/Composables/useTransaction'
+import { reactive } from "vue"
+import InputForm from '@/Components/Form/InputForm.vue'
+import SelectForm from '@/Components/Form/SelectForm.vue'
+import { watchDebounced } from '@vueuse/core'
+import { router } from '@inertiajs/vue3'
 
 defineProps(['transactions'])
 const { destroy } = useTransaction({})
+
+const urlSearchParams = new URLSearchParams(window.location.search)
+
+const queryParams = reactive({
+  type: urlSearchParams.get('type') ?? '',
+  from: urlSearchParams.get('from') ?? '',
+  to: urlSearchParams.get('to') ?? '',
+  search: urlSearchParams.get('search') ?? '',
+})
+
+watchDebounced(
+  queryParams,
+  () => {
+    let params = { ...queryParams }
+
+    for (const key in params) {
+      if (!params[key]) delete params[key]
+    }
+
+    router.get(route('dashboard.transactions.index'), params, {
+      preserveState: true,
+      preserveScroll: true,
+      only: ['transactions'],
+      replace: false
+    })
+  },
+  { debounce: 500, maxWait: 1000 }
+)
+
 </script>
 
 <template>
@@ -17,12 +51,28 @@ const { destroy } = useTransaction({})
       <h2 class="text-2xl font-semibold">Transacciones</h2>
     </div>
 
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mb-3">
+      <SelectForm v-model="queryParams.type" label="Tipo" name="type" required>
+        <option value="" selected>Todos</option>
+        <option value="INGRESO">Ingreso</option>
+        <option value="EGRESO">Egresos</option>
+      </SelectForm>
+      <InputForm v-model="queryParams.from" label="Desde" type="date" />
+      <InputForm v-model="queryParams.to" label="Hasta" type="date" />
+      <InputForm
+        v-model="queryParams.search"
+        label="Buscar"
+        type="search"
+        placeholder="Buscar descripción"
+      />
+    </div>
+
     <TableSection>
       <template #header>
         <th>Fecha</th>
         <th>Tipo</th>
         <th>Concepto</th>
-        <th>Descripcion</th>
+        <th>Descripción</th>
         <th>Cantidad</th>
         <th>Monto</th>
         <th>Total</th>

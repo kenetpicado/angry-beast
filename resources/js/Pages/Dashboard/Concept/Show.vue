@@ -102,7 +102,8 @@ const tabs = [
       v-model="openModal"
       @onSubmit="onSubmit(() => (openModal = false))"
       @onCancel="resetValues"
-      title="Transaccion"
+      title="Transacción"
+      :loading="form.processing"
     >
       <SelectForm v-model="form.type" label="Tipo" name="type" required>
         <option value="" selected>Seleccione un tipo</option>
