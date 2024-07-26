@@ -6,11 +6,13 @@ import { IconTrash } from '@tabler/icons-vue'
 import ActionIcon from '@/Components/ActionIcon.vue'
 import getFormattedDate from '@/Utils/date'
 import useTransaction from '@/Composables/useTransaction'
-import { reactive } from "vue"
+import { reactive, computed } from "vue"
 import InputForm from '@/Components/Form/InputForm.vue'
 import SelectForm from '@/Components/Form/SelectForm.vue'
 import { watchDebounced } from '@vueuse/core'
 import { router } from '@inertiajs/vue3'
+import Card from '@/Components/Card.vue'
+import { IconInfoCircle, IconArrowBigUp, IconArrowBigDown } from '@tabler/icons-vue'
 
 defineProps(['transactions'])
 const { destroy } = useTransaction({})
@@ -43,6 +45,21 @@ watchDebounced(
   { debounce: 500, maxWait: 1000 }
 )
 
+const cards = computed(() => {
+  return [
+    {
+      title: 'Ingresos (20)',
+      value: 'C$ 20',
+      icon: IconArrowBigDown
+    },
+    {
+      title: 'Egresos (39)',
+      value: 'C$ 2',
+      icon: IconArrowBigUp
+    },
+  ]
+})
+
 </script>
 
 <template>
@@ -52,19 +69,23 @@ watchDebounced(
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mb-3">
+      <InputForm v-model="queryParams.from" label="Desde" type="date" />
+      <InputForm v-model="queryParams.to" label="Hasta" type="date" />
       <SelectForm v-model="queryParams.type" label="Tipo" name="type" required>
         <option value="" selected>Todos</option>
         <option value="INGRESO">Ingreso</option>
         <option value="EGRESO">Egresos</option>
       </SelectForm>
-      <InputForm v-model="queryParams.from" label="Desde" type="date" />
-      <InputForm v-model="queryParams.to" label="Hasta" type="date" />
       <InputForm
         v-model="queryParams.search"
         label="Buscar"
         type="search"
         placeholder="Buscar descripción"
       />
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-3">
+      <Card v-for="(card, index) in cards" :key="index" :item="card" />
     </div>
 
     <TableSection>
