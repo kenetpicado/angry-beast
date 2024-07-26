@@ -21,7 +21,15 @@ class EventController extends Controller
 
     public function store(EventRequest $request)
     {
-        auth()->user()->events()->create($request->validated());
+        $event = auth()->user()->events()->create($request->validated());
+        $reminder = $request->get('reminder');
+
+        if ($reminder['date'] && $reminder['name']) {
+            auth()->user()->reminders()->create([
+                'event_id' => $event->id,
+                ...$reminder
+            ]);
+        }
 
         return back();
     }

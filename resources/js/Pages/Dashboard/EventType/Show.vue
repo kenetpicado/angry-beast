@@ -19,6 +19,7 @@ import useEvent from '@/Composables/useEvent.js'
 const props = defineProps(['events', 'event_type'])
 
 const openModal = ref(false)
+const addReminder = ref(false)
 const tab = ref('EVENTS')
 
 const { storeEvent, updateEvent, formEvent, setEventValues } = useEvent({
@@ -41,9 +42,9 @@ const tabs = [
 
 function onSubmit() {
   if (formEvent.id) {
-    updateEvent(() => (openModal.value = false))
+    updateEvent(() => (openModal.value = false, addReminder.value = false))
   } else {
-    storeEvent(() => (openModal.value = false))
+    storeEvent(() => (openModal.value = false, addReminder.value = false))
   }
 }
 
@@ -113,6 +114,28 @@ function onCancel() {
         type="number"
         required
       />
+      <label class="inline-flex items-center cursor-pointer lg:col-span-2 mb-4">
+        <span class="mr-3 text-sm">Agregar recordatorio</span>
+        <input type="checkbox" v-model="addReminder" class="sr-only peer" />
+        <div
+          class="relative w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"
+        ></div>
+      </label>
+      <template v-if="addReminder">
+        <InputForm
+          v-model="formEvent.reminder.name"
+          label="Nombre (Descripción)"
+          name="reminder.name"
+          required
+        />
+        <InputForm
+          v-model="formEvent.reminder.date"
+          label="Fecha del recordatorio"
+          name="reminder.date"
+          type="date"
+          required
+        />
+      </template>
     </ModalForm>
   </DefaultLayout>
 </template>

@@ -19,7 +19,7 @@ class AnimalController extends Controller
     public function index()
     {
         return inertia('Dashboard/Animal/Index', [
-            'animals' => Animal::where('user_id', auth()->id())->paginate(),
+            'animals' => auth()->user()->animals()->paginate(),
         ]);
     }
 

@@ -32,14 +32,12 @@ const { destroyEvent } = useEvent({})
         </tr>
         <tr v-for="(item, index) in events.data" :key="item.id">
           <td>
-           {{ getFormattedDate(item.created_at) }}
+            {{ getFormattedDate(item.created_at) }}
           </td>
           <td>
-            <span v-if="item.model_type.includes('Animal')">
-              Animal: {{ item.model.code }}
-            </span>
+            <span v-if="item.model_type.includes('Animal')"> Animal: {{ item.model.code }} </span>
             <span v-else>
-             {{ item.model?.name }}
+              {{ item.model?.name }}
             </span>
           </td>
           <td>

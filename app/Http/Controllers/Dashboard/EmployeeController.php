@@ -11,15 +11,15 @@ class EmployeeController extends Controller
     public function index()
     {
         return inertia('Dashboard/Employee/Index', [
-            'employees' => Employee::query()
-                ->where('user_id', auth()->id())
+            'employees' => auth()->user()
+                ->employees()
                 ->paginate(),
         ]);
     }
 
     public function store(EmployeeRequest $request)
     {
-        Employee::create($request->validated());
+        auth()->user()->employees()->create($request->validated());
 
         return back();
     }

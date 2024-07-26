@@ -12,8 +12,7 @@ class EventTypeController extends Controller
     public function index()
     {
         return inertia('Dashboard/EventType/Index', [
-            'event_types' => EventType::query()
-                ->where('user_id', auth()->id())
+            'event_types' => auth()->user()->eventTypes()
                 ->select(['id', 'name'])
                 ->paginate()
         ]);

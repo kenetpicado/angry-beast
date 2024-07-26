@@ -8,7 +8,11 @@ export function useEvent({ model_id, model_type }) {
     model_id: model_id || '',
     model_type: model_type || '',
     description: '',
-    quantity: 1
+    quantity: 1,
+    reminder: {
+      date: '',
+      name: ''
+    }
   })
 
   function storeEvent(onSuccessCallback) {

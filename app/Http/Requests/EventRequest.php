@@ -25,7 +25,10 @@ class EventRequest extends FormRequest
             'model_id' => 'required',
             'model_type' => 'required',
             'description' => 'required',
-            'quantity' => 'required'
+            'quantity' => 'required',
+            'reminder' => 'nullable|array',
+            'reminder.date' => 'nullable|date',
+            'reminder.name' => 'nullable|max:255'
         ];
     }
 }

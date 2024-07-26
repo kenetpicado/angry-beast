@@ -12,7 +12,7 @@ class ConceptController extends Controller
     public function index()
     {
         return inertia('Dashboard/Concept/Index', [
-            'concepts' => Concept::auth()
+            'concepts' => auth()->user()->concepts()
                 ->select(['id', 'name', 'user_id'])
                 ->addSelect([
                     'last_egreso' => Transaction::select('created_at')
@@ -42,7 +42,7 @@ class ConceptController extends Controller
 
     public function store(ConceptRequest $request)
     {
-        Concept::create($request->validated());
+        auth()->user()->concepts()->create($request->validated());
 
         return back();
     }

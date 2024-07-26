@@ -14,13 +14,6 @@ class ConceptRequest extends FormRequest
         return true;
     }
 
-    public function prepareForValidation()
-    {
-        $this->merge([
-            'user_id' => auth()->id(),
-        ]);
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -30,7 +23,6 @@ class ConceptRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:255'],
-            'user_id' => ['required', 'integer'],
         ];
     }
 }

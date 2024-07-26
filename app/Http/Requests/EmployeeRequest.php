@@ -14,13 +14,6 @@ class EmployeeRequest extends FormRequest
         return true;
     }
 
-    public function prepareForValidation(): void
-    {
-        $this->merge([
-            'user_id' => auth()->id(),
-        ]);
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -32,7 +25,6 @@ class EmployeeRequest extends FormRequest
             'name' => ['required', 'max:255'],
             'phone' => ['nullable', 'max:255'],
             'schedule' => ['nullable', 'max:255'],
-            'user_id' => ['required'],
         ];
     }
 }
