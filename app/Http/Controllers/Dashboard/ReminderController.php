@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Reminder;
 use Illuminate\Http\Request;
 
 class ReminderController extends Controller
@@ -12,56 +13,15 @@ class ReminderController extends Controller
         return inertia('Dashboard/Reminder/Index', [
             'reminders' => auth()->user()->reminders()
                 ->with('event')
-                ->latest()
+                ->latest('date')
                 ->paginate()
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function destroy(Reminder $reminder)
     {
-        //
-    }
+        $reminder->delete();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return back();
     }
 }

@@ -44,7 +44,8 @@ Route::group([
 
         Route::resource('events', EventController::class);
 
-        Route::resource('reminders', ReminderController::class);
+        Route::resource('reminders', ReminderController::class)
+            ->only(['index', 'destroy']);
 
         Route::resource('photo', PhotoController::class)
             ->only(['store', 'destroy'])

@@ -13,7 +13,8 @@ import {
   IconBulb,
   IconCurrencyDollar,
   IconFlag,
-  IconFileDollar
+  IconFileDollar,
+  IconAlarm
 } from '@tabler/icons-vue'
 import SidebarItem from './SidebarItem.vue'
 import { onClickOutside } from '@vueuse/core'
@@ -70,7 +71,7 @@ const menuGroups = ref([
         show: true
       },
       {
-        icon: IconFlag,
+        icon: IconAlarm,
         label: 'Recordatorios',
         route: route('dashboard.reminders.index'),
         show: true

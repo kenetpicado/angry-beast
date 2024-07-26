@@ -12,7 +12,7 @@ const { destroyEvent } = useEvent({})
 </script>
 
 <template>
-  <DefaultLayout head="Tipos de eventos">
+  <DefaultLayout head="Eventos">
     <div class="mb-6 flex gap-3 items-center justify-between">
       <h2 class="text-2xl font-semibold">Eventos</h2>
     </div>
@@ -20,8 +20,8 @@ const { destroyEvent } = useEvent({})
     <TableSection>
       <template #header>
         <th>Fecha</th>
+        <th>Tipo</th>
         <th>Nombre</th>
-        <th>Descripción</th>
         <th>Cantidad</th>
         <th>Acciones</th>
       </template>
