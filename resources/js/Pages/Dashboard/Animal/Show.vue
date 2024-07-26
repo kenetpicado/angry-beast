@@ -378,7 +378,7 @@ function onCancel() {
         <TableSection>
           <template #header>
             <th>Fecha</th>
-            <th>Descripción</th>
+            <th>Nombre</th>
             <th>Cantidad</th>
             <th>Acciones</th>
           </template>
@@ -392,7 +392,7 @@ function onCancel() {
                 {{ getFormattedDate(item.created_at) }}
               </td>
               <td>
-                {{ item.description }}
+                {{ item.name }}
               </td>
               <td>
                 {{ item.quantity }}
@@ -419,10 +419,10 @@ function onCancel() {
           :loading="formEvent.processing"
         >
           <InputForm
-            v-model="formEvent.description"
-            label="Descripción"
+            v-model="formEvent.name"
+            label="Nombre"
             required
-            name="description"
+            name="name"
           />
           <InputForm
             v-model="formEvent.quantity"

@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\EmployeeController;
 use App\Http\Controllers\Dashboard\EventController;
 use App\Http\Controllers\Dashboard\EventTypeController;
 use App\Http\Controllers\Dashboard\PhotoController;
+use App\Http\Controllers\Dashboard\ReminderController;
 use App\Http\Controllers\Dashboard\SpeciesController;
 use App\Http\Controllers\Dashboard\TransactionController;
 use App\Http\Controllers\Dashboard\UserController;
@@ -42,6 +43,8 @@ Route::group([
         Route::resource('event-types', EventTypeController::class);
 
         Route::resource('events', EventController::class);
+
+        Route::resource('reminders', ReminderController::class);
 
         Route::resource('photo', PhotoController::class)
             ->only(['store', 'destroy'])

@@ -121,6 +121,7 @@ function resetValues() {
       @onSubmit="onSubmit"
       @onCancel="resetValues"
       title="Tipo de evento"
+      :loading="form.processing"
     >
       <InputForm v-model="form.name" label="Nombre" name="name" required class="col-span-2" />
     </ModalForm>

@@ -68,6 +68,12 @@ const menuGroups = ref([
         label: 'Tipos de eventos',
         route: route('dashboard.event-types.index'),
         show: true
+      },
+      {
+        icon: IconFlag,
+        label: 'Recordatorios',
+        route: route('dashboard.reminders.index'),
+        show: true
       }
     ]
   },

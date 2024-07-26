@@ -10,4 +10,9 @@ class Reminder extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'date', 'event_id'];
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
 }

@@ -24,7 +24,7 @@ class EventRequest extends FormRequest
         return [
             'model_id' => 'required',
             'model_type' => 'required',
-            'description' => 'required',
+            'name' => 'required',
             'quantity' => 'required',
             'reminder' => 'nullable|array',
             'reminder.date' => 'nullable|date',

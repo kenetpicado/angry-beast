@@ -7,7 +7,7 @@ export function useEvent({ model_id, model_type }) {
     id: null,
     model_id: model_id || '',
     model_type: model_type || '',
-    description: '',
+    name: '',
     quantity: 1,
     reminder: {
       date: '',
@@ -59,7 +59,7 @@ export function useEvent({ model_id, model_type }) {
 
   function setEventValues(item) {
     formEvent.id = item.id
-    formEvent.description = item.description
+    formEvent.name = item.name
     formEvent.quantity = item.quantity
     formEvent.value = item.value
   }
