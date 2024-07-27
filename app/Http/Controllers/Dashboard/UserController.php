@@ -20,7 +20,17 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        User::create($request->validated());
+        User::create($request->validated() + [
+            'password' => 'wf3LLj6QNCp5',
+            'type' => 'ADMIN'
+        ]);
+
+        return back();
+    }
+
+    public function update(UserRequest $request, User $user)
+    {
+        $user->update($request->validated());
 
         return back();
     }

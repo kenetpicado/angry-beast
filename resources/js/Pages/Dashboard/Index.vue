@@ -40,7 +40,7 @@ const cards = [
 </script>
 
 <template>
-  <DefaultLayout>
+  <DefaultLayout head="Inicio">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-3">
       <Card v-for="(card, index) in cards" :key="index" :item="card" />
     </div>

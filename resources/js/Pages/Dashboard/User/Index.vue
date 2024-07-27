@@ -85,6 +85,8 @@ function resetValues() {
       <template #header>
         <th>Nombre</th>
         <th>Correo</th>
+        <th>Tipo</th>
+        <th>Compañia</th>
         <th>Acciones</th>
       </template>
 
@@ -99,6 +101,12 @@ function resetValues() {
               </td>
               <td>
                 {{ user.email }}
+              </td>
+              <td>
+                {{ user.type }}
+              </td>
+              <td>
+                {{ user.company }}
               </td>
               <td>
                 <div class="flex gap-3">
@@ -129,7 +137,7 @@ function resetValues() {
         </div>
         <div class="flex gap-3 items-center justify-end">
           <SecondaryButton text="Cancelar" @click="resetValues" />
-          <PrimaryButton text="Guardar" type="submit" />
+          <PrimaryButton text="Guardar" type="submit" :loading="form.processing" />
         </div>
       </form>
     </Modal>
