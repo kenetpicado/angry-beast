@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
                 'required',
                 'lowercase',
                 'email',
-                Rule::unique('users')->ignore($this->id)
+                Rule::unique('users')->ignore($this->id),
             ],
         ];
     }

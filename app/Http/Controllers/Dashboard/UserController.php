@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         User::create($request->validated() + [
             'password' => 'wf3LLj6QNCp5',
-            'type' => 'ADMIN'
+            'type' => 'ADMIN',
         ]);
 
         return back();

@@ -18,7 +18,7 @@ class DashboardController extends Controller
     {
         return inertia('Dashboard/Index', [
             'month' => Carbon::now()->month,
-            'stats' => $this->service->getHomeStats()
+            'stats' => $this->service->getHomeStats(),
         ]);
     }
 }

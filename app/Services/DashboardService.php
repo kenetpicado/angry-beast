@@ -2,10 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Concept;
-use App\Models\Transaction;
-use Illuminate\Support\Facades\DB;
-
 class DashboardService
 {
     public function getHomeStats()
@@ -25,7 +21,7 @@ class DashboardService
             'egresos' => auth()->user()->transactions()
                 ->where('created_at', '>=', $startOfMonth)
                 ->where('type', 'EGRESO')
-                ->sum('total')
+                ->sum('total'),
         ];
     }
 }

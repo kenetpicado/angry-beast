@@ -15,7 +15,7 @@ class VerifyReminder
      */
     public function handle(Request $request, Closure $next): Response
     {
-         if (isset($request->reminder) && $request->reminder->user_id !== auth()->id()) {
+        if (isset($request->reminder) && $request->reminder->user_id !== auth()->id()) {
             abort(403);
         }
 

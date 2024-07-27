@@ -23,7 +23,7 @@ const openModal = ref(false)
 const form = useForm({
   id: null,
   name: '',
-  email: '',
+  email: ''
 })
 
 function onSubmit() {
@@ -70,7 +70,6 @@ function resetValues() {
   openModal.value = false
   form.reset()
 }
-
 </script>
 
 <template>
@@ -92,29 +91,29 @@ function resetValues() {
 
       <template #body>
         <tr v-if="users.data.length == 0">
-              <td class="text-center text-slate-400" colspan="4">No hay datos que mostrar</td>
-            </tr>
-            <tr v-for="user in users.data" :key="user.id">
-              <td>
-                <div>{{ user.name }}</div>
-                <small class="text-primary tracking-wider">Activo: {{ user.active }}</small>
-              </td>
-              <td>
-                {{ user.email }}
-              </td>
-              <td>
-                {{ user.type }}
-              </td>
-              <td>
-                {{ user.company }}
-              </td>
-              <td>
-                <div class="flex gap-3">
-                  <ActionIcon :icon="IconEdit" @click="edit(user)" tooltip="Editar" />
-                  <ActionIcon :icon="IconTrash" @click="destroy(user.id)" tooltip="Eliminar" />
-                </div>
-              </td>
-            </tr>
+          <td class="text-center text-slate-400" colspan="4">No hay datos que mostrar</td>
+        </tr>
+        <tr v-for="user in users.data" :key="user.id">
+          <td>
+            <div>{{ user.name }}</div>
+            <small class="text-primary tracking-wider">Activo: {{ user.active }}</small>
+          </td>
+          <td>
+            {{ user.email }}
+          </td>
+          <td>
+            {{ user.type }}
+          </td>
+          <td>
+            {{ user.company }}
+          </td>
+          <td>
+            <div class="flex gap-3">
+              <ActionIcon :icon="IconEdit" @click="edit(user)" tooltip="Editar" />
+              <ActionIcon :icon="IconTrash" @click="destroy(user.id)" tooltip="Eliminar" />
+            </div>
+          </td>
+        </tr>
       </template>
 
       <template #footer>
