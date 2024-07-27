@@ -27,6 +27,7 @@ class User extends Authenticatable
         'company',
         'password_updated_at',
         'last_active_at',
+        'type'
     ];
 
     /**
