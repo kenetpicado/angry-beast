@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Reminder;
-use Illuminate\Http\Request;
 
 class ReminderController extends Controller
 {
@@ -14,7 +13,7 @@ class ReminderController extends Controller
             'reminders' => auth()->user()->reminders()
                 ->with('event')
                 ->latest('date')
-                ->paginate()
+                ->paginate(),
         ]);
     }
 

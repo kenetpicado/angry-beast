@@ -6,18 +6,31 @@ import Pagination from '@/Components/Pagination.vue'
 import TableSection from '@/Components/TableSection.vue'
 import DefaultLayout from '@/Layouts/DefaultLayout.vue'
 import { IconEdit, IconTrash, IconUserDollar } from '@tabler/icons-vue'
-import { ref } from 'vue'
+import { ref, computed, reactive } from 'vue'
 import ActionIcon from '@/Components/ActionIcon.vue'
 import getFormattedDate from '@/Utils/date'
 import useTransaction from '@/Composables/useTransaction'
 import Tabs from '@/Components/Tabs.vue'
 import transaction_type from '@/Utils/types'
 import SelectForm from '@/Components/Form/SelectForm.vue'
+import Card from '@/Components/Card.vue'
+import { IconInfoCircle, IconArrowBigUp, IconArrowBigDown } from '@tabler/icons-vue'
+import { watchDebounced } from '@vueuse/core'
+import { router } from '@inertiajs/vue3'
 
-const props = defineProps(['concept', 'transactions'])
+const props = defineProps(['concept', 'transactions', 'transactions_total'])
 
 const openModal = ref(false)
 const tab = ref('transacciones')
+
+const urlSearchParams = new URLSearchParams(window.location.search)
+
+const queryParams = reactive({
+  type: urlSearchParams.get('type') ?? '',
+  from: urlSearchParams.get('from') ?? '',
+  to: urlSearchParams.get('to') ?? '',
+  search: urlSearchParams.get('search') ?? '',
+})
 
 const { destroy, form, onSubmit, setValues } = useTransaction({
   model_id: props.concept.id,
@@ -41,6 +54,46 @@ const tabs = [
     icon: IconUserDollar
   }
 ]
+
+watchDebounced(
+  queryParams,
+  () => {
+    let params = { ...queryParams }
+
+    for (const key in params) {
+      if (!params[key]) delete params[key]
+    }
+
+    router.get(route('dashboard.concepts.show', props.concept.id), params, {
+      preserveState: true,
+      preserveScroll: true,
+      only: ['transactions', 'transactions_total'],
+      replace: false
+    })
+  },
+  { debounce: 500, maxWait: 1000 }
+)
+
+const REGISTER = (type, key, value) => {
+  const record = props.transactions_total.find(total => total.type == type)
+  if (record) return record[key].toLocaleString()
+  else return value
+}
+
+const cards = computed(() => {
+  return [
+    {
+      title: 'Ingresos: ' + REGISTER('INGRESO', 'count', 0),
+      value: 'C$ ' + REGISTER('INGRESO', 'total', 0),
+      icon: IconArrowBigDown
+    },
+    {
+      title: 'Egresos: ' + REGISTER('EGRESO', 'count', 0),
+      value: 'C$ ' + REGISTER('EGRESO', 'total', 0),
+      icon: IconArrowBigUp
+    },
+  ]
+})
 </script>
 
 <template>
@@ -51,6 +104,26 @@ const tabs = [
     </div>
 
     <Tabs :options="tabs" v-model="tab" />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mb-3">
+      <InputForm v-model="queryParams.from" label="Desde" type="date" />
+      <InputForm v-model="queryParams.to" label="Hasta" type="date" />
+      <SelectForm v-model="queryParams.type" label="Tipo" name="type" required>
+        <option value="" selected>Todos</option>
+        <option value="INGRESO">Ingreso</option>
+        <option value="EGRESO">Egresos</option>
+      </SelectForm>
+      <InputForm
+        v-model="queryParams.search"
+        label="Buscar"
+        type="search"
+        placeholder="Buscar descripción"
+      />
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-3">
+      <Card v-for="(card, index) in cards" :key="index" :item="card" />
+    </div>
 
     <TableSection>
       <template #header>
@@ -83,7 +156,9 @@ const tabs = [
             {{ item.quantity }}
           </td>
           <td>C${{ item.value }}</td>
-          <td class="font-bold">C${{ (item.quantity * item.value).toLocaleString() }}</td>
+          <td class="font-bold">
+            C${{ item.total.toLocaleString() }}
+          </td>
           <td>
             <div class="flex gap-4">
               <ActionIcon :icon="IconEdit" @click="edit(item)" tooltip="Editar" />

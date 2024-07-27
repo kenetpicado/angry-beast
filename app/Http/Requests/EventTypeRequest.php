@@ -25,8 +25,8 @@ class EventTypeRequest extends FormRequest
         return [
             'name' => [
                 'required',
-                Rule::unique('event_types')->where('user_id', auth()->id())->ignore($this->id)
-            ]
+                Rule::unique('event_types')->where('user_id', auth()->id())->ignore($this->id),
+            ],
         ];
     }
 }

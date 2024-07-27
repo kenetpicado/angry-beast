@@ -19,12 +19,15 @@ class TransactionController extends Controller
     {
         return inertia('Dashboard/Transaction/Index', [
             'transactions' => $this->service->getTransactions($request->all()),
+            'transactions_total' => $this->service->getTransactionsTotal($request->all()),
         ]);
     }
 
     public function store(TransactionRequest $request)
     {
-        auth()->user()->transactions()->create($request->validated());
+        auth()->user()->transactions()->create($request->validated() + [
+            'total' => $request->value * $request->quantity,
+        ]);
 
         return back();
     }

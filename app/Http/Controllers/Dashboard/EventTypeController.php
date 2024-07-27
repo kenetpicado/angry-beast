@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EventTypeRequest;
 use App\Models\EventType;
-use Illuminate\Http\Request;
 
 class EventTypeController extends Controller
 {
@@ -14,7 +13,7 @@ class EventTypeController extends Controller
         return inertia('Dashboard/EventType/Index', [
             'event_types' => auth()->user()->eventTypes()
                 ->select(['id', 'name'])
-                ->paginate()
+                ->paginate(),
         ]);
     }
 
@@ -29,7 +28,7 @@ class EventTypeController extends Controller
     {
         return inertia('Dashboard/EventType/Show', [
             'event_type' => $eventType,
-            'events' => $eventType->events()->latest()->paginate()
+            'events' => $eventType->events()->latest()->paginate(),
         ]);
     }
 
@@ -44,7 +43,7 @@ class EventTypeController extends Controller
     {
         if ($eventType->events()->count()) {
             return back()->withErrors([
-                'message' => 'No es posible eliminar porque tiene eventos registrados'
+                'message' => 'No es posible eliminar porque tiene eventos registrados',
             ]);
         }
 

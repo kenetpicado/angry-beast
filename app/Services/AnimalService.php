@@ -18,14 +18,14 @@ class AnimalService
         ]);
 
         foreach ($data['details'] as $key => $value) {
-            if (!isset($value)) {
+            if (! isset($value)) {
                 continue;
             }
 
             AnimalDetail::create([
                 'key' => $key,
                 'animal_id' => $animal->id,
-                'value' => $value
+                'value' => $value,
             ]);
         }
 
@@ -45,8 +45,9 @@ class AnimalService
         ]);
 
         foreach ($data['details'] as $key => $value) {
-            if (!isset($value)) {
+            if (! isset($value)) {
                 $keysToRemove[] = $key;
+
                 continue;
             }
 
@@ -54,7 +55,7 @@ class AnimalService
                 'key' => $key,
                 'animal_id' => $animal->id,
             ], [
-                'value' => $value
+                'value' => $value,
             ]);
         }
 

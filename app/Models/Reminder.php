@@ -12,11 +12,11 @@ class Reminder extends Model
     protected $fillable = ['name', 'date', 'event_id'];
 
     protected $casts = [
-        'date' => 'date'
+        'date' => 'date',
     ];
 
     protected $appends = [
-        'status'
+        'status',
     ];
 
     public function getStatusAttribute()

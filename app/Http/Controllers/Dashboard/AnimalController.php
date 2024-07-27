@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AnimalRequest;
 use App\Models\Animal;
-use App\Models\AnimalDetail;
 use App\Models\Species;
 use App\Services\AnimalService;
 
@@ -26,7 +25,7 @@ class AnimalController extends Controller
     public function create()
     {
         return inertia('Dashboard/Animal/Create', [
-            'species' => Species::all(['id', 'name'])
+            'species' => Species::all(['id', 'name']),
         ]);
     }
 

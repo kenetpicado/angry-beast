@@ -5,38 +5,29 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ConceptRequest;
 use App\Models\Concept;
-use App\Models\Transaction;
+use App\Services\ConceptService;
+use Illuminate\Http\Request;
 
 class ConceptController extends Controller
 {
+    public function __construct(
+        private readonly ConceptService $service
+    ) {
+    }
+
     public function index()
     {
         return inertia('Dashboard/Concept/Index', [
-            'concepts' => auth()->user()->concepts()
-                ->select(['id', 'name', 'user_id'])
-                ->addSelect([
-                    'last_egreso' => Transaction::select('created_at')
-                        ->where('model_type', Concept::class)
-                        ->whereColumn('model_id', 'concepts.id')
-                        ->where('type', 'EGRESO')
-                        ->latest()
-                        ->limit(1),
-                    'last_ingreso' => Transaction::select('created_at')
-                        ->where('model_type', Concept::class)
-                        ->whereColumn('model_id', 'concepts.id')
-                        ->where('type', 'INGRESO')
-                        ->latest()
-                        ->limit(1),
-                ])
-                ->paginate(),
+            'concepts' => $this->service->getConcepts(),
         ]);
     }
 
-    public function show(Concept $concept)
+    public function show(Request $request, Concept $concept)
     {
         return inertia('Dashboard/Concept/Show', [
             'concept' => $concept,
-            'transactions' => $concept->transactions()->latest()->paginate(),
+            'transactions' => $this->service->getConceptTransactions($concept, $request->all()),
+            'transactions_total' => $this->service->getConceptTransactionsTotal($concept, $request->all()),
         ]);
     }
 

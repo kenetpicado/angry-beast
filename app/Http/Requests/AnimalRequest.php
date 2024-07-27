@@ -25,12 +25,12 @@ class AnimalRequest extends FormRequest
         return [
             'code' => [
                 'required',
-                Rule::unique('animals')->where('user_id', auth()->id())->ignore($this->animal)
+                Rule::unique('animals')->where('user_id', auth()->id())->ignore($this->animal),
             ],
             'name' => ['nullable'],
             'specie_id' => ['nullable'],
             'photo' => ['nullable', 'image'],
-            'details' => ['nullable', 'array']
+            'details' => ['nullable', 'array'],
         ];
     }
 }

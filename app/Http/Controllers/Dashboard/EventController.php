@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
-use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
@@ -15,7 +14,7 @@ class EventController extends Controller
             'events' => auth()->user()->events()
                 ->with('model')
                 ->latest()
-                ->paginate()
+                ->paginate(),
         ]);
     }
 
@@ -27,7 +26,7 @@ class EventController extends Controller
         if ($reminder['date'] && $reminder['name']) {
             auth()->user()->reminders()->create([
                 'event_id' => $event->id,
-                ...$reminder
+                ...$reminder,
             ]);
         }
 

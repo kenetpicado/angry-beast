@@ -28,7 +28,7 @@ class EventRequest extends FormRequest
             'quantity' => 'required',
             'reminder' => 'nullable|array',
             'reminder.date' => 'nullable|date',
-            'reminder.name' => 'nullable|max:255'
+            'reminder.name' => 'nullable|max:255',
         ];
     }
 }

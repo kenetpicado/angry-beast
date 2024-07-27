@@ -14,7 +14,7 @@ import { router } from '@inertiajs/vue3'
 import Card from '@/Components/Card.vue'
 import { IconInfoCircle, IconArrowBigUp, IconArrowBigDown } from '@tabler/icons-vue'
 
-defineProps(['transactions'])
+const props = defineProps(['transactions', 'transactions_total'])
 const { destroy } = useTransaction({})
 
 const urlSearchParams = new URLSearchParams(window.location.search)
@@ -38,23 +38,29 @@ watchDebounced(
     router.get(route('dashboard.transactions.index'), params, {
       preserveState: true,
       preserveScroll: true,
-      only: ['transactions'],
+      only: ['transactions', 'transactions_total'],
       replace: false
     })
   },
   { debounce: 500, maxWait: 1000 }
 )
 
+const REGISTER = (type, key, value) => {
+  const record = props.transactions_total.find(total => total.type == type)
+  if (record) return record[key].toLocaleString()
+  else return value
+}
+
 const cards = computed(() => {
   return [
     {
-      title: 'Ingresos (20)',
-      value: 'C$ 20',
+      title: 'Ingresos: ' + REGISTER('INGRESO', 'count', 0),
+      value: 'C$ ' + REGISTER('INGRESO', 'total', 0),
       icon: IconArrowBigDown
     },
     {
-      title: 'Egresos (39)',
-      value: 'C$ 2',
+      title: 'Egresos: ' + REGISTER('EGRESO', 'count', 0),
+      value: 'C$ ' + REGISTER('EGRESO', 'total', 0),
       icon: IconArrowBigUp
     },
   ]
@@ -123,7 +129,9 @@ const cards = computed(() => {
             {{ item.quantity }}
           </td>
           <td>C${{ item.value }}</td>
-          <td class="font-bold">C${{ (item.quantity * item.value).toLocaleString() }}</td>
+          <td class="font-bold">
+            C${{ item.total.toLocaleString() }}
+          </td>
           <td>
             <div class="flex gap-4">
               <ActionIcon :icon="IconTrash" @click="destroy(item.id)" tooltip="Eliminar" />
