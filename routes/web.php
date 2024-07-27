@@ -42,7 +42,7 @@ Route::group([
 
         Route::resource('animals', AnimalController::class)
             ->middleware('verify.animal')
-            ->except(['edit', 'create']);
+            ->except(['edit']);
 
         Route::resource('concepts', ConceptController::class)
             ->middleware('verify.concept')
