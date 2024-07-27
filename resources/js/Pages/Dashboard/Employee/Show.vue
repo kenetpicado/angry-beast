@@ -71,9 +71,7 @@ const tabs = [
           <td>
             {{ item.description }}
           </td>
-          <td class="font-bold">
-            C${{ item.total.toLocaleString() }}
-          </td>
+          <td class="font-bold">C${{ item.total.toLocaleString() }}</td>
           <td>
             <div class="flex gap-4">
               <ActionIcon :icon="IconEdit" @click="edit(item)" tooltip="Editar" />

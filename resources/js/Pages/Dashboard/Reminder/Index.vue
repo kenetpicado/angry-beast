@@ -25,7 +25,6 @@ function destroy(id) {
     }
   })
 }
-
 </script>
 
 <template>
@@ -46,7 +45,7 @@ function destroy(id) {
 
       <template #body>
         <tr v-if="reminders.data.length == 0">
-          <td class="text-center" colspan="4">No hay datos que mostrar</td>
+          <td class="text-center" colspan="6">No hay datos que mostrar</td>
         </tr>
         <tr v-for="(item, index) in reminders.data" :key="item.id">
           <td>
@@ -56,7 +55,7 @@ function destroy(id) {
             {{ item.name }}
           </td>
           <td>
-            {{ getFormattedDate(item.date, 'DD/MM/YY') }}
+            {{ getFormattedDate(item.date, 'DD/MM/YYYY') }}
           </td>
           <td>
             <span class="bg-green-100 text-green-600 px-2 py-1 rounded-lg">

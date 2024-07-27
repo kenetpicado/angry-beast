@@ -34,9 +34,13 @@ Route::group([
         Route::resource('species', SpeciesController::class)
             ->except(['edit', 'create']);
 
-        Route::resource('transactions', TransactionController::class);
+        Route::resource('transactions', TransactionController::class)
+            ->middleware('verify.transaction')
+            ->except(['edit', 'create', 'show']);
 
-        Route::resource('animals', AnimalController::class);
+        Route::resource('animals', AnimalController::class)
+            ->middleware('verify.animal')
+            ->except(['edit', 'create']);
 
         Route::resource('concepts', ConceptController::class);
 

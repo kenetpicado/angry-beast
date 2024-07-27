@@ -42,9 +42,9 @@ const tabs = [
 
 function onSubmit() {
   if (formEvent.id) {
-    updateEvent(() => (openModal.value = false, addReminder.value = false))
+    updateEvent(() => ((openModal.value = false), (addReminder.value = false)))
   } else {
-    storeEvent(() => (openModal.value = false, addReminder.value = false))
+    storeEvent(() => ((openModal.value = false), (addReminder.value = false)))
   }
 }
 

@@ -69,6 +69,7 @@ class Kernel extends HttpKernel
         'last.active' => \App\Http\Middleware\LastActive::class,
         'verify.employee' => \App\Http\Middleware\VerifyEmployee::class,
         'verify.animal' => \App\Http\Middleware\VerifyAnimal::class,
+        'verify.transaction' => \App\Http\Middleware\VerifyTransaction::class,
         'type' => \App\Http\Middleware\CheckType::class,
     ];
 }

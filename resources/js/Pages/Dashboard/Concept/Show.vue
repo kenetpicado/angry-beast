@@ -29,7 +29,7 @@ const queryParams = reactive({
   type: urlSearchParams.get('type') ?? '',
   from: urlSearchParams.get('from') ?? '',
   to: urlSearchParams.get('to') ?? '',
-  search: urlSearchParams.get('search') ?? '',
+  search: urlSearchParams.get('search') ?? ''
 })
 
 const { destroy, form, onSubmit, setValues } = useTransaction({
@@ -75,7 +75,7 @@ watchDebounced(
 )
 
 const REGISTER = (type, key, value) => {
-  const record = props.transactions_total.find(total => total.type == type)
+  const record = props.transactions_total.find((total) => total.type == type)
   if (record) return record[key].toLocaleString()
   else return value
 }
@@ -91,7 +91,7 @@ const cards = computed(() => {
       title: 'Egresos: ' + REGISTER('EGRESO', 'count', 0),
       value: 'C$ ' + REGISTER('EGRESO', 'total', 0),
       icon: IconArrowBigUp
-    },
+    }
   ]
 })
 </script>
@@ -156,9 +156,7 @@ const cards = computed(() => {
             {{ item.quantity }}
           </td>
           <td>C${{ item.value }}</td>
-          <td class="font-bold">
-            C${{ item.total.toLocaleString() }}
-          </td>
+          <td class="font-bold">C${{ item.total.toLocaleString() }}</td>
           <td>
             <div class="flex gap-4">
               <ActionIcon :icon="IconEdit" @click="edit(item)" tooltip="Editar" />

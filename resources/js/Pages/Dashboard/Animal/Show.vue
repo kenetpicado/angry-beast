@@ -418,12 +418,7 @@ function onCancel() {
           title="Evento"
           :loading="formEvent.processing"
         >
-          <InputForm
-            v-model="formEvent.name"
-            label="Nombre"
-            required
-            name="name"
-          />
+          <InputForm v-model="formEvent.name" label="Nombre" required name="name" />
           <InputForm
             v-model="formEvent.quantity"
             label="Cantidad"
