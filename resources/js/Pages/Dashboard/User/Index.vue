@@ -8,6 +8,8 @@ import { useForm } from '@inertiajs/vue3'
 import { created, deleted, updated } from '@/Utils/toast.js'
 import { IconEdit, IconLock, IconTrash } from '@tabler/icons-vue'
 import Pagination from '@/Components/Pagination.vue'
+import TableSection from '@/Components/TableSection.vue'
+import ActionIcon from '@/Components/ActionIcon.vue'
 
 defineProps({
   users: {
@@ -22,8 +24,6 @@ const form = useForm({
   id: null,
   name: '',
   email: '',
-  password: '',
-  password_confirmation: ''
 })
 
 function onSubmit() {
@@ -71,29 +71,6 @@ function resetValues() {
   form.reset()
 }
 
-const passwordStatus = computed(() => {
-  if (form.password.length < 8) {
-    return 'La contraseña debe contener al menos 8 caracteres'
-  }
-
-  if (!/\d/.test(form.password)) {
-    return 'La contraseña debe contener al menos un número'
-  }
-
-  if (!/[A-Z]/.test(form.password)) {
-    return 'La contraseña debe contener al menos una letra mayúscula'
-  }
-
-  if (!/[a-z]/.test(form.password)) {
-    return 'La contraseña debe contener al menos una letra minúscula'
-  }
-
-  if (form.password !== form.password_confirmation) {
-    return 'La confirmación de contraseña debe coincidir'
-  }
-
-  return null
-})
 </script>
 
 <template>
@@ -103,18 +80,16 @@ const passwordStatus = computed(() => {
 
       <PrimaryButton text="Nuevo" @click="openModal = true" />
     </div>
-    <div class="bg-white p-0 lg:p-4 rounded-md flex flex-col">
-      <div class="max-w-full overflow-x-auto">
-        <table class="w-full table-auto text-left text-sm lg:text-base">
-          <thead class="uppercase text-xs tracking-widest">
-            <tr>
-              <th>Nombre</th>
-              <th>Correo</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-if="users.data.length == 0">
+
+    <TableSection>
+      <template #header>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Acciones</th>
+      </template>
+
+      <template #body>
+        <tr v-if="users.data.length == 0">
               <td class="text-center text-slate-400" colspan="4">No hay datos que mostrar</td>
             </tr>
             <tr v-for="user in users.data" :key="user.id">
@@ -127,16 +102,17 @@ const passwordStatus = computed(() => {
               </td>
               <td>
                 <div class="flex gap-3">
-                  <IconEdit role="button" size="25" stroke="2" @click="edit(user)" />
-                  <IconTrash role="button" size="25" stroke="2" @click="destroy(user.id)" />
+                  <ActionIcon :icon="IconEdit" @click="edit(user)" tooltip="Editar" />
+                  <ActionIcon :icon="IconTrash" @click="destroy(user.id)" tooltip="Eliminar" />
                 </div>
               </td>
             </tr>
-          </tbody>
-        </table>
-      </div>
-      <Pagination :links="users.links" />
-    </div>
+      </template>
+
+      <template #footer>
+        <Pagination :links="users.links" />
+      </template>
+    </TableSection>
 
     <Modal v-model="openModal" class="z-30">
       <form
@@ -149,32 +125,6 @@ const passwordStatus = computed(() => {
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <InputForm v-model="form.name" label="Nombre" name="name" required />
             <InputForm v-model="form.email" label="Correo" name="email" type="email" />
-
-            <InputForm
-              v-model="form.password"
-              label="Contraseña"
-              name="password"
-              required
-              type="password"
-            >
-              <IconLock class="text-stroke" size="25" stroke="2" />
-            </InputForm>
-
-            <InputForm
-              v-model="form.password_confirmation"
-              label="Confirmar contraseña"
-              name="password_confirmation"
-              required
-              type="password"
-            >
-              <IconLock class="text-stroke" size="25" stroke="2" />
-            </InputForm>
-            <div
-              v-if="passwordStatus && form.password"
-              class="mb-2 text-red-400 text-sm col-span-2"
-            >
-              {{ passwordStatus }}
-            </div>
           </div>
         </div>
         <div class="flex gap-3 items-center justify-end">

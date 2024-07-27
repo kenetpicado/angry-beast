@@ -32,7 +32,8 @@ Route::group([
             ->except(['edit', 'create']);
 
         Route::resource('species', SpeciesController::class)
-            ->except(['edit', 'create']);
+            ->middleware('verify.specie')
+            ->except(['edit', 'create', 'show']);
 
         Route::resource('transactions', TransactionController::class)
             ->middleware('verify.transaction')
@@ -42,13 +43,20 @@ Route::group([
             ->middleware('verify.animal')
             ->except(['edit', 'create']);
 
-        Route::resource('concepts', ConceptController::class);
+        Route::resource('concepts', ConceptController::class)
+            ->middleware('verify.concept')
+            ->except(['edit', 'create']);
 
-        Route::resource('event-types', EventTypeController::class);
+        Route::resource('event-types', EventTypeController::class)
+            ->middleware('verify.event.type')
+            ->except(['edit', 'create']);
 
-        Route::resource('events', EventController::class);
+        Route::resource('events', EventController::class)
+            ->middleware('verify.event')
+            ->except(['edit', 'create', 'show']);
 
         Route::resource('reminders', ReminderController::class)
+            ->middleware('verify.reminder')
             ->only(['index', 'destroy']);
 
         Route::resource('photo', PhotoController::class)

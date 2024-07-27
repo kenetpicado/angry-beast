@@ -70,6 +70,11 @@ class Kernel extends HttpKernel
         'verify.employee' => \App\Http\Middleware\VerifyEmployee::class,
         'verify.animal' => \App\Http\Middleware\VerifyAnimal::class,
         'verify.transaction' => \App\Http\Middleware\VerifyTransaction::class,
+        'verify.specie' => \App\Http\Middleware\VerifySpecie::class,
+        'verify.event' => \App\Http\Middleware\VerifyEvent::class,
+        'verify.reminder' => \App\Http\Middleware\VerifyReminder::class,
+        'verify.event.type' => \App\Http\Middleware\VerifyEventType::class,
+        'verify.concept' => \App\Http\Middleware\VerifyConcept::class,
         'type' => \App\Http\Middleware\CheckType::class,
     ];
 }
