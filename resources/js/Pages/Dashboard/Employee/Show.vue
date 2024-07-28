@@ -91,6 +91,7 @@ const tabs = [
       @onSubmit="onSubmit(() => (openModal = false))"
       @onCancel="resetValues"
       title="Pago"
+      :loading="form.processing"
     >
       <InputForm v-model="form.description" label="Descripcion" required name="description" />
       <InputForm v-model="form.value" label="Monto" name="value" type="number" required />

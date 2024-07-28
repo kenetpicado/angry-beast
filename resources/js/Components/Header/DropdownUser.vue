@@ -8,7 +8,7 @@
       </span>
     </span>
 
-    <span class="h-12 w-12 rounded-full overflow-hidden border flex items-center justify-center">
+    <span class="h-12 w-12 rounded-full overflow-hidden flex items-center justify-center">
       <img src="/profile.jpg" alt="User" />
     </span>
   </div>

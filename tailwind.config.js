@@ -15,6 +15,9 @@ export default {
         //     ...defaultTheme.screens
         // },
         extend: {
+            fontFamily: {
+                sans: ["Lato", ...defaultTheme.fontFamily.sans],
+            },
             colors: {
                 stroke: '#E2E8F0',
                 primary: PRIMARY,

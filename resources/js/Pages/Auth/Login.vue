@@ -52,6 +52,12 @@ const submit = () => {
         No tienes cuenta?
         <Link :href="route('register')" class="text-primary">Regístrate</Link>
       </p>
+      <p class="text-sm mt-4">
+        Si tienes problemas para acceder
+        <a target="_blank" href="mailto:contacto@strain-team.com" class="text-primary">
+          escríbenos
+        </a>
+      </p>
     </div>
   </GuestLayout>
 </template>
