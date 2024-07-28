@@ -1,0 +1,6 @@
+import{_ as c}from"./DefaultLayout-CWSOlPCh.js";import{_ as l}from"./Card-B8kWNnhj.js";import{c as m}from"./createVueComponent-YZjrh2G-.js";import{o as s,c as d,w as p,b as g,h as u,l as h,F as _,a as f}from"./app-DhAk2B9F.js";import"./_plugin-vue_export-helper-DlAUqK2U.js";/**
+ * @license @tabler/icons-vue v3.3.0 - MIT
+ *
+ * This source code is licensed under the MIT license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var o=m("outline","info-circle","IconInfoCircle",[["path",{d:"M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0",key:"svg-0"}],["path",{d:"M12 9h.01",key:"svg-1"}],["path",{d:"M11 12h1v4h1",key:"svg-2"}]]);const v={class:"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-3"},$={__name:"Index",props:["month","stats"],setup(r){const e=r,t=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"],a=[{title:"Ingresos "+t[e.month-1],value:"C$ "+e.stats.ingresos.toLocaleString(),icon:o},{title:"Egresos "+t[e.month-1],value:"C$ "+e.stats.egresos.toLocaleString(),icon:o},{title:"Recordatorios para hoy",value:e.stats.reminders_count??0,icon:o}];return(b,k)=>(s(),d(c,{head:"Inicio"},{default:p(()=>[g("div",v,[(s(),u(_,null,h(a,(i,n)=>f(l,{key:n,item:i},null,8,["item"])),64))])]),_:1}))}};export{$ as default};
